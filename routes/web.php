@@ -25,6 +25,10 @@ $app->get('/', function () use ($app) {
 });
 
 $app->get('foo', function () {
+<<<<<<< HEAD
     //return 'Hello World ' . $results = Uporabnik::select("SELECT * FROM Uporabnik");;
     return response()->json(Uporabnik::all());
+=======
+    return 'Hello World 2' . $results = DB::select("SELECT * FROM Uporabnik");;
+>>>>>>> origin/master
 });
