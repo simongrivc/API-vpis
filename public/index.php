@@ -32,7 +32,7 @@ class Usr extends \Illuminate\Database\Eloquent\Model {
 
 $app->get('foo', function () {
     //return 'Hello World ' . $results = Uporabnik::select("SELECT * FROM Uporabnik");;
-    return response()->json(Usr::all());
+   // return response()->json(Usr::all());
 });
 
 $app->run();
