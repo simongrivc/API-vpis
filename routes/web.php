@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 $app = require __DIR__.'/../bootstrap/app.php';
 
-class Uporabnik extends \Illuminate\Database\Eloquent\Model {  
+class Usr extends \Illuminate\Database\Eloquent\Model {  
   protected $table = 'Uporabnik';
 }
 
@@ -26,5 +26,5 @@ $app->get('/', function () use ($app) {
 
 $app->get('foo', function () {
     //return 'Hello World ' . $results = Uporabnik::select("SELECT * FROM Uporabnik");;
-    return response()->json(Uporabnik::all());
+    return response()->json(Usr::all());
 });
