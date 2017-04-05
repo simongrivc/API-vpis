@@ -11,20 +11,7 @@
 |
 */
 
-use Illuminate\Http\Request;
-
-$app = require __DIR__.'/../bootstrap/app.php';
-
-class Usr extends \Illuminate\Database\Eloquent\Model {  
-  protected $table = 'Uporabnik';
-}
-
 $app->get('/', function () use ($app) {
 
     return $app->version();
-});
-
-$app->get('foo', function () {
-    //return 'Hello World ' . $results = Uporabnik::select("SELECT * FROM Uporabnik");;
-    return response()->json(Usr::all());
 });

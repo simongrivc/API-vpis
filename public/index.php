@@ -10,9 +10,12 @@
 | is ready to receive HTTP / Console requests from the environment.
 |
 */
-
+use Illuminate\Http\Request;
 $app = require __DIR__.'/../bootstrap/app.php';
 
+class Usr extends \Illuminate\Database\Eloquent\Model {  
+  protected $table = 'Uporabnik';
+}
 /*
 |--------------------------------------------------------------------------
 | Run The Application
@@ -24,5 +27,12 @@ $app = require __DIR__.'/../bootstrap/app.php';
 | and wonderful application we have prepared for them.
 |
 */
+
+
+
+$app->get('foo', function () {
+    //return 'Hello World ' . $results = Uporabnik::select("SELECT * FROM Uporabnik");;
+    return response()->json(Usr::all());
+});
 
 $app->run();
