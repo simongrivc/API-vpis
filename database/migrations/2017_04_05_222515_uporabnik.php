@@ -13,7 +13,7 @@ class Uporabnik extends Migration
      */
     public function up()
     {
-        Uporabnik::create('Uporabnik', function (Blueprint $table) {
+        Schema::create('Uporabnik', function (Blueprint $table) {
             $table->increments('IdUporabnik');
             $table->string('ImeUporabnik');
         });
