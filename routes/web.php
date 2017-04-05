@@ -17,5 +17,5 @@ $app->get('/', function () use ($app) {
 });
 
 $app->get('foo', function () {
-    return 'Hello World';
+    return 'Hello World ' . $results = DB::select("SELECT * FROM Uporabnik");;
 });
