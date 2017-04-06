@@ -13,9 +13,7 @@
 use Illuminate\Http\Request;
 $app = require __DIR__.'/../bootstrap/app.php';
 
-class Usr extends \Illuminate\Database\Eloquent\Model {  
-  protected $table = 'Uporabnik';
-}
+
 /*
 |--------------------------------------------------------------------------
 | Run The Application
