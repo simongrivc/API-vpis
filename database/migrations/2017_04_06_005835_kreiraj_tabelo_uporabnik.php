@@ -13,7 +13,7 @@ class KreirajTabeloUporabnik extends Migration
      */
     public function up()
     {
-        Schema::create('Uporabnik', function (Blueprint $table) {
+        Schema::create('uporabniki', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ImeUporabnik');
             $table->timestamps();
@@ -27,6 +27,6 @@ class KreirajTabeloUporabnik extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Uporabnik');
+        Schema::dropIfExists('uporabniki');
     }
 }
