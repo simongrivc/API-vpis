@@ -18,7 +18,7 @@ class UporabnikController extends Controller{
  
     public function urediUporabnika(Request $request, $id){
 
-        $uporabnik  = Uporabnik::find($id);
+        $uporabnik = Uporabnik::find($id);
         $uporabnik->ImeUporabnika = $request->input('ImeUporabnika');
         $uporabnik->save();
  
@@ -26,7 +26,7 @@ class UporabnikController extends Controller{
     }  
 
     public function izbrisiUporabnika($id){
-        $uporabnik  = Uporabnik::find($id);
+        $uporabnik = Uporabnik::find($id);
         $Uporabnik->delete();
  
         return response()->json('Uporabnik odstranjen uspešno.');
@@ -34,7 +34,7 @@ class UporabnikController extends Controller{
 
     public function index(){
  
-        $uporabniki  = Uporabnik::all();
+        $uporabniki = Uporabnik::all();
  
         return response()->json($uporabniki);
  
