@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
  
 class UporabnikController extends Controller{
 
-    public function kreirajUporabnika(Request $request){
+    public function ustvariUporabnika(Request $request){
  
         $uporabnik = Uporabnik::create($request->all());
  

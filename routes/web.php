@@ -17,3 +17,9 @@ $app->get('/', function () use ($app) {
 });
 
 $app->get('uporabniki','UporabnikController@index');
+
+$app->post('uporabnik','UporabnikController@ustvariUporabnika');
+ 
+$app->put('uporabnik/{id}','UporabnikController@urediUporabnika');
+ 	 
+$app->delete('uporabnik/{id}','UporabnikController@izbrisiUporabnika');
