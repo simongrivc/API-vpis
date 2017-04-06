@@ -22,4 +22,4 @@ $app->post('uporabnik','UporabnikController@ustvariUporabnika');
  
 $app->put('uporabnik/{id}','UporabnikController@urediUporabnika');
  	 
-$app->delete('uporabnik/{id}','UporabnikController@izbrisiUporabnika');
+$app->delete('uporabnikDelete/{id}','UporabnikController@izbrisiUporabnika');
