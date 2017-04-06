@@ -2,7 +2,7 @@
 namespace App;
 use Illuminate\Database\Eloquent\Model;
  
-class Uporabnik extends Model
+class Uporabnika extends Model
 { 
  	protected $fillable = ['IdUporabnik', 'ImeUporabnik'];	 
 }
