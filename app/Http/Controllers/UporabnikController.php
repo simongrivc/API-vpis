@@ -34,7 +34,7 @@ class UporabnikController extends Controller{
 
     public function index(){
  
-        $uporabniki = Uporabnik::find(1);
+        $uporabniki = Uporabnik::all();
  
         return response()->json($uporabniki);
  
