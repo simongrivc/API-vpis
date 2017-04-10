@@ -6,8 +6,17 @@ use App\Uporabnik;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
- 
-class UporabnikController extends Controller{
+use Tymon\JWTAuth\JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+
+class LoginController extends Controller{
+
+    protected $jwt;
+
+    public function __construct(JWTAuth $jwt)
+    {
+        $this->jwt = $jwt;
+    }
 
     public function ustvariUporabnika(Request $request){
  
@@ -33,14 +42,12 @@ class UporabnikController extends Controller{
         return response()->json('Uporabnik odstranjen uspešno.');
     }
 
-
     public function login(Request $request){
-
  
         //$uporabniki = Uporabnik::all();
         $uporabnik = Auth::user();
         return response()->json($uporabnik);
- 
+
     }
 }
 ?>
