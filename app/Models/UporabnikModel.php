@@ -7,6 +7,6 @@ class Uporabnik extends Model
  	protected $fillable = ['IdUporabnik', 'ImeUporabnik'];
 
  	protected $table = 'uporabniki';
- 
+ 	  protected $primaryKey = 'IdUporabnik';
 }
 ?>
