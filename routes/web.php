@@ -16,7 +16,7 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
-$app->get('uporabniki','UporabnikController@index');
+$app->get('uporabniki', ['middleware' => 'auth', 'uses' => 'UporabnikController@index']);
 
 $app->post('uporabnik','UporabnikController@ustvariUporabnika');
  
