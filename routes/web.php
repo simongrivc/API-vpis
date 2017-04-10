@@ -25,5 +25,3 @@ $app->get('login', ['middleware' => 'auth', 'uses' => 'LoginController@login']);
 $app->put('uporabnik/{id}','UporabnikController@urediUporabnika');
  	 
 $app->delete('uporabnik/{id}','UporabnikController@izbrisiUporabnika');*/
-
-$app->get('register', ['middleware' => 'auth', 'uses' => 'LoginController@ustvariUporabnika']);
