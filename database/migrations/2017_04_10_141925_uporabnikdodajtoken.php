@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Uporabniktoken extends Migration
+class Uporabnikdodajtoken extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class Uporabniktoken extends Migration
      */
     public function up()
     {
-        Schema::create('Uporabnik', function (Blueprint $table) {
+        Schema::create('uporabniki', function (Blueprint $table) {
             $table->increments('IdUporabnik');
             $table->string('ImeUporabnik');
             $table->string('api_token', 60)->unique();
@@ -27,6 +27,8 @@ class Uporabniktoken extends Migration
      */
     public function down()
     {
-        Schema::drop('Uporabnik');
+        Schema::table('uporabniki', function (Blueprint $table) {
+            //
+        });
     }
 }
