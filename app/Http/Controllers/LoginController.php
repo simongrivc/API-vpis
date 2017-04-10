@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
  
-class UporabnikController extends Controller{
+class LoginController extends Controller{
 
     public function ustvariUporabnika(Request $request){
  

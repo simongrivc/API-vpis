@@ -18,7 +18,7 @@ $app->get('/', function () use ($app) {
 
 //route groups
 
-$app->get('uporabniki', ['middleware' => 'auth', 'uses' => 'UporabnikController@index']);
+$app->get('login', ['middleware' => 'auth', 'uses' => 'LoginController@login']);
 
 /*$app->post('uporabnik','UporabnikController@ustvariUporabnika');
  
