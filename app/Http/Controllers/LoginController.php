@@ -33,7 +33,7 @@ class LoginController extends Controller{
         return response()->json('Uporabnik odstranjen uspešno.');
     }
 
-    public function index(){
+    public function login(){
  
         //$uporabniki = Uporabnik::all();
         $uporabnik = Auth::user();
