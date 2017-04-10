@@ -9,13 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller{
 
-    protected $jwt;
-
-    public function __construct(JWTAuth $jwt)
-    {
-        $this->jwt = $jwt;
-    }
-
     public function ustvariUporabnika(Request $request){
  
         $uporabnik = Uporabnik::create($request->all());
