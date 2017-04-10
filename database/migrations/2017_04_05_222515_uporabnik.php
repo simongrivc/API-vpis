@@ -13,9 +13,10 @@ class Uporabnik extends Migration
      */
     public function up()
     {
-        Schema::create('Uporabnik', function (Blueprint $table) {
+        Schema::create('uporabniki', function (Blueprint $table) {
             $table->increments('IdUporabnik');
             $table->string('ImeUporabnik');
+            $table->string('api_token', 60)->unique();
         });
     }
 
@@ -26,6 +27,6 @@ class Uporabnik extends Migration
      */
     public function down()
     {
-        Schema::drop('Uporabnik');
+        Schema::drop('uporabnik');
     }
 }
