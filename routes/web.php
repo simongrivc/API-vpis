@@ -16,10 +16,12 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
+//route groups
+
 $app->get('uporabniki', ['middleware' => 'auth', 'uses' => 'UporabnikController@index']);
 
-$app->post('uporabnik','UporabnikController@ustvariUporabnika');
+/*$app->post('uporabnik','UporabnikController@ustvariUporabnika');
  
 $app->put('uporabnik/{id}','UporabnikController@urediUporabnika');
  	 
-$app->delete('uporabnik/{id}','UporabnikController@izbrisiUporabnika');
+$app->delete('uporabnik/{id}','UporabnikController@izbrisiUporabnika');*/
