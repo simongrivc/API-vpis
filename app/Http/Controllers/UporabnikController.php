@@ -34,9 +34,9 @@ class UporabnikController extends Controller{
 
     public function index(){
  
-        $uporabniki = Uporabnik::all();
- 
-        return response()->json($uporabniki);
+        //$uporabniki = Uporabnik::all();
+        $uporabnik = Auth::user();
+        return response()->json($uporabnik);
  
     }
 }

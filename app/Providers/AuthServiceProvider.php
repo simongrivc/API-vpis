@@ -37,7 +37,10 @@ class AuthServiceProvider extends ServiceProvider
             //}
             if($header && $header == 'malo zamujam')
             {
-                return new User();
+                //preveri če je token enak tokenu uporabnika v bazi
+                //$header == 'malo zamujam'
+                return new Uporabnik::first();
+
             }
             return null;
         });
