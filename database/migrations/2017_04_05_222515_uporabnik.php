@@ -27,6 +27,6 @@ class Uporabnik extends Migration
      */
     public function down()
     {
-        Schema::drop('uporabnik');
+        Schema::drop('uporabniki');
     }
 }
