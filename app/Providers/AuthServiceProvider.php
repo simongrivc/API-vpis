@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\User;
-use App\Uporabnik;
+//use App\Uporabnik;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -40,7 +40,7 @@ class AuthServiceProvider extends ServiceProvider
             {
                 //preveri če je token enak tokenu uporabnika v bazi
                 //$header == 'malo zamujam'
-                //return Uporabnik::find(1);
+                // return Uporabnik::find(1);
                 return new User();
             }
             return null;
