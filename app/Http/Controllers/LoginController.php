@@ -41,7 +41,11 @@ class LoginController extends Controller{
         return response()->json('Uporabnik odstranjen uspešno.');
     }
 
+<<<<<<< HEAD
     public function login(Request $request){
+=======
+    public function index(){
+>>>>>>> parent of ae8090e... login
  
         //$uporabniki = Uporabnik::all();
        /* $uporabnik = Auth::user();

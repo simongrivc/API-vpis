@@ -79,6 +79,8 @@ $app->singleton(
 
 $app->register(App\Providers\AppServiceProvider::class);
  $app->register(App\Providers\AuthServiceProvider::class);
+
+ $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
 /*
