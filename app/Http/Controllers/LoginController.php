@@ -12,16 +12,19 @@ class LoginController extends Controller{
   
     public function login(Request $request){
         //dobi podatke o uporabniškem imenu in emailu (vereficiraj)
-        $u = $request->input('username');
-        $p = $request->input('password');
 
         $user = User::where([
                     ['username', '=', $request->input('username')],
                     ['password', '=', $request->input('password')],
                 ])->first();
 
-        //$user = User::whereName($username)->wherePassword($password)->first();
-        return response()->json($user);
+        // če user ni null kreiraj token in ga dodaj userju vrni toke
+        if($user)
+        {
+            $user->api_token = "novtoken";
+            $user->save();
+        }
+        return response()->json($user->api_token);
     }
 }
 ?>
