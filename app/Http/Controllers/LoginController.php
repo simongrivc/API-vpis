@@ -21,10 +21,11 @@ class LoginController extends Controller{
         // če user ni null kreiraj token in ga dodaj userju vrni toke
         if($user)
         {
+            $token = {token:"novtoken"};
             $user->api_token = "novtoken";
             $user->save();
         }
-        return response()->json($user);
+        return response()->json($token);
     }
 }
 ?>
