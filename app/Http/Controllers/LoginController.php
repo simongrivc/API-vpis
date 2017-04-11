@@ -23,9 +23,18 @@ class LoginController extends Controller{
         if($user)
         {
             $user->api_token = Crypt::encrypt('tokenuser,time');
+            //decript $decrypted = Crypt::decrypt($encryptedValue);
             $user->save();
+            return response()->json($user);
         }
-        return response()->json($user);
+        else
+            return response()->json('Incorect user credentials.');
+       
+    }
+
+    public function tokenExpired(Request $request){
+        $decrypted = Crypt::decrypt( $request->input('token'));
+        return response()->json($decrypted);
     }
 }
 ?>
