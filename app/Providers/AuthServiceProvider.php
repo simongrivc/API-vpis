@@ -43,7 +43,7 @@ class AuthServiceProvider extends ServiceProvider
                 //$header == 'malo zamujam'
                 // return Uporabnik::find(1);
                 //return new User(["Simon","simongrivc@gmail.com"]);
-                return User::where('api_token', '=', $header);
+                return User::where('api_token', '=', $header)->first();
             }
             return null;
         });
