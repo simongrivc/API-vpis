@@ -22,7 +22,7 @@ class LoginController extends Controller{
         // če user ni null kreiraj token in ga dodaj userju vrni toke
         if($user)
         {
-            $user->api_token = Crypt::encrypt('tokenuser,time');
+            $user->api_token = Crypt::encrypt('Time created:,'.time().',Time of exp.:,'. (time()+3600) . $user->username);
             //decript $decrypted = Crypt::decrypt($encryptedValue);
             $user->save();
             return response()->json($user);
