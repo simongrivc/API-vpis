@@ -18,6 +18,7 @@ $app->get('/', function () use ($app) {
 
 //route groups
 
+
 $app->post('login','LoginController@login');
 
 //$app->get('login', ['middleware' => 'auth', 'uses' => 'LoginController@login']);
