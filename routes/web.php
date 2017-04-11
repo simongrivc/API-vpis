@@ -22,6 +22,8 @@ $app->get('login','LoginController@login');
 
 $app->post('login','LoginController@login');
 
+$app->get('token','LoginController@tokenExpired');
+
 $app->post('token','LoginController@tokenExpired');
 
 //$app->get('login', ['middleware' => 'auth', 'uses' => 'LoginController@login']);
