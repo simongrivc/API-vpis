@@ -33,16 +33,10 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->app['auth']->viaRequest('api', function ($request) {
             $header = $request->header('Api-Token');
-            //if ($request->input('api_token')) {
-            //    return User::where('api_token', $request->input('api_token'))->first();
-            //}
+
             if($header)
             {
-                
-                //preveri če je token enak tokenu uporabnika v bazi
-                //$header == 'malo zamujam'
-                // return Uporabnik::find(1);
-                //return new User(["Simon","simongrivc@gmail.com"]);
+                //preveri če je token enak tokenu uporabnika v bazi ter vrni uporabnik
                 return User::where('api_token', '=', $header)->first();
             }
             return null;

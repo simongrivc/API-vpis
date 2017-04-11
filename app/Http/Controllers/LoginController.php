@@ -11,10 +11,12 @@ class LoginController extends Controller{
 
   
     public function login(Request $request){
- 
-        $user = Auth::user();
-        return response()->json($user);
+        //dobi podatke o uporabniškem imenu in emailu (vereficiraj)
+        $username = $request->input('username');
+        $password = $request->input('password');
 
+        $user = User::select('select * from users where username = ' . $username . ' and password = ' . $password, [1]);
+        return response()->json($user);
     }
 }
 ?>
