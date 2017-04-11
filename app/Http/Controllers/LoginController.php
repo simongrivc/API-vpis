@@ -16,8 +16,8 @@ class LoginController extends Controller{
         $password = $request->input('password');
 
         $user = User::where([
-                    ['username', '=', $username],
-                    ['password', '=', $password],
+                    ['username', '=', 'simongrivc'],
+                    ['password', '=', 'simongeslo'],
                 ])->first();
 
         //$user = User::whereName($username)->wherePassword($password)->first();
