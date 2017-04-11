@@ -22,7 +22,7 @@ class LoginController extends Controller{
         if($user)
         {
             $user->api_token = "novtoken";
-            $user->update();
+            $user->save();
         }
         return response()->json($user);
     }
