@@ -24,7 +24,7 @@ class LoginController extends Controller{
             $user->api_token = "novtoken";
             $user->save();
         }
-        return response()->json($user->api_token);
+        return response()->json($user);
     }
 }
 ?>
