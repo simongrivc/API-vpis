@@ -13,5 +13,6 @@ class User extends Model
     ];
 
  	protected $table = 'users';
- 	protected $timestamps  = false;
+ 	//da eloquent ne dodaja timestamp v bazo
+ 	public $timestamps  = false;
 }
