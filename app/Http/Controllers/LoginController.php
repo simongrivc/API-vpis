@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class LoginController extends Controller{
 
@@ -21,7 +22,7 @@ class LoginController extends Controller{
         // če user ni null kreiraj token in ga dodaj userju vrni toke
         if($user)
         {
-            $user->api_token = "novtoken";
+            $user->api_token = Crypt::encrypt('tokenuser,time');
             $user->save();
         }
         return response()->json($user);
