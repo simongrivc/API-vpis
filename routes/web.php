@@ -18,7 +18,7 @@ $app->get('/', function () use ($app) {
 
 //route groups
 
-$app->post('get','LoginController@login');
+$app->get('login','LoginController@login');
 
 $app->post('login','LoginController@login');
 
