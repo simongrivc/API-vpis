@@ -33,8 +33,15 @@ class LoginController extends Controller{
     }
 
     public function tokenExpired(Request $request){
-        $decrypted = Crypt::decrypt( $request->input('token'));
-        return response()->json($decrypted);
+        $header = $request->header('Api-Token');
+
+        if($header)
+        {
+         $decrypted = Crypt::decrypt($header);
+         return response()->json($decrypted);
+        }
+        else 
+            return response()->json('No token to inspect.');
     }
 }
 ?>
