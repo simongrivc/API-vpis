@@ -42,7 +42,7 @@ class AuthServiceProvider extends ServiceProvider
                 //$header == 'malo zamujam'
                 // return Uporabnik::find(1);
                 //return new User(["Simon","simongrivc@gmail.com"]);
-                return Uporabnik::find(1);
+                return User::find(1);
             }
             return null;
         });
