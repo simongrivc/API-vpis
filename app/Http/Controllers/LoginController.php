@@ -18,7 +18,7 @@ class LoginController extends Controller{
         $user = User::where([
                     ['username', '=', $username],
                     ['password', '=', $password],
-                ])->first();
+                ])->get()->first();
         return response()->json($user);
     }
 }
