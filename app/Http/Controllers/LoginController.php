@@ -12,12 +12,12 @@ class LoginController extends Controller{
   
     public function login(Request $request){
         //dobi podatke o uporabniškem imenu in emailu (vereficiraj)
-        $username = $request->input('username');
-        $password = $request->input('password');
+        $u = $request->input('username');
+        $p = $request->input('password');
 
         $user = User::where([
-                    ['username', '=', 'simongrivc'],
-                    ['password', '=', 'simongeslo'],
+                    ['username', '=', $u],
+                    ['password', '=', $p],
                 ])->first();
 
         //$user = User::whereName($username)->wherePassword($password)->first();
