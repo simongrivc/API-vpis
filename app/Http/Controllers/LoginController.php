@@ -32,11 +32,11 @@ class LoginController extends Controller{
         }
         else
         {
-            $ip=Request::ip();
+            $ip = $this->server->get('REMOTE_ADDR');
             $log = new Ip_log;
             $log->ip_number($ip);
             $log->save();
-            
+
             return response()->json('Incorect user credentials.');
         }
        
