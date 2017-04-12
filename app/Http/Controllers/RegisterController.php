@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Contracts\Mail\Mailer;
-use Illuminate\Contracts\Mail\Message;
+use Illuminate\Mail\Mailer;
+use Illuminate\Mail\Message;
 
 class RegisterController extends Controller{
 
@@ -85,7 +85,7 @@ class RegisterController extends Controller{
                 );*/
                 //pošlji mail
           
-                $message='This is a test to see if emails are working';
+                $message = sprintf('Activate account <a href="%s">%s</a>');
                    
 
                 $this->mailer->raw($message, function (Message $m) use ($user) {
