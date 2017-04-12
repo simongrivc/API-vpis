@@ -6,7 +6,6 @@ use App\User;
 use App\Ip_log;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
@@ -33,7 +32,7 @@ class LoginController extends Controller{
         }
         else
         {
-            $ip=Request::ip();
+            $ip=$request->ip;
             $log = new Ip_log;
             $log->ip_number($ip);
             $log->save();
