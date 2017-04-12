@@ -50,17 +50,21 @@ class RegisterController extends Controller{
             }     
 
             //če gre vse čez kreiraj uporabnika ter ga dodaj v tabelo
-            $user = new User();
+            /*$user = new User();
             $user->name = $request->input('name');
             $user->surname = $request->input('surname');
             $user->username = $request->input('username');
             $user->password = Hash::make($request->input('password'));
             $user->email = $request->input('email');
-            //nastavimo da je uporabnik študent
-            $user->fk_user_role = 4;
+            //nastavimo da je uporabnik študent*/
+            //$user->fk_user_role = 4;
             //nastavimo da študent še ni aktiviran dokler ne potrdi preko email računa svoj račun
-            $user->is_active = 0;
-            $user->save();
+           // $user->is_active = 0;
+            //$user->save();
+
+            $id = DB::table('users')->insertGetId(
+                ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' => $request->input('password'), 'email' => $request->input('email'), 'fk_user_role' => 4, 'is_active' => 0]
+            );
 
             //dodaj v tabelo user activations nov zapis za študenta ter pošli mail :TODO
 
