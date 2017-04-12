@@ -42,10 +42,10 @@ class LoginController extends Controller{
                 $ipAddress = trim($_SERVER['REMOTE_ADDR']);
             }
         }
-          
-            $log = new Ip_log;
-            $log->ip_number($ipAddress);
-            $log->save();
+            $log = DB::table('ip_logs')->insertGetId(
+                ['ip_number' => $ipAddress]
+            );
+           
             return response()->json('Incorect user credentials.');
         }
        
