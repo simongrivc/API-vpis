@@ -56,7 +56,7 @@ class LoginController extends Controller{
                     ['ip_number' => $ipAddress]
                 );
                
-                return response()->json('Incorect user credentials.', 400);
+                return response()->json(array('error' => 'incorect_user_credentials'), 400);
             }
        
     }
@@ -71,10 +71,10 @@ class LoginController extends Controller{
          if($podatkiToken[3]>time())
             return response()->json('Token is active.');
          else
-            return response()->json('Token expired.',400);
+            return response()->json(array('error' => 'token_expired'),400);
         }
         else 
-            return response()->json('No token to inspect.',400);
+            return response()->json(array('error' => 'missing_token'),400);
     }
 }
 ?>

@@ -27,21 +27,21 @@ class RegisterController extends Controller{
 
             if(sizeOf($usernamesMatch)>0 || sizeOf($emailMatch)>0){
                 //uporabnik že obstaja oz. se njegovi podatki podvajajo
-                return response()->json('User duplication.',400);
+                return response()->json(array('error' => 'user_duplication'),400);
             }
 
             //preverjanje ustreznosti gesla
 
             if (strlen($request->input('password')) < 8) {
-                return response()->json('Password too short (at least 8 characters)!',400);
+                return response()->json(array('error' => 'password_to_short'),400);
             }
 
             if (!preg_match("#[0-9]+#", $request->input('password'))) {
-                return response()->json('Password must include at least one number!',400);
+                return response()->json(array('error' => 'password_one_number_required'),400);
             }
 
             if (!preg_match("#[a-zA-Z]+#", $request->input('password'))) {
-                return response()->json('Password must include at least one letter!',400);
+                return response()->json(array('error' => 'password_one_letter_required'),400);
             }     
 
             //če gre vse čez kreiraj uporabnika ter ga dodaj v tabelo
@@ -65,14 +65,14 @@ class RegisterController extends Controller{
             }
             else
             {
-                return response()->json("Activation code not generated error.",400);
+                return response()->json(array('error' => 'activation_code_not_generated'),400);
             }
           
 
             //dodaj v tabelo user activations nov zapis za študenta ter pošli mail :TODO 
 
         }   
-         return  response()->json("Missing form data.", 400);
+         return  response()->json(array('error' => 'missing_data'), 400);
        
        
     }
@@ -92,21 +92,21 @@ class RegisterController extends Controller{
 
                 if(sizeOf($usernamesMatch)>0 || sizeOf($emailMatch)>0){
                     //uporabnik že obstaja oz. se njegovi podatki podvajajo
-                    return response()->json('User duplication.', 400);
+                    return response()->json(array('error' => 'user_duplication'), 400);
                 }
 
                 //preverjanje ustreznosti gesla
 
                 if (strlen($request->input('password')) < 8) {
-                    return response()->json('Password too short (at least 8 characters)!', 400);
+                    return response()->json(array('error' => 'password_to_short'), 400);
                 }
 
                 if (!preg_match("#[0-9]+#", $request->input('password'))) {
-                    return response()->json('Password must include at least one number!', 400);
+                    return response()->json(array('error' => 'password_one_number_required'), 400);
                 }
 
                 if (!preg_match("#[a-zA-Z]+#", $request->input('password'))) {
-                    return response()->json('Password must include at least one letter!', 400);
+                    return response()->json(array('error' => 'password_one_letter_required'), 400);
                 }     
 
                 //če gre vse čez kreiraj uporabnika ter ga dodaj v tabelo
@@ -130,17 +130,17 @@ class RegisterController extends Controller{
                 }
                 else
                 {
-                    return response()->json("Activation code not generated error.", 400);
+                    return response()->json(array('error' => 'activation_code_not_generated'), 400);
                 }
               
 
                 //dodaj v tabelo user activations nov zapis za študenta ter pošli mail :TODO 
 
             }   
-             return  response()->json("Missing form data.", 400);
+             return  response()->json(array('error' => 'missing_data'), 400);
         }
         
-        return  response()->json("This user doesn't have admin rights.", 401);
+        return  response()->json(array('error' => 'no_admin_rights'), 401);
     }
     
 
