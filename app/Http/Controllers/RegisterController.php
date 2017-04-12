@@ -23,10 +23,10 @@ class RegisterController extends Controller{
 
         if($request->input('name') && $request->input('surname') && $request->input('username') && $request->input('password') && $request->input('email'))
         {
-            $usernamesMatch = User::where(['username', '=', $request->input('username')])->get();
+            $usernamesMatch = User::where('username', '=', $request->input('username'))->get();
             // ujemanje username-a ali email naslova
             $results = User::where($usernamesMatch)
-                ->orWhere(['email', '=', $request->input('email')])
+                ->orWhere('email', '=', $request->input('email'))
                 ->get();
 
             if(sizeOf($results)>0){
@@ -75,7 +75,7 @@ class RegisterController extends Controller{
 
     public function registerUser(Request $request){
         
- 
+
     }
     
 
