@@ -25,17 +25,12 @@ $app->post('login','LoginController@login');
 $app->post('token','LoginController@tokenExpired');
 
 //registracija navadnega uporabnika
-//$app->post('register/student','RegisterController@registerStudent');
+$app->post('register/student','RegisterController@registerStudent');
 
 
 //registracija službe vpis in refentov
-//$app->post('register/user', ['middleware' => 'auth', 'uses' => 'RegisterController@registerUser']);
+$app->post('register/user', ['middleware' => 'auth', 'uses' => 'RegisterController@registerUser']);
 
-$app->group(['prefix' => 'register/'], function () use ($app) {
-    $app->post('student', 'RegisterController@registerStudent');
- 	$app->post('user', ['middleware' => 'auth', 'uses' => 'RegisterController@registerUser']);
-
-});
 
 
 /*$app->post('uporabnik','UporabnikController@ustvariUporabnika');
