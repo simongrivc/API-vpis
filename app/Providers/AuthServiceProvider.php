@@ -36,8 +36,20 @@ class AuthServiceProvider extends ServiceProvider
 
             if($header)
             {
-                //preveri če je token enak tokenu uporabnika v bazi ter vrni uporabnik
-                return User::where('api_token', '=', $header)->first();
+                //preveri če je token enak tokenu uporabnika v bazi, preveri še njegovo veljavnost
+                //preveri kateri role ima user ter mu glede na role dovoli dostop do kontrolerja
+                $uporabnik = User::where('api_token', '=', $header)->first();
+                if($uporabnik)
+                {
+                 $decrypted = Crypt::decrypt($uporabnik->api_token);
+                 $podatkiToken = explode(";", $decrypted);
+                 if($podatkiToken[3]>time())
+                    return $uporabnik;
+                 else
+                    return response()->json('Token expired.');
+                }
+                else 
+                   return null;
             }
             return null;
         });

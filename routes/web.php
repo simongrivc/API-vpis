@@ -18,15 +18,17 @@ $app->get('/', function () use ($app) {
 
 //route groups
 
-$app->get('login','LoginController@login');
-
 $app->post('login','LoginController@login');
 
 $app->get('token','LoginController@tokenExpired');
 
 $app->post('token','LoginController@tokenExpired');
 
-//$app->get('login', ['middleware' => 'auth', 'uses' => 'LoginController@login']);
+//registracija navadnega uporabnika
+$app->post('register/student','RegisterController@registerStudent');
+
+//registracija službe vpis in refentov
+$app->post('register/user', ['middleware' => 'auth', 'uses' => 'RegisterController@registerUser']);
 
 /*$app->post('uporabnik','UporabnikController@ustvariUporabnika');
  
