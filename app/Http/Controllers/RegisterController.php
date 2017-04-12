@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller{
 
@@ -75,7 +76,10 @@ class RegisterController extends Controller{
                 $id = DB::table('users')->insertGetId(
                     ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' => $request->input('password'), 'email' => $request->input('email'), 'fk_user_role' => 4, 'is_active' => 0, 'fk_activation_code' => $idActivationCodeUser]
                 );
-                return response()->json('Student created: ' . $activationCode);
+                //pošlji mail
+                Mail::raw('To je mail', function($msg) { $msg->to([ $request->input('email')]); $msg->from(['sistem@test.com']); });
+        
+                return response()->json('Student created (mail sent to student): ' . $activationCode);
             }
             else
             {
