@@ -69,7 +69,12 @@ class RegisterController extends Controller{
             $user->email = $request->input('email');
             //nastavimo da je uporabnik študent
             $user->fk_user_role = 4;
+            //nastavimo da študent še ni aktiviran dokler ne potrdi preko email računa svoj račun
+            $user->is_active = 0;
             $user->save();
+
+            //dodaj v tabelo user activations nov zapis za študenta ter pošli mail :TODO
+            
 
             //$user = User::create($request->all());
      
