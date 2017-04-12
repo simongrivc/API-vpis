@@ -14,42 +14,52 @@ class LoginController extends Controller{
 
   
     public function login(Request $request){
-        //dobi podatke o uporabniškem imenu in emailu (vereficiraj)
+         
+         $ipAddress = '';
 
-        $user = User::where([
-                    ['username', '=', $request->input('username')],
-                    ['password', '=', $request->input('password')],
-                ])->first();
-
-        // če user ni null kreiraj token in ga dodaj userju vrni toke
-        if($user)
-        {
-            $user->api_token = Crypt::encrypt('Time created:;'.time().';Time of exp.:;'. (time()+3600) .';'. $user->username);
-            //decript $decrypted = Crypt::decrypt($encryptedValue);
-            $user->last_login = time();
-            $user->save();
-
-            return response()->json($user);
-        }
-        else
-        {
-            $ipAddress = '';
-
-        // Check for X-Forwarded-For headers and use those if found
-        if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ('' !== trim($_SERVER['HTTP_X_FORWARDED_FOR']))) {
+         if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ('' !== trim($_SERVER['HTTP_X_FORWARDED_FOR']))) {
             $ipAddress = trim($_SERVER['HTTP_X_FORWARDED_FOR']);
         } else {
             if (isset($_SERVER['REMOTE_ADDR']) && ('' !== trim($_SERVER['REMOTE_ADDR']))) {
                 $ipAddress = trim($_SERVER['REMOTE_ADDR']);
             }
         }
-            $log = DB::table('ip_logs')->insertGetId(
-                ['ip_number' => $ipAddress]
-            );
-           
-            return response()->json('Incorect user credentials.', 400);
+        //preveri blokado ip-ja
+        $ip_logs = Ip_log::where('ip_number', '=', $ipAddress);
+        if($ip_logs){
+            if(count($ip_log)>3)
+                return response()->json('This IP is blocked after 3 unothorized attempts.', 400);
+
         }
-       
+        else
+        {
+            //dobi podatke o uporabniškem imenu in emailu (vereficiraj)
+
+            $user = User::where([
+                        ['username', '=', $request->input('username')],
+                        ['password', '=', $request->input('password')],
+                    ])->first();
+
+            // če user ni null kreiraj token in ga dodaj userju vrni toke
+            if($user)
+            {
+                $user->api_token = Crypt::encrypt('Time created:;'.time().';Time of exp.:;'. (time()+3600) .';'. $user->username);
+                //decript $decrypted = Crypt::decrypt($encryptedValue);
+                $user->last_login = time();
+                $user->save();
+
+                return response()->json($user);
+            }
+            else
+            {
+            // Check for X-Forwarded-For headers and use those if found
+                $log = DB::table('ip_logs')->insertGetId(
+                    ['ip_number' => $ipAddress]
+                );
+               
+                return response()->json('Incorect user credentials.', 400);
+            }
+       }
     }
 
     public function tokenExpired(Request $request){
