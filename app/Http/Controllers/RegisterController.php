@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
 
-
 class RegisterController extends Controller{
 
   
@@ -54,41 +53,23 @@ class RegisterController extends Controller{
             }     
 
             //če gre vse čez kreiraj uporabnika ter ga dodaj v tabelo
-            /*$user = new User();
-            $user->name = $request->input('name');
-            $user->surname = $request->input('surname');
-            $user->username = $request->input('username');
-            $user->password = Hash::make($request->input('password'));
-            $user->email = $request->input('email');
-            //nastavimo da je uporabnik študent*/
-            //$user->fk_user_role = 4;
-            //nastavimo da študent še ni aktiviran dokler ne potrdi preko email računa svoj račun
-           // $user->is_active = 0;
-            //$user->save();
 
             //kreiram aktivacijsko kodo za link
             $activationCode = Crypt::encrypt('Time created:;'.time().';Time of exp.:;'. (time()+3600) .';'. $request->input('username'));
             
-            /*$idActivationCodeUser = DB::table('user_activations')->insertGetId(
+            $idActivationCodeUser = DB::table('user_activations')->insertGetId(
                 ['activation_code' => $activationCode, 'send_time' => time()]
-            );*/
+            );
 
-            if($activationCode)
+            if($idActivationCodeUser)
             {
-                /*$id = DB::table('users')->insertGetId(
-                    ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' => $request->input('password'), 'email' => $request->input('email'), 'fk_user_role' => 4, 'is_active' => 0, 'fk_activation_code' => $idActivationCodeUser]
-                );*/
-                //pošlji mail
-          
-                $message = sprintf('Activate account <a href="%s">%s</a>',123,123);
-                   
-
-                $this->mailer->raw($message, function (Message $m) use ($user) {
-                    $m->to('simongrivc@gmail.com')->subject('Activation mail');
-                });
-     
-
-                return response()->json('Student created (mail sent to student): ' . $activationCode);
+                $id = DB::table('users')->insertGetId(
+                    ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' => $request->input('password'), 'email' => $request->input('email'), 'fk_user_role' => 4, 'is_active' => 1, 'fk_activation_code' => $idActivationCodeUser]
+                );
+                
+                //popravi pri kreiranju is_active na 0 pošlji mail z aktivacijskim linkom :TODO
+               
+                return response()->json('Student created.' . $activationCode);
             }
             else
             {
