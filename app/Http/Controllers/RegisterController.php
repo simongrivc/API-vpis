@@ -9,17 +9,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Mail\Mailer;
+
 
 
 class RegisterController extends Controller{
 
-   protected $mailer;
-
-    public function __construct(Mailer $mailer)
-    {
-        $this->mailer = $mailer;
-    }
+  
 
     public function registerStudent(Request $request){
         
