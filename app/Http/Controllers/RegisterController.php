@@ -78,7 +78,7 @@ class RegisterController extends Controller{
                 );*/
                 //pošlji mail
               $recipients = ['simongrivc@gmail.com'];
-                app('mailer')->raw('This is a test message.', function ($message) use ($recipients) {
+                app('mail')->raw('This is a test message.', function ($message) use ($recipients) {
                     $message->subject('This is a test to see if emails are working');
                     $message->to($recipients);
                 });
