@@ -35,20 +35,20 @@ class LoginController extends Controller{
      
          //dobi podatke o uporabniškem imenu in emailu (vereficiraj)
 
-            $user = User::where([
-                        ['username', '=', $request->input('username')],
-                        ['password', '=', Hash::make($request->input('password'))],
-                    ])->first();
-
+            $user = User::where('username', '=', $request->input('username'))->first();
+            
             // če user ni null kreiraj token in ga dodaj userju vrni toke
             if($user)
             {
-                $user->api_token = Crypt::encrypt('Time created:;'.time().';Time of exp.:;'. (time()+3600) .';'. $user->username);
-                //decript $decrypted = Crypt::decrypt($encryptedValue);
-                $user->last_login = time();
-                $user->save();
+                if(Hash::check($request->input('password'), $user->password))          
+                {
+                    $user->api_token = Crypt::encrypt('Time created:;'.time().';Time of exp.:;'. (time()+3600) .';'. $user->username);
+                    //decript $decrypted = Crypt::decrypt($encryptedValue);
+                    $user->last_login = time();
+                    $user->save();
 
-                return response()->json($user);
+                    return response()->json($user);
+                }
             }
             else
             {
