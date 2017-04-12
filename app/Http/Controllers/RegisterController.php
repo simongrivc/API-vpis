@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller{
 
@@ -37,7 +38,7 @@ class RegisterController extends Controller{
             //preverjanje ustreznosti gesla
 
             if (strlen($request->input('password')) < 8) {
-                return response()->json('Password too short!');
+                return response()->json('Password too short (at least 8 characters)!');
             }
 
             if (!preg_match("#[0-9]+#", $request->input('password'))) {
