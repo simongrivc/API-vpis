@@ -63,9 +63,25 @@ class RegisterController extends Controller{
            // $user->is_active = 0;
             //$user->save();
 
-            $id = DB::table('users')->insertGetId(
-                ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' => $request->input('password'), 'email' => $request->input('email'), 'fk_user_role' => 4, 'is_active' => 0]
+            //kreiram aktivacijsko kodo za link
+            $activationCode = Crypt::encrypt('Time created:;'.time().';Time of exp.:;'. (time()+3600) .';'. $user->username);
+            
+            $idActivationCodeUser = DB::table('user_activations')->insertGetId(
+                ['activation_code' => $activationCode, 'send_time' => time()]
             );
+
+            if($idActivationCodeUser)
+            {
+                $id = DB::table('users')->insertGetId(
+                    ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' => $request->input('password'), 'email' => $request->input('email'), 'fk_user_role' => 4, 'is_active' => 0, 'fk_activation_code' => $idActivationCodeUser]
+                );
+                response()->json('Student created: ' . $activationCode);
+            }
+            else
+            {
+                response()->json("Activation code not generated error.");
+            }
+          
 
             //dodaj v tabelo user activations nov zapis za študenta ter pošli mail :TODO
 
