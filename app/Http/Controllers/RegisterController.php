@@ -67,6 +67,8 @@ class RegisterController extends Controller{
             $user->username = $request->input('email');
             $user->password = Hash::make($request->input('password'));
             $user->email = $request->input('email');
+            //nastavimo da je uporabnik študent
+            $user->fk_user_role = 4;
             $user->save();
 
             //$user = User::create($request->all());
