@@ -80,7 +80,7 @@ class RegisterController extends Controller{
                 );*/
                 //pošlji mail
           
-                $message = sprintf('Activate account <a href="%s">%s</a>',123);
+                $message = sprintf('Activate account <a href="%s">%s</a>',123,123);
                    
 
                 $this->mailer->raw($message, function (Message $m) use ($user) {
