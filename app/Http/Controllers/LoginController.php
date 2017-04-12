@@ -32,10 +32,10 @@ class LoginController extends Controller{
         }
         else
         {
-           /* $ip=$request->ip;
+            $ip= \Request::ip();
             $log = new Ip_log;
             $log->ip_number($ip);
-            $log->save();*/
+            $log->save();
             return response()->json('Incorect user credentials.');
         }
        
