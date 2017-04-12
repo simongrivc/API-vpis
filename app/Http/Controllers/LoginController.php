@@ -32,9 +32,19 @@ class LoginController extends Controller{
         }
         else
         {
-            $ip= \Request::ip();
+            $ipAddress = '';
+
+        // Check for X-Forwarded-For headers and use those if found
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ('' !== trim($_SERVER['HTTP_X_FORWARDED_FOR']))) {
+            $ipAddress = trim($_SERVER['HTTP_X_FORWARDED_FOR']);
+        } else {
+            if (isset($_SERVER['REMOTE_ADDR']) && ('' !== trim($_SERVER['REMOTE_ADDR']))) {
+                $ipAddress = trim($_SERVER['REMOTE_ADDR']);
+            }
+        }
+          
             $log = new Ip_log;
-            $log->ip_number($ip);
+            $log->ip_number($ipAddress);
             $log->save();
             return response()->json('Incorect user credentials.');
         }
