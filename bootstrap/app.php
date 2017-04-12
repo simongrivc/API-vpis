@@ -78,6 +78,8 @@ $app->singleton(
 */
 
 $app->register(App\Providers\AppServiceProvider::class);
+$app->configure('services');
+
  $app->register(App\Providers\AuthServiceProvider::class);
 
  
