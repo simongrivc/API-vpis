@@ -24,7 +24,9 @@ class LoginController extends Controller{
         {
             $user->api_token = Crypt::encrypt('Time created:;'.time().';Time of exp.:;'. (time()+3600) .';'. $user->username);
             //decript $decrypted = Crypt::decrypt($encryptedValue);
+            $user->last_login = time();
             $user->save();
+
             return response()->json($user);
         }
         else

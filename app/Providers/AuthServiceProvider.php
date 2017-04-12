@@ -42,15 +42,18 @@ class AuthServiceProvider extends ServiceProvider
                 $uporabnik = User::where('api_token', '=', $header)->first();
                 if($uporabnik)
                 {
-                 $decrypted = Crypt::decrypt($uporabnik->api_token);
-                 $podatkiToken = explode(";", $decrypted);
-                 if($podatkiToken[3]>time())
-                    return $uporabnik;
-                 else
-                    return response()->json('Token expired.');
+                    if($uporabnik->is_active)
+                    {
+                         $decrypted = Crypt::decrypt($uporabnik->api_token);
+                         $podatkiToken = explode(";", $decrypted);
+                         if($podatkiToken[3]>time())
+                            return $uporabnik;
+                         else
+                            return response()->json('Token expired.');
+                    }
+                    else 
+                        return response()->json('User account not activated.');
                 }
-                else 
-                   return null;
             }
             return null;
         });
