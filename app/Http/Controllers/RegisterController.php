@@ -14,7 +14,13 @@ use Illuminate\Mail\Message;
 
 class RegisterController extends Controller{
 
-  
+   protected $mailer;
+
+    public function __construct(Mailer $mailer)
+    {
+        $this->mailer = $mailer;
+    }
+
     public function registerStudent(Request $request){
         
              //dobi podatke o študentu
@@ -78,13 +84,13 @@ class RegisterController extends Controller{
                     ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' => $request->input('password'), 'email' => $request->input('email'), 'fk_user_role' => 4, 'is_active' => 0, 'fk_activation_code' => $idActivationCodeUser]
                 );*/
                 //pošlji mail
-              $recipients = ['simongrivc@gmail.com'];
-                Mail::raw('This is a test message.', function ($message) use ($recipients) {
-                    $message->subject('This is a test to see if emails are working');
-                    $message->to($recipients);
+          
+                $message='This is a test to see if emails are working';
+                   
+
+                $this->mailer->raw($message, function (Message $m) use ($user) {
+                    $m->to('simongrivc@gmail.com')->subject('Activation mail');
                 });
-
-
      
 
                 return response()->json('Student created (mail sent to student): ' . $activationCode);
