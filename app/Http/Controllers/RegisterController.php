@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Mail\Mailer;
-use Illuminate\Mail\Message;
+
 
 class RegisterController extends Controller{
 
