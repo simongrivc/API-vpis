@@ -20,12 +20,12 @@ $app->get('/', function () use ($app) {
 
 $app->post('login','LoginController@login');
 
-$app->get('token','LoginController@tokenExpired');
+//$app->get('token','LoginController@tokenExpired');
 
 $app->post('token','LoginController@tokenExpired');
 
 //registracija navadnega uporabnika
-//$app->post('register/student','RegisterController@registerStudent');
+$app->post('register/student','RegisterController@registerStudent');
 
 
 //registracija službe vpis in refentov
