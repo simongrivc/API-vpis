@@ -49,10 +49,10 @@ class AuthServiceProvider extends ServiceProvider
                          if($podatkiToken[3]>time())
                             return $uporabnik;
                          else
-                            return response()->json('Token expired.');
+                            return response()->json('Token expired.',401);
                     }
                     else 
-                        return response()->json('User account not activated.');
+                        return response()->json('User account not activated.',401);
                 }
             }
             return null;

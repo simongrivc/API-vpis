@@ -47,7 +47,7 @@ class LoginController extends Controller{
                 ['ip_number' => $ipAddress]
             );
            
-            return response()->json('Incorect user credentials.', 401);
+            return response()->json('Incorect user credentials.', 400);
         }
        
     }
@@ -65,7 +65,7 @@ class LoginController extends Controller{
             return response()->json('Token expired.');
         }
         else 
-            return response()->json('No token to inspect.');
+            return response()->json('No token to inspect.',400);
     }
 }
 ?>
