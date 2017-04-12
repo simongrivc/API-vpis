@@ -61,7 +61,7 @@ class RegisterController extends Controller{
                 
                 //popravi pri kreiranju is_active na 0 pošlji mail z aktivacijskim linkom :TODO
                
-                return response()->json('Student created.');
+                return response()->json(array('success' => 'student_created'));
             }
             else
             {
@@ -126,7 +126,7 @@ class RegisterController extends Controller{
                     
                     //popravi pri kreiranju is_active na 0 pošlji mail z aktivacijskim linkom :TODO
                    
-                    return response()->json('User created.');
+                    return response()->json(array('success' => 'user_created'));
                 }
                 else
                 {

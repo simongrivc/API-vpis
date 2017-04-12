@@ -69,7 +69,7 @@ class LoginController extends Controller{
          $decrypted = Crypt::decrypt($header);
          $podatkiToken = explode(";", $decrypted);
          if($podatkiToken[3]>time())
-            return response()->json('Token is active.');
+            return response()->json(array('success' => 'token_active'));
          else
             return response()->json(array('error' => 'token_expired'),400);
         }
