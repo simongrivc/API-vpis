@@ -87,8 +87,7 @@ class RegisterController extends Controller{
 
 
             //$user = User::create($request->all());
-     
-            return response()->json($user);
+
         }   
          return  response()->json("Missing form data.");
        
