@@ -30,7 +30,7 @@ class RegisterController extends Controller{
         //vrni errorje če je kaj narobe drugače dodaj userja z šifriranim geslom
         //če ne dodaj v tabelo ter pošlji email z potrditvenim url jem v bazo dodaj potditev
         //naredi endpoint za potrditve
-
+        return response()->json('Dobrodošel uporabnik.');
        
        
     }
