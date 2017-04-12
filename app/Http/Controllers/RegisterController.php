@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Mailable;
 
 class RegisterController extends Controller{
 
@@ -77,14 +77,7 @@ class RegisterController extends Controller{
                     ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' => $request->input('password'), 'email' => $request->input('email'), 'fk_user_role' => 4, 'is_active' => 0, 'fk_activation_code' => $idActivationCodeUser]
                 );*/
                 //pošlji mail
-         Mail::send('emails.send', ['title' => 'test mail', 'content' => $activationCode], function ($message)
-        {
-
-            $message->from('me@gmail.com', 'Christian Nwamba');
-
-            $message->to( $request->input('email'));
-
-        });
+                Mail::to('simongrivc@gmail.com')->send("asdasd");
 
      
 
