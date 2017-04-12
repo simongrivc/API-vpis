@@ -77,7 +77,15 @@ class RegisterController extends Controller{
                     ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' => $request->input('password'), 'email' => $request->input('email'), 'fk_user_role' => 4, 'is_active' => 0, 'fk_activation_code' => $idActivationCodeUser]
                 );*/
                 //pošlji mail
-                Mail::to('simongrivc@gmail.com')->send("asdasd");
+               $data = [
+                    'key'  => 'value'
+                ];
+
+                Mail::send('emails.test', $data, function ($message) {
+                    //$message->from('another@email.com', 'My name');
+                    $message->subject('subject');
+                    $message->to('simongrivc@gmail.com');
+                });
 
      
 
