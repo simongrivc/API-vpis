@@ -134,7 +134,12 @@ class RegisterController extends Controller{
                 }
               
 
-                //dodaj v tabelo user activations nov zapis za študenta ter pošli mail :TODO 
+                //dodaj v tabelo user activations nov zapis za študenta ter pošli mail :TODO
+                Mail::send(['text' => 'view'], ['user' => $user], function ($m) use ($user) {
+                    $m->from('hello@app.com', 'Sistem vpis');
+        
+                    $m->to($request->input('email'), $request->input('name'))->subject('Testni mail');
+                 });
 
             }   
              return  response()->json(array('error' => 'missing_data'), 400);
