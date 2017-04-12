@@ -29,7 +29,7 @@ class LoginController extends Controller{
         
         if($ip_logs){
             if(count($ip_logs)>3)
-                return response()->json('This IP is blocked after 3 unothorized attempts.');
+                return response()->json('This IP is blocked after 3 unothorized attempts.', 401);
         }
         else
         {
@@ -72,7 +72,7 @@ class LoginController extends Controller{
          if($podatkiToken[3]>time())
             return response()->json('Token is active.');
          else
-            return response()->json('Token expired.');
+            return response()->json('Token expired.',400);
         }
         else 
             return response()->json('No token to inspect.',400);
