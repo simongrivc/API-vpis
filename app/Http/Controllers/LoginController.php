@@ -25,10 +25,10 @@ class LoginController extends Controller{
             }
         }
         //preveri blokado ip-ja
-        $ip_logs = Ip_log::where('ip_number', '=', $ipAddress);
+        $ip_logs = Ip_log::where('ip_number', '=', $ipAddress)->get();
         
         if($ip_logs){
-           // if(count($ip_logs)>3)
+            if(count($ip_logs)>3)
                 return response()->json('This IP is blocked after 3 unothorized attempts.',401);
         }
         else
