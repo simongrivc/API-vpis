@@ -6,6 +6,7 @@ use App\User;
 use App\Uporabnik;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Crypt;
 
 class AuthServiceProvider extends ServiceProvider
 {
