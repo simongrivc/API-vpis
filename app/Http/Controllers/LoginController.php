@@ -31,9 +31,8 @@ class LoginController extends Controller{
             if(count($ip_logs)>3)
                 return response()->json('This IP is blocked after 3 unothorized attempts.',401);
         }
-        else
-        {
-            //dobi podatke o uporabniškem imenu in emailu (vereficiraj)
+     
+         //dobi podatke o uporabniškem imenu in emailu (vereficiraj)
 
             $user = User::where([
                         ['username', '=', $request->input('username')],
@@ -59,7 +58,7 @@ class LoginController extends Controller{
                
                 return response()->json('Incorect user credentials.', 400);
             }
-       }
+       
     }
 
     public function tokenExpired(Request $request){
