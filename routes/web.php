@@ -34,8 +34,7 @@ $app->post('token','LoginController@tokenExpired');
 $app->group(['prefix' => 'register/'], function () use ($app) {
     $app->post('student', 'RegisterController@registerStudent');
  	$app->post('user', ['middleware' => 'auth', 'uses' => 'RegisterController@registerUser']);
-       
-    });
+
 });
 
 
