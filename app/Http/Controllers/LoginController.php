@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
  
 use App\User;
+use App\Ip_log;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,14 @@ class LoginController extends Controller{
             return response()->json($user);
         }
         else
+        {
+            $ip=Request::ip();
+            $log = new Ip_log;
+            $log->ip_number($ip);
+            $log->save();
+            
             return response()->json('Incorect user credentials.');
+        }
        
     }
 
