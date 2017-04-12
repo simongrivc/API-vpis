@@ -33,7 +33,7 @@ class RegisterController extends Controller{
 
         //preverimo podvajanje email naslova in username-a
 
-        if($request->input('name') && $request->input('surname') && $request->input('email') && $request->input('password') && $request->input('email'))
+        if($request->input('name') && $request->input('surname') && $request->input('username') && $request->input('password') && $request->input('email'))
         {
             $usernamesMatch = User::where(['username', '=', $request->input('username')])->get();
             // ujemanje username-a ali email naslova
@@ -64,7 +64,7 @@ class RegisterController extends Controller{
             $user = new User();
             $user->name = $request->input('name');
             $user->surname = $request->input('surname');
-            $user->username = $request->input('email');
+            $user->username = $request->input('username');
             $user->password = Hash::make($request->input('password'));
             $user->email = $request->input('email');
             //nastavimo da je uporabnik študent
@@ -74,7 +74,7 @@ class RegisterController extends Controller{
             $user->save();
 
             //dodaj v tabelo user activations nov zapis za študenta ter pošli mail :TODO
-            
+
 
             //$user = User::create($request->all());
      
