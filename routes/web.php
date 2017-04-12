@@ -25,7 +25,7 @@ $app->post('login','LoginController@login');
 $app->post('token','LoginController@tokenExpired');
 
 //registracija navadnega uporabnika
-$app->post('register/student','RegisterController@registerStudent');
+//$app->post('register/student','RegisterController@registerStudent');
 
 
 //registracija službe vpis in refentov
