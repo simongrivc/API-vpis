@@ -23,6 +23,19 @@ class RegisterController extends Controller{
        
     }
 
+    public function registerUser(Request $request){
+        
+        //dobi podatke o študentu
+        //preveri pravilno strukturo emaila preveri podvajanje up imena in email naslova in šibkost gesla
+        //vrni errorje če je kaj narobe drugače dodaj userja z šifriranim geslom
+        //če ne dodaj v tabelo ter pošlji email z potrditvenim url jem v bazo dodaj potditev
+        //naredi endpoint za potrditve
+
+       
+       
+    }
+    
+
    
 }
 ?>
