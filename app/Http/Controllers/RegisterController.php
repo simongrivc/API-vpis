@@ -81,11 +81,13 @@ class RegisterController extends Controller{
                     'key'  => 'value'
                 ];
 
-                Mail::send('emails.test', $data, function ($message) {
-                    //$message->from('another@email.com', 'My name');
-                    $message->subject('subject');
+               
+
+                Mail::raw('Text to e-mail', function ($message) {
+                   $message->subject('subject');
                     $message->to('simongrivc@gmail.com');
                 });
+
 
      
 
