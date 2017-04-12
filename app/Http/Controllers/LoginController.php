@@ -47,7 +47,7 @@ class LoginController extends Controller{
                 ['ip_number' => $ipAddress]
             );
            
-            return response()->json('Incorect user credentials.');
+            return response()->json('Incorect user credentials.', 401);
         }
        
     }
