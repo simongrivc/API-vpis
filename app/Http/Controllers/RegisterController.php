@@ -23,13 +23,13 @@ class RegisterController extends Controller{
 
         if($request->input('name') && $request->input('surname') && $request->input('username') && $request->input('password') && $request->input('email'))
         {
+             // ujemanje username-a ali email naslova
             $usernamesMatch = User::where('username', '=', $request->input('username'))->get();
-            // ujemanje username-a ali email naslova
-            $results = User::where($usernamesMatch)
-                ->orWhere('email', '=', $request->input('email'))
-                ->get();
+           
+            $emailMatch =  User::where('email', '=', $request->input('email'))->get();
+           
 
-            if(sizeOf($results)>0){
+            if(sizeOf($usernamesMatch)>0 && sizeOf($emailMatch)>0){
                 //uporabnik že obstaja oz. se njegovi podatki podvajajo
                 return response()->json('User duplication.');
             }
