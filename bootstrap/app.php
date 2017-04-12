@@ -83,7 +83,7 @@ $app->configure('services');
  $app->register(App\Providers\AuthServiceProvider::class);
 
  
-$app->register(Illuminate\Mail\MailServiceProvider::class);
+//$app->register(Illuminate\Mail\MailServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
