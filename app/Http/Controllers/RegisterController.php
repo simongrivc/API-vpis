@@ -56,7 +56,7 @@ class RegisterController extends Controller{
             if($idActivationCodeUser)
             {
                 $id = DB::table('users')->insertGetId(
-                    ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' => $request->input('password'), 'email' => $request->input('email'), 'fk_user_role' => 4, 'is_active' => 1, 'fk_activation_code' => $idActivationCodeUser]
+                    ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' =>  Hash::make($request->input('password')), 'email' => $request->input('email'), 'fk_user_role' => 4, 'is_active' => 1, 'fk_activation_code' => $idActivationCodeUser]
                 );
                 
                 //popravi pri kreiranju is_active na 0 pošlji mail z aktivacijskim linkom :TODO
@@ -121,7 +121,7 @@ class RegisterController extends Controller{
                 if($idActivationCodeUser)
                 {
                     $id = DB::table('users')->insertGetId(
-                        ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' => $request->input('password'), 'email' => $request->input('email'), 'fk_user_role' => $request->input('user_role'), 'is_active' => 1, 'fk_activation_code' => $idActivationCodeUser]
+                        ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' =>  Hash::make($request->input('password')), 'email' => $request->input('email'), 'fk_user_role' => $request->input('user_role'), 'is_active' => 1, 'fk_activation_code' => $idActivationCodeUser]
                     );
                     
                     //popravi pri kreiranju is_active na 0 pošlji mail z aktivacijskim linkom :TODO

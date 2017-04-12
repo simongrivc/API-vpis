@@ -36,7 +36,7 @@ class LoginController extends Controller{
 
             $user = User::where([
                         ['username', '=', $request->input('username')],
-                        ['password', '=', $request->input('password')],
+                        ['password', '=', Hash::make($request->input('password'))],
                     ])->first();
 
             // če user ni null kreiraj token in ga dodaj userju vrni toke
