@@ -64,7 +64,7 @@ class RegisterController extends Controller{
             //$user->save();
 
             //kreiram aktivacijsko kodo za link
-            $activationCode = Crypt::encrypt('Time created:;'.time().';Time of exp.:;'. (time()+3600) .';'. $user->username);
+            $activationCode = Crypt::encrypt('Time created:;'.time().';Time of exp.:;'. (time()+3600) .';'. $request->input('username'));
             
             $idActivationCodeUser = DB::table('user_activations')->insertGetId(
                 ['activation_code' => $activationCode, 'send_time' => time()]
