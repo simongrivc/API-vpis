@@ -29,7 +29,7 @@ class RegisterController extends Controller{
             $emailMatch =  User::where('email', '=', $request->input('email'))->get();
            
 
-            if(sizeOf($usernamesMatch)>0 && sizeOf($emailMatch)>0){
+            if(sizeOf($usernamesMatch)>0 || sizeOf($emailMatch)>0){
                 //uporabnik že obstaja oz. se njegovi podatki podvajajo
                 return response()->json('User duplication.');
             }
