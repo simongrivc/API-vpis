@@ -162,11 +162,10 @@ class RegisterController extends Controller{
             $message->to('tursic.klemen@gmail.com', 'Klemen')->subject('Testni mail');
         });*/
         
-        /*Mail::send(['text' => 'view'], "Podatki", function ($message) {
+        Mail::send(['text' => 'view'], function ($message) {
             //
             $message->to('tursic.klemen@gmail.com', 'Klemen')->subject('Testni mail');
-        });*/
-        mail("tursic.klemen@gmail.com","My subject","sporocilo");
+        });
         
         return response()->json(array('status' => 'dela'));
     }
