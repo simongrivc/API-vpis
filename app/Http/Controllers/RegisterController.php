@@ -152,11 +152,15 @@ class RegisterController extends Controller{
     
     
     public function sendTestMail(){
-        Mail::send(['text' => 'view'], ['user' => "testno"], function ($m) {
+        /*Mail::send(['text' => 'view'], ['user' => "testno"], function ($m) {
                         $m->from('tursic.klemen@gmail.com', 'Sistem vpis');
             
                         $m->to('tursic.klemen@gmail.com', 'Klemen')->subject('Testni mail');
-                     });
+                     *});*/
+        Mail::raw('Text to e-mail', function ($message) {
+            //
+            $message->to('tursic.klemen@gmail.com', 'Klemen')->subject('Testni mail');
+        });
         
         return response()->json(array('status' => 'dela'));
     }
