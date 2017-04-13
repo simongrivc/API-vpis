@@ -49,6 +49,10 @@ class LoginController extends Controller{
 
                     return response()->json($user);
                 }
+                
+                $log = DB::table('ip_logs')->insertGetId(
+                    ['ip_number' => $ipAddress]
+                );
 
                 return response()->json(array('error' => 'incorect_user_credentials'), 400);
             }
