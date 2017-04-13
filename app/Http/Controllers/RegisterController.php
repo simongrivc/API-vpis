@@ -157,7 +157,7 @@ class RegisterController extends Controller{
             
                         $m->to('tursic.klemen@gmail.com', 'Klemen')->subject('Testni mail');
                      *});*/
-        Mail::raw('Text to e-mail', function ($message) {
+        Mail::raw('Text to e-mail', 'text', function ($message) {
             //
             $message->to('tursic.klemen@gmail.com', 'Klemen')->subject('Testni mail');
         });
