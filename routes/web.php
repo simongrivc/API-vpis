@@ -33,6 +33,8 @@ $app->post('register/user', ['middleware' => 'auth', 'uses' => 'RegisterControll
 
 $app->post('mail','RegisterController@sendTestMail');
 
+$app->post('mail1','RegisterController@sendTestMail1');
+
 
 
 /*$app->post('uporabnik','UporabnikController@ustvariUporabnika');

@@ -170,6 +170,11 @@ class RegisterController extends Controller{
         return response()->json(array('status' => 'dela'));
     }
     
+    public function sendTestMail1(){
+        Mail::raw('Raw string email', function($msg) { $msg->to(['tursic.klemen@gmail.com']); $msg->from(['x@x.com']); });
+        return 'mail send';
+    }
+    
 
    
 }
