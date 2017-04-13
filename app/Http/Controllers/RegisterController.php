@@ -2,7 +2,7 @@
  
 namespace App\Http\Controllers;
  
-use Mail;
+//use Mail;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -128,11 +128,11 @@ class RegisterController extends Controller{
                     //popravi pri kreiranju is_active na 0 pošlji mail z aktivacijskim linkom :TODO
                     
                     //dodaj v tabelo user activations nov zapis za študenta ter pošli mail :TODO
-                    Mail::send(['text' => 'view'], ['user' => $user], function ($m) use ($user) {
+                    /*Mail::send(['text' => 'view'], ['user' => $user], function ($m) use ($user) {
                         $m->from('hello@app.com', 'Sistem vpis');
             
                         $m->to($request->input('email'), $request->input('name'))->subject('Testni mail');
-                     });
+                     });*/
                    
                     return response()->json(array('success' => 'user_created'));
                 }
@@ -148,6 +148,17 @@ class RegisterController extends Controller{
         }
         
         return  response()->json(array('error' => 'no_admin_rights'), 401);
+    }
+    
+    
+    public function sendTestMail(){
+        Mail::send(['text' => 'view'], ['user' => $user], function ($m) use ($user) {
+                        $m->from('hello@app.com', 'Sistem vpis');
+            
+                        $m->to($request->input('email'), $request->input('name'))->subject('Testni mail');
+                     });
+        
+        return response()->json(array('status' => 'dela'));
     }
     
 
