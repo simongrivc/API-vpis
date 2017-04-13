@@ -18,7 +18,7 @@ class CorsMiddleware
             'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PUT, DELETE',
             'Access-Control-Allow-Credentials' => '*',
             'Access-Control-Max-Age'           => '0',
-            'Access-Control-Allow-Headers'     => 'Content-Type, Authorization, X-Requested-With, Api-Token'
+            'Access-Control-Allow-Headers'     => 'Content-Type, Origin, Authorization, X-Requested-With, Api-Token'
         ];
 
         if ($request->isMethod('OPTIONS'))
