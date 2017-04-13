@@ -62,16 +62,16 @@ $app->singleton(
 //    App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
- $app->routeMiddleware([
- 	'cors' =>  App\Http\Middleware\CorsMiddleware::class,
-     'auth' => App\Http\Middleware\Authenticate::class
+
+$app->middleware([
+   'cors' =>  App\Http\Middleware\CorsMiddleware::class
  ]);
 
 
-/*$app->middleware([
-   'cors' =>  App\Http\Middleware\CorsMiddleware::class
- ]);*/
-
+ $app->routeMiddleware([
+     'auth' => App\Http\Middleware\Authenticate::class
+ ]);
+ 
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
