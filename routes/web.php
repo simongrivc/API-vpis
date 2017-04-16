@@ -35,6 +35,12 @@ $app->post('mail','RegisterController@sendTestMail');
 
 $app->post('mail1','RegisterController@sendTestMail1');
 
+//programi 
+//$app->get('application/study_programs', ['middleware' => 'auth', 'uses' => 'studyProgramsController@index']);
+$app->get('application/study_programs', 'StudyProgramsController@index');
+
+$app->get('application/study_programs/{id}', 'StudyProgramsController@getStudyProgramById');
+
 
 
 /*$app->post('uporabnik','UporabnikController@ustvariUporabnika');
