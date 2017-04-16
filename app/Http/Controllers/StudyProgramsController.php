@@ -11,7 +11,6 @@ class StudyProgramsController extends Controller{
 
     public function index(){
  
-        $studyPrograms = StudyProgram::create($request->all());
         return response()->json($studyPrograms);
     }
  
