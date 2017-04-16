@@ -25,7 +25,7 @@ $app = new Laravel\Lumen\Application(
 
 $app->withFacades();
 $app->withEloquent();
-$app->configure('services');
+
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -86,7 +86,7 @@ $app->middleware([
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Illuminate\Mail\MailServiceProvider::class);
-$app->alias('mailer', \Illuminate\Contracts\Mail\Mailer::class);
+//$app->alias('mailer', \Illuminate\Contracts\Mail\Mailer::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -102,5 +102,8 @@ $app->alias('mailer', \Illuminate\Contracts\Mail\Mailer::class);
 $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
     require __DIR__.'/../routes/web.php';
 });
+
+$app->configure('mail');
+
 
 return $app;
