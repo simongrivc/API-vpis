@@ -1,0 +1,11 @@
+SELECT study_programs.*, program_types.type_name, VIS_institutions.institution_name, VIS_institutions.abbreviation, VIS_institutions.fk_id_municipality, VIS_institutions.fk_id_university, municipalities.municipality_name, universities.university_name
+FROM study_programs
+INNER JOIN program_types
+    on study_programs.fk_id_type = program_types.id
+INNER JOIN vis_institutions
+    on study_programs.fk_id_program_carrier = vis_institutions.id
+INNER JOIN municipalities    
+    on vis_institutions.fk_id_municipality=municipalities.id
+INNER JOIN universities    
+    on vis_institutions.fk_id_university=universities.id
+    AND vis_institutions.fk_id_university = universities.id
