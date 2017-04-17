@@ -173,16 +173,16 @@ class RegisterController extends Controller{
         
         $mail = new PHPMailer;
 
-        // notice the \ you have to use root namespace here
+       
         try {
-        $mail->isSMTP(); // tell to use smtp
-        $mail->CharSet = "utf-8"; // set charset to utf8
+        $mail->isSMTP(); 
+        $mail->CharSet = "utf-8";
         $mail->Host = "smtp.gmail.com";
         $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'ssl';
+        $mail->SMTPSecure = 'tls';
         $mail->SMTPDebug = 1;
         $mail->IsHTML(true);
-        $mail->Port = 465; // most likely something different for you. This is the mailtrap.io port i use for testing. 
+        $mail->Port = 587; 
         $mail->Username = "frismrpo@gmail.com";
         $mail->Password = "smrpo2017";
         $mail->setFrom("frismrpo@gmail.com");
