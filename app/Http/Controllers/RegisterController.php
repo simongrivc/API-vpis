@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
+use PHPMailerAutoload; 
+use PHPMailer;
+
 
 
 class RegisterController extends Controller{
@@ -163,10 +166,36 @@ class RegisterController extends Controller{
             $message->to('tursic.klemen@gmail.com', 'Klemen')->subject('Testni mail');
         });*/
         
-        Mail::send(['text' => 'view'], function ($message) {
+        /*Mail::send(['text' => 'view'], function ($message) {
             //
             $message->to('tursic.klemen@gmail.com', 'Klemen')->subject('Testni mail');
-        });
+        });*/
+        
+        $mail = new PHPMailer;
+
+        // notice the \ you have to use root namespace here
+        try {
+        $mail->isSMTP(); // tell to use smtp
+        $mail->CharSet = "utf-8"; // set charset to utf8
+        $mail->Host = $_SERVER["smtp.gmail.com"];
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 465; // most likely something different for you. This is the mailtrap.io port i use for testing. 
+        $mail->Username = "frismrpo@gmail.com";
+        $mail->Password = "smrpo2017";
+        $mail->setFrom("frismrpo@gmail.com", "SMRPO 2017");
+        $mail->Subject = "Test";
+        $mail->MsgHTML("Testni mail");
+        $mail->addAddress("tursic.klemen@gmail.com", "Klemen");
+        
+        
+        $mail->send();
+        } catch (phpmailerException $e) {
+        dd($e);
+        } catch (Exception $e) {
+        dd($e);
+        }
+        dd(‘success’);
         
         return response()->json(array('status' => 'dela'));
     }
