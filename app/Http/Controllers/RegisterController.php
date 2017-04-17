@@ -180,7 +180,7 @@ class RegisterController extends Controller{
         $mail->Host = "tls://smtp.gmail.com";
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'tls';
-        $mail->SMTPDebug = 1;        
+        $mail->SMTPDebug = 2;        
         $mail->Port = 587; 
         $mail->Username = "frismrpo@gmail.com";
         $mail->Password = "smrpo2017";
