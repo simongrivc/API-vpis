@@ -6,6 +6,7 @@ class Ip_log extends Model
 {
 	const CREATED_AT = 'time_stamp';
     const UPDATED_AT = 'time_stamp';
+	protected $dateFormat = 'U';
 	
  	protected $fillable = ['ip_number'];
 
