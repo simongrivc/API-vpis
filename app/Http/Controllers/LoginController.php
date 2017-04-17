@@ -26,6 +26,11 @@ class LoginController extends Controller{
             }
         }
         //preveri blokado ip-ja
+        $ip_block_duration = 1; //duration in minutes
+        $block_time_border = time() - ($ip_block_duration * 60);
+        
+        Ip_log::where('ip_number', '=', $ipAddress)->where('time_stamp', '<', $block_time_border)->delete();
+        
         $ip_logs = Ip_log::where('ip_number', '=', $ipAddress)->get();
         
         if($ip_logs){
