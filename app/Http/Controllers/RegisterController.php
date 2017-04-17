@@ -2,7 +2,7 @@
  
 namespace App\Http\Controllers;
  
-
+use Illuminate\Support\Facades\Mail;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
+
 
 
 class RegisterController extends Controller{
