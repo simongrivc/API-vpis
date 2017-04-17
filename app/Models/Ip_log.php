@@ -10,5 +10,5 @@ class Ip_log extends Model
  
  	protected $table = 'ip_logs';
  	//da eloquent ne dodaja timestamp v bazo
- 	public $timestamps  = false;
+ 	public $timestamps  = true;
 }
