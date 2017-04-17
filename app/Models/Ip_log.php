@@ -3,7 +3,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
  
 class Ip_log extends Model
-{ 
+{
+	const CREATED_AT = 'time_stamp';
+    const UPDATED_AT = 'time_stamp';
+	
  	protected $fillable = ['ip_number'];
 
  	protected $attributes  = ['ip_number'];
