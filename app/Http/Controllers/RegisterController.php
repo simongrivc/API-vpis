@@ -179,7 +179,7 @@ class RegisterController extends Controller{
         $mail->CharSet = "utf-8"; // set charset to utf8
         $mail->Host = "smtp.gmail.com";
         $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'tls';
+        $mail->SMTPSecure = 'ssl';
         $mail->SMTPDebug = 1;
         $mail->IsHTML(true);
         $mail->Port = 465; // most likely something different for you. This is the mailtrap.io port i use for testing. 
