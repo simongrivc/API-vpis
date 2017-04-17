@@ -189,13 +189,13 @@ class RegisterController extends Controller{
         $mail->Subject = "Sluzba vpis - API";
         $mail->Body = "Testna vsebina";
         $mail->addAddress("frismrpo@gmail.com"); 
-        $mail->SMTPOptions = array(
+        /*$mail->SMTPOptions = array(
             'ssl' => array(
                 'verify_peer' => false,
                 'verify_peer_name' => false,
                 'allow_self_signed' => true
             )
-        );
+        );*/
             /*if(!$mail->send()) {
                 echo "Mailer Error: " . $mail->ErrorInfo;
              } else {
@@ -207,7 +207,7 @@ class RegisterController extends Controller{
         } catch (Exception $e) {
         dd($e);
         }
-        dd("success");
+        //dd("success");
         
         return response()->json(array('status' => 'dela'));
     }
