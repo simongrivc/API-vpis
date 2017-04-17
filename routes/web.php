@@ -13,7 +13,9 @@
 
 $app->get('/', function () use ($app) {
 
-    return $app->version();
+    //return $app->version();
+     Mail::raw('Raw string email', function($msg) { $msg->to(['simongrivc@gmail.com']); $msg->from(['frismrpo@gmail.com']); });
+    return 'logged email via mailtrap.io...';
 });
 
 //route groups
