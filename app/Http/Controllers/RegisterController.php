@@ -179,10 +179,10 @@ class RegisterController extends Controller{
         $mail->CharSet = "utf-8";
         $mail->Host = "smtp.gmail.com";
         $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'tls';
+        $mail->SMTPSecure = 'ssl';
         $mail->SMTPDebug = 1;
         $mail->IsHTML(true);
-        $mail->Port = 587; 
+        $mail->Port = 465; 
         $mail->Username = "frismrpo@gmail.com";
         $mail->Password = "smrpo2017";
         $mail->setFrom("frismrpo@gmail.com");
