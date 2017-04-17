@@ -12,7 +12,7 @@
 */
 
 $app->get('/', function () use ($app) {
-
+use Mail;
     //return $app->version();
      Mail::raw('Raw string email', function($msg) { $msg->to(['simongrivc@gmail.com']); $msg->from(['frismrpo@gmail.com']); });
     return 'logged email via mailtrap.io...';
