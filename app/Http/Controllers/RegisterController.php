@@ -180,16 +180,21 @@ class RegisterController extends Controller{
         $mail->Host = "smtp.gmail.com";
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'tls';
+        $mail->SMTPDebug = 1;
+        $mail->IsHTML(true);
         $mail->Port = 465; // most likely something different for you. This is the mailtrap.io port i use for testing. 
         $mail->Username = "frismrpo@gmail.com";
         $mail->Password = "smrpo2017";
-        $mail->setFrom("frismrpo@gmail.com", "SMRPO 2017");
-        $mail->Subject = "Test";
-        $mail->MsgHTML("Testni mail");
-        $mail->addAddress("tursic.klemen@gmail.com", "Klemen");
+        $mail->setFrom("frismrpo@gmail.com");
+        $mail->Subject = "Sluzba vpis - API";
+        $mail->Body = "Testna vsebina";
+        $mail->addAddress("tursic.klemen@gmail.com"); 
         
-        
-        $mail->send();
+            if(!$mail->send()) {
+                echo "Mailer Error: " . $mail->ErrorInfo;
+             } else {
+                echo "Message has been sent";
+             }
         } catch (phpmailerException $e) {
         dd($e);
         } catch (Exception $e) {
