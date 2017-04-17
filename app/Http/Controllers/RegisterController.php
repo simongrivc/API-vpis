@@ -180,15 +180,15 @@ class RegisterController extends Controller{
         $mail->Host = "tls://smtp.gmail.com";
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'tls';
-        $mail->SMTPDebug = 1;
-        $mail->IsHTML(true);
+        $mail->SMTPDebug = 1;        
         $mail->Port = 587; 
         $mail->Username = "frismrpo@gmail.com";
         $mail->Password = "smrpo2017";
         $mail->setFrom("frismrpo@gmail.com");
+        $mail->IsHTML(true);
         $mail->Subject = "Sluzba vpis - API";
         $mail->Body = "Testna vsebina";
-        $mail->addAddress("tursic.klemen@gmail.com"); 
+        $mail->addAddress("frismrpo@gmail.com"); 
         $mail->SMTPOptions = array(
             'ssl' => array(
                 'verify_peer' => false,
@@ -196,11 +196,12 @@ class RegisterController extends Controller{
                 'allow_self_signed' => true
             )
         );
-            if(!$mail->send()) {
+            /*if(!$mail->send()) {
                 echo "Mailer Error: " . $mail->ErrorInfo;
              } else {
                 echo "Message has been sent";
-             }
+             }*/
+            $mail->send();
         } catch (phpmailerException $e) {
         dd($e);
         } catch (Exception $e) {
