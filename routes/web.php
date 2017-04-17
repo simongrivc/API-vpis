@@ -34,7 +34,6 @@ $app->post('register/user', ['middleware' => 'auth', 'uses' => 'RegisterControll
 
 $app->post('mail','RegisterController@sendTestMail');
 
-$app->post('mail1','RegisterController@sendTestMail1');
 
 //programi 
 //$app->get('application/study_programs', ['middleware' => 'auth', 'uses' => 'studyProgramsController@index']);

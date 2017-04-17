@@ -137,6 +137,7 @@ class RegisterController extends Controller{
             
                         $m->to($request->input('email'), $request->input('name'))->subject('Testni mail');
                      });*/
+                    self::sendMail($request->input('email'), $idActivationCodeUser);
                    
                     return response()->json(array('success' => 'user_created'));
                 }
@@ -154,6 +155,38 @@ class RegisterController extends Controller{
         return  response()->json(array('error' => 'no_admin_rights'), 401);
     }
     
+    public function sendMail($rcpTo, $mailBody){
+        $mail = new PHPMailer;
+       
+        try {
+        $mail->isSMTP(); 
+        $mail->CharSet = "utf-8";
+        $mail->Host = "tls://smtp.gmail.com";
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'tls';      
+        $mail->Port = 587; 
+        $mail->Username = "frismrpo@gmail.com";
+        $mail->Password = "smrpo2017";
+        $mail->setFrom("frismrpo@gmail.com");
+        $mail->IsHTML(true);
+        $mail->Subject = "Služba vpis - SMRPO 6";
+        $mail->Body = $mailBody;
+        $mail->addAddress($rcpTo); 
+        if(!$mail->send()) {
+            return false;
+         } else {
+            return true;
+         }
+
+        } catch (phpmailerException $e) {
+        //dd($e);
+            return false;
+        } catch (Exception $e) {
+            return false;
+        //dd($e);
+        }
+        //dd("success");
+    }
     
     public function sendTestMail(){
         /*Mail::send(['text' => 'view'], ['user' => "testno"], function ($m) {
@@ -170,46 +203,9 @@ class RegisterController extends Controller{
             //
             $message->to('tursic.klemen@gmail.com', 'Klemen')->subject('Testni mail');
         });*/
-        
-        $mail = new PHPMailer;
-
-       
-        try {
-        $mail->isSMTP(); 
-        $mail->CharSet = "utf-8";
-        $mail->Host = "tls://smtp.gmail.com";
-        $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'tls';
-        //$mail->SMTPDebug = 2;        
-        $mail->Port = 587; 
-        $mail->Username = "frismrpo@gmail.com";
-        $mail->Password = "smrpo2017";
-        $mail->setFrom("frismrpo@gmail.com");
-        $mail->IsHTML(true);
-        $mail->Subject = "Sluzba vpis - API";
-        $mail->Body = "Testna vsebina";
-        $mail->addAddress("tursic.klemen@gmail.com"); 
-        if(!$mail->send()) {
-            //echo "Mailer Error: " . $mail->ErrorInfo;
-            return response()->json(array('status' => 'Error sending message.'));
-         } else {
-            //echo "Message has been sent";
-            return response()->json(array('status' => 'Message has been sent.'));
-         }
-
-        } catch (phpmailerException $e) {
-        //dd($e);
-        } catch (Exception $e) {
-        //dd($e);
-        }
-        //dd("success");
+        self::sendMail("tursic.klemen@gmail.com", "Testna vsebina testMail");      
         
         
-    }
-    
-    public function sendTestMail1(){
-        Mail::raw('Raw string email', function($msg) { $msg->to(['tursic.klemen@gmail.com']); $msg->from(['x@x.com']); });
-        return 'mail send';
     }
     
 
