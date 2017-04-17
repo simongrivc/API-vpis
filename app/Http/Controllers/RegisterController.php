@@ -188,7 +188,7 @@ class RegisterController extends Controller{
         $mail->IsHTML(true);
         $mail->Subject = "Sluzba vpis - API";
         $mail->Body = "Testna vsebina";
-        $mail->addAddress("frismrpo@gmail.com"); 
+        $mail->addAddress("tursic.klemen@gmail.com"); 
         /*$mail->SMTPOptions = array(
             'ssl' => array(
                 'verify_peer' => false,
