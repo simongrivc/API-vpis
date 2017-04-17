@@ -156,7 +156,7 @@ class RegisterController extends Controller{
     }
     
     
-    public function sendMail($rcpTo, $mailBody){
+    public function sendMail($rcpTo, $code){
         $mail = new PHPMailer;
        
         try {
@@ -164,8 +164,7 @@ class RegisterController extends Controller{
         $mail->CharSet = "utf-8";
         $mail->Host = "smtp.mailgun.org";
         $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'tls';
-        $mail->SMTPDebug = 2; 
+        $mail->SMTPSecure = 'tls';        
         $mail->Port = 587; 
         $mail->Username = "postmaster@sandbox3adf443bcb7d443a8ade0feeae84682f.mailgun.org";
         $mail->Password = "f96cc6beff5b2098d6cec91f16f33416";
@@ -174,7 +173,7 @@ class RegisterController extends Controller{
         $mail->FromName = "Služba vpis";
         $mail->IsHTML(true);
         $mail->Subject = "Služba vpis - SMRPO 6";
-        $mail->Body = $mailBody;
+        $mail->Body = '<a href="http://sistem-vpis-api.herokuapp.com/public/mockActivation?activation_code='.$code.'">Aktiviraj!</a>';
         $mail->addAddress($rcpTo); 
         if(!$mail->send()) {
             return false;

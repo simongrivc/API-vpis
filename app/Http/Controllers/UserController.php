@@ -35,7 +35,28 @@ class UserController extends Controller{
     
     public function activateUser(Request $request){
         if($request->input('activation_code')){
-            $user = User::where('activation_code', '=', $request->input('activation_code'));
+            //$user = User::where('activation_code', '=', $request->input('activation_code'));
+            $user = User::join('user_activations', function($join) {
+                $join->on('users.fk_activation_code', '=', 'user_activations.id')
+                        ->where('user_activations.activation_code', '=', $request->input('activation_code'));
+            });
+           
+            if($user){
+                $user->is_active = 1;
+                $user->save();
+                return response()->json(array('status' => 'activated'));
+            }
+            return response()->json(array('status' => 'not_found'));            
+        }
+        
+        return  response()->json(array('error' => 'missing_data'), 400);
+        
+    }
+    
+    public function activateUserMock(){
+        $code = app('request')->input('activation_code');
+        if($code){
+            $user = User::where('activation_code', '=', $code);
             if($user){
                 $user->is_active = 1;
                 $user->save();
