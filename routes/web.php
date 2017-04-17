@@ -28,6 +28,8 @@ $app->post('token','LoginController@tokenExpired');
 //registracija navadnega uporabnika
 $app->post('register/student','RegisterController@registerStudent');
 
+//user activation
+$app->post('activation','UserController@activateUser');
 
 //registracija službe vpis in refentov
 $app->post('register/user', ['middleware' => 'auth', 'uses' => 'RegisterController@registerUser']);

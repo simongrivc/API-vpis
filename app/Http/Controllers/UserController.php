@@ -32,6 +32,20 @@ class UserController extends Controller{
  
         return response()->json('User successfully deleted.');
     }
+    
+    public function activateUser(Request $request){
+        if($request->input('activation_code')){
+            if($user){
+                $user->is_active = 1;
+                $user->save();
+                return response()->json(array('status' => 'activated'));
+            }
+            return response()->json(array('status' => 'not_found'));            
+        }
+        
+        return  response()->json(array('error' => 'missing_data'), 400);
+        
+    }
 
 }
 ?>
