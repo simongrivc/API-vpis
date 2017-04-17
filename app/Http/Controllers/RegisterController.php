@@ -155,7 +155,44 @@ class RegisterController extends Controller{
         return  response()->json(array('error' => 'no_admin_rights'), 401);
     }
     
+    
     public function sendMail($rcpTo, $mailBody){
+        $mail = new PHPMailer;
+       
+        try {
+        $mail->isSMTP(); 
+        $mail->CharSet = "utf-8";
+        $mail->Host = "smtp.mailgun.org";
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'tls';
+        $mail->SMTPDebug = 2; 
+        $mail->Port = 587; 
+        $mail->Username = "postmaster@sandbox3adf443bcb7d443a8ade0feeae84682f.mailgun.org";
+        $mail->Password = "f96cc6beff5b2098d6cec91f16f33416";
+        //$mail->setFrom("frismrpo@gmail.com");
+        $mail->From = "sandbox3adf443bcb7d443a8ade0feeae84682f.mailgun.org";
+        $mail->FromName = "Služba vpis";
+        $mail->IsHTML(true);
+        $mail->Subject = "Služba vpis - SMRPO 6";
+        $mail->Body = $mailBody;
+        $mail->addAddress($rcpTo); 
+        if(!$mail->send()) {
+            return false;
+         } else {
+            return true;
+         }
+
+        } catch (phpmailerException $e) {
+        //dd($e);
+            return false;
+        } catch (Exception $e) {
+            return false;
+        //dd($e);
+        }
+        //dd("success");
+    }
+    
+    public function sendMailGmail($rcpTo, $mailBody){
         $mail = new PHPMailer;
        
         try {
