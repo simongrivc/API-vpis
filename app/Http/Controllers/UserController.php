@@ -35,6 +35,7 @@ class UserController extends Controller{
     
     public function activateUser(Request $request){
         if($request->input('activation_code')){
+            $user = User::where('activation_code', '=', $request->input('activation_code'));
             if($user){
                 $user->is_active = 1;
                 $user->save();

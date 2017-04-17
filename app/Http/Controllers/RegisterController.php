@@ -137,7 +137,7 @@ class RegisterController extends Controller{
             
                         $m->to($request->input('email'), $request->input('name'))->subject('Testni mail');
                      });*/
-                    self::sendMail($request->input('email'), $idActivationCodeUser);
+                    self::sendMail($request->input('email'), $activationCode);
                    
                     return response()->json(array('success' => 'user_created'));
                 }
@@ -170,7 +170,7 @@ class RegisterController extends Controller{
         $mail->Username = "postmaster@sandbox3adf443bcb7d443a8ade0feeae84682f.mailgun.org";
         $mail->Password = "f96cc6beff5b2098d6cec91f16f33416";
         //$mail->setFrom("frismrpo@gmail.com");
-        $mail->From = "sandbox3adf443bcb7d443a8ade0feeae84682f.mailgun.org";
+        $mail->From = "noreply@sandbox3adf443bcb7d443a8ade0feeae84682f.mailgun.org";
         $mail->FromName = "Služba vpis";
         $mail->IsHTML(true);
         $mail->Subject = "Služba vpis - SMRPO 6";
