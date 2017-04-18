@@ -45,6 +45,9 @@ class LoginController extends Controller{
             // če user ni null kreiraj token in ga dodaj userju vrni toke
             if($user)
             {
+                if($user->is_active == 0){
+                    return response()->json(array('error' => 'not_activated'), 400);
+                }
                 if(Hash::check($request->input('password'), $user->password))          
                 {
                     $user->api_token = Crypt::encrypt('Time created:;'.time().';Time of exp.:;'. (time()+3600) .';'. $user->username);

@@ -48,9 +48,9 @@ class UserController extends Controller{
             if($user && $user != null){
                 $user->is_active = 1;
                 $user->save();
-                return response()->json(array('status' => 'activated'));
+                return response()->json(array('success' => 'activated'));
             }
-            return response()->json(array('status' => 'not_found'));            
+            return response()->json(array('error' => 'not_found'), 400);            
         }
         
         return  response()->json(array('error' => 'missing_data'), 400);
@@ -72,9 +72,9 @@ class UserController extends Controller{
             if($user && $user != null){
                 $user->is_active = 1;
                 $user->save();
-                return response()->json(array('status' => 'activated'));
+                return response()->json(array('success' => 'activated'));
             }
-            return response()->json(array('status' => 'not_found'));            
+            return response()->json(array('error' => 'not_found'), 400);            
         }
         
         return  response()->json(array('error' => 'missing_data'), 400);
