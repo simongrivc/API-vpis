@@ -137,7 +137,8 @@ class RegisterController extends Controller{
             
                         $m->to($request->input('email'), $request->input('name'))->subject('Testni mail');
                      });*/
-                    self::sendMail($request->input('email'), $activationCode);
+                    
+                    //self::sendMail($request->input('email'), $activationCode);
                    
                     return response()->json(array('success' => 'user_created'));
                 }
