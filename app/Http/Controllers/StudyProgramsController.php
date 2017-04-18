@@ -20,7 +20,13 @@ class StudyProgramsController extends Controller{
         $studyProgram = StudyProgram::find($id);
 
         return response()->json($studyProgram);
-    }  
+    }
+    
+    public function getFaculties(Request $request){
+        $institutions = DB::select("SELECT id, institution_name AS name FROM vis_institutions");
+        
+        return response()->json($institutions);
+    }
 
 }
 ?>

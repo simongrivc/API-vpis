@@ -46,6 +46,9 @@ $app->get('application/study_programs', 'StudyProgramsController@index');
 
 $app->get('application/study_programs/{id}', 'StudyProgramsController@getStudyProgramById');
 
+//
+$app->get('application/faculties', 'StudyProgramsController@getFaculties');
+
 
 
 /*$app->post('uporabnik','UporabnikController@ustvariUporabnika');
