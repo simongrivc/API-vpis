@@ -40,8 +40,6 @@ class UserController extends Controller{
             $idCode = DB::table('user_activations')
                     ->where('activation_code', '=', $request->input('activation_code'))->first();
             
-            $user = User::where('fk_activation_code', '=', $idCode);
-           
             if($user && $user != null){
                 $user->is_active = 1;
                 $user->save();
