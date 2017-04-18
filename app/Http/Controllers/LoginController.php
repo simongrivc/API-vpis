@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
  
 use App\User;
-use App\VisInstitution
+use App\VisInstitution;
 use App\Ip_log;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
