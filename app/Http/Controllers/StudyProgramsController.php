@@ -27,6 +27,14 @@ class StudyProgramsController extends Controller{
     public function getStudyProgramCalls(Request $request){
         $studyProgramCalls = StudyProgramCallView::all();
 
+        foreach ($studyProgramCalls as $program) {
+           $program->nr_slo_eu_vpis_mock =0;
+           $program->nr_foreigners_vpis_mock =0;
+           $program->nr_without_citizenship_vpis_mock =0;
+           $program->nr_slo_eu_sprejeti_mock =0;
+           $program->nr_foreigners_sprejeti_mock =0;
+           $program->nr_without_citizenship_sprejeti_mock =0;
+        }
         //$studyProgramCalls = DB::select("SELECT * FROM study_programs_calls_view");
 
         return response()->json($studyProgramCalls);
