@@ -40,12 +40,14 @@ $app->post('register/user', ['middleware' => 'auth', 'uses' => 'RegisterControll
 $app->post('mail','RegisterController@sendTestMail');
 
 
-//programi 
+//programi vsi (nerazpisani)
 //$app->get('application/study_programs', ['middleware' => 'auth', 'uses' => 'studyProgramsController@index']);
 $app->get('application/study_programs', 'StudyProgramsController@index');
-
+//program po id
 $app->get('application/study_programs/{id}', 'StudyProgramsController@getStudyProgramById');
 
+//dobi vse razpisane programe
+$app->get('application/study_programs_calls', 'StudyProgramsController@getStudyProgramCalls');
 //dobi vse fakultete
 $app->get('application/vis_institutions', 'VisInstitutionsController@index');
 
