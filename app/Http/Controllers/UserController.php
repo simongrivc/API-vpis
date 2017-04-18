@@ -57,8 +57,8 @@ class UserController extends Controller{
         
     }
     
-    public function activateUserMock(){
-        $code = app('request')->input('activation_code');
+    public function activateUserMock(Request $request){
+        $code = $request->get('activation_code');
         if($code){
             $idCode = DB::table('user_activations')
                     ->where('activation_code', '=', $request->input('activation_code'))->first();
