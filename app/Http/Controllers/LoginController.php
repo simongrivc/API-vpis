@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
  
 use App\User;
+use App\VisInstitution
 use App\Ip_log;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+
 
 class LoginController extends Controller{
 
@@ -55,6 +57,9 @@ class LoginController extends Controller{
                     $user->last_login = time();
                     $user->save();
 
+                    $fakulteta = VisInstitution::find($user->fk_id_vis_institution);
+                 
+                    $user->vis_institution_name = $fakulteta->institution_name;
                     return response()->json($user);
                 }
                 
