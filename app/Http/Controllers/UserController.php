@@ -36,9 +36,12 @@ class UserController extends Controller{
     
     public function activateUser(Request $request){
         if($request->input('activation_code')){
-            //$user = User::where('activation_code', '=', $request->input('activation_code'));
             $idCode = DB::table('user_activations')
                     ->where('activation_code', '=', $request->input('activation_code'))->first();
+            
+            /*$durationValid = 1; //duration in days
+            $durationValidBorder = time() - ($durationValid * 24*60*60);*/
+            
             
             $user = User::where('fk_activation_code', '=', $idCode->id)->first();
             
@@ -57,8 +60,16 @@ class UserController extends Controller{
     public function activateUserMock(){
         $code = app('request')->input('activation_code');
         if($code){
-            $user = User::where('activation_code', '=', $code);
-            if($user){
+            $idCode = DB::table('user_activations')
+                    ->where('activation_code', '=', $request->input('activation_code'))->first();
+                    
+            /*$durationValid = 1; //duration in days
+            $durationValidBorder = time() - ($durationValid * 24*60*60);*/
+                    
+            $user = User::where('fk_activation_code', '=', $idCode->id)->first();
+            
+
+            if($user && $user != null){
                 $user->is_active = 1;
                 $user->save();
                 return response()->json(array('status' => 'activated'));
