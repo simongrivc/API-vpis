@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
  
 use App\StudyProgram;
+use App\StudyProgramCallView;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,8 +25,9 @@ class StudyProgramsController extends Controller{
     }
 
     public function getStudyProgramCalls(Request $request){
+        $studyProgramCalls = StudyProgramCallView::all();
 
-        $studyProgramCalls = DB::select("SELECT * FROM study_programs_calls_view");
+        //$studyProgramCalls = DB::select("SELECT * FROM study_programs_calls_view");
 
         return response()->json($studyProgramCalls);
     }
