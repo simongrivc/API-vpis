@@ -13,7 +13,7 @@
 
 $app->get('/', function () use ($app) {
 
-    return $app->version();
+    return $app->version() . " Dokumentacija: http://docs.sistemvpis.apiary.io/#reference/0/login/login";
     
 });
 

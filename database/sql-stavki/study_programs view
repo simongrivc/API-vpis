@@ -14,7 +14,7 @@ INNER JOIN universities
 
 
 CREATE VIEW study_programs_calls_view AS
-SELECT study_programs.*, program_types.type_name, VIS_institutions.institution_name, VIS_institutions.abbreviation, VIS_institutions.fk_id_municipality, VIS_institutions.fk_id_university, municipalities.municipality_name, universities.university_name, study_programs_calls.fk_id_call_type, call_type.type_name as call_type_name, study_programs_calls.nr_slo_eu, study_programs_calls.nr_foreigners, study_programs_calls.nr_without_citizenship, study_programs_calls.min_nr_points
+SELECT study_programs.*, program_types.type_name, vis_institutions.institution_name, vis_institutions.abbreviation, vis_institutions.fk_id_municipality, vis_institutions.fk_id_university, municipalities.municipality_name, universities.university_name, study_programs_calls.fk_id_call_type, call_type.type_name as call_type_name, study_programs_calls.nr_slo_eu, study_programs_calls.nr_foreigners, study_programs_calls.nr_without_citizenship, study_programs_calls.min_nr_points
 FROM study_programs
 INNER JOIN program_types
     on study_programs.fk_id_type = program_types.id
@@ -29,3 +29,17 @@ INNER JOIN study_programs_calls
 	ON study_programs_calls.fk_id_study_program=study_programs.id
 INNER JOIN call_type
     ON study_programs_calls.fk_id_call_type = call_type.id
+
+
+
+CREATE VIEW study_programs_calls_view AS
+SELECT study_programs.*, program_types.type_name, vis_institutions.institution_name, vis_institutions.abbreviation, vis_institutions.fk_id_municipality, vis_institutions.fk_id_university, municipalities.municipality_name, universities.university_name, study_programs_calls.fk_id_call_type, call_type.type_name as call_type_name, study_programs_calls.nr_slo_eu, study_programs_calls.nr_foreigners, study_programs_calls.nr_without_citizenship, study_programs_calls.min_nr_points
+FROM study_programs_calls, study_programs, program_types, vis_institutions, municipalities, universities, call_type
+WHERE 
+study_programs_calls.fk_id_study_program=study_programs.id
+AND study_programs.fk_id_type = program_types.id
+AND study_programs.fk_id_program_carrier = vis_institutions.id
+AND vis_institutions.fk_id_municipality=municipalities.id
+AND vis_institutions.fk_id_university=universities.id
+AND vis_institutions.fk_id_university = universities.id
+AND study_programs_calls.fk_id_call_type = call_type.id
