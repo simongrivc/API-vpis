@@ -87,7 +87,7 @@ class RegisterController extends Controller{
         //preveri da registrira administrator
         if($user->fk_user_role==1)
         {
-            if($request->input('name') && $request->input('surname') && $request->input('username') && $request->input('password') && $request->input('email') && $request->input('user_role'))
+            if($request->input('name') && $request->input('surname') && $request->input('username') && $request->input('password') && $request->input('email') && $request->input('user_role') && $request->input('id_vis_institution'))
             {
                  // ujemanje username-a ali email naslova
                 $usernamesMatch = User::where('username', '=', $request->input('username'))->get();
@@ -126,7 +126,7 @@ class RegisterController extends Controller{
                 if($idActivationCodeUser)
                 {
                     $id = DB::table('users')->insertGetId(
-                        ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' =>  Hash::make($request->input('password')), 'email' => $request->input('email'), 'fk_user_role' => $request->input('user_role'), 'is_active' => 1, 'fk_activation_code' => $idActivationCodeUser]
+                        ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' =>  Hash::make($request->input('password')), 'email' => $request->input('email'), 'fk_user_role' => $request->input('user_role'), 'is_active' => 1, 'fk_activation_code' => $idActivationCodeUser, 'fk_id_vis_institution' => $request->input('id_vis_institution')]
                     );
                     
                     //popravi pri kreiranju is_active na 0 pošlji mail z aktivacijskim linkom :TODO
