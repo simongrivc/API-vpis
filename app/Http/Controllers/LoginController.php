@@ -55,12 +55,12 @@ class LoginController extends Controller{
                     $user->api_token = Crypt::encrypt('Time created:;'.time().';Time of exp.:;'. (time()+3600) .';'. $user->username);
                     //decript $decrypted = Crypt::decrypt($encryptedValue);
                     $user->last_login = time();
-                    $user->save();
+                    $userReturn=$user->save();
 
                     $fakulteta = VisInstitution::find($user->fk_id_vis_institution);
                  
-                    $user->vis_institution_name = $fakulteta->institution_name;
-                    return response()->json($user);
+                    $userReturn->vis_institution_name = $fakulteta->institution_name;
+                    return response()->json($userReturn);
                 }
                 
                 $log = DB::table('ip_logs')->insertGetId(
