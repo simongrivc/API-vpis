@@ -36,10 +36,10 @@ class UserController extends Controller{
     public function activateUser(Request $request){
         if($request->input('activation_code')){
             //$user = User::where('activation_code', '=', $request->input('activation_code'));
-            $user = User::join('user_activations', function($join) {
-                $join->on('users.fk_activation_code', '=', 'user_activations.id')
-                        ->where('user_activations.activation_code', '=', $request->input('activation_code'));
-            });
+            $idCode = DB::table('user_activations')
+                    ->where('activation_code', '=', $request->input('activation_code'))->first();
+            
+            $user = User::where('fk_activation_code', '=', $idCode);
            
             if($user){
                 $user->is_active = 1;
