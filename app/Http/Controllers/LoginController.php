@@ -56,7 +56,14 @@ class LoginController extends Controller{
                     //decript $decrypted = Crypt::decrypt($encryptedValue);
                     $user->last_login = time();
                     $fakulteta = VisInstitution::find($user->fk_id_vis_institution);
-                    $user->vis_institution_name = $fakulteta->institution_name;
+                    if($fakulteta)
+                    {
+                        $user->vis_institution_name = $fakulteta->institution_name;
+                    }
+                    else
+                    {
+                        $user->vis_institution_name = "";
+                    }
                     $user->save();
 
                     return response()->json($user);
