@@ -23,16 +23,7 @@ class StudyProgramsController extends Controller{
         return response()->json($studyProgram);
     }
     
-    public function getFaculties(Request $request){
-        $institutions = DB::select("SELECT inst.id, inst.institution_name AS name, inst.abbreviation,
-                                   m.id AS id_municipality, m.municipality_name, u.id AS id_university,
-                                   u.university_name
-                                   FROM vis_institutions inst
-                                   INNER JOIN municipalities m ON inst.fk_id_municipality = m.id
-                                   INNER JOIN universities u ON inst.fk_id_university = u.id");
-        
-        return response()->json($institutions);
-    }
+
 
 }
 ?>
