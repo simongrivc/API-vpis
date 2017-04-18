@@ -32,7 +32,7 @@ $app->post('register/student','RegisterController@registerStudent');
 $app->post('activation','UserController@activateUser');
 
 //mock activation
-$app->post('mockActivation','UserController@activateUserMock');
+$app->get('mockActivation','UserController@activateUserMock');
 
 //registracija službe vpis in refentov
 $app->post('register/user', ['middleware' => 'auth', 'uses' => 'RegisterController@registerUser']);
