@@ -22,6 +22,13 @@ class StudyProgramsController extends Controller{
 
         return response()->json($studyProgram);
     }
+
+    public function getStudyProgramCalls(Request $request){
+
+        $studyProgramCalls = DB::select("SELECT * FROM study_program_view");
+
+        return response()->json($studyProgramCalls);
+    }
     
 
 
