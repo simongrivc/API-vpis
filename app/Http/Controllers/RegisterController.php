@@ -117,16 +117,16 @@ class RegisterController extends Controller{
                 //če gre vse čez kreiraj uporabnika ter ga dodaj v tabelo
 
                 //kreiram aktivacijsko kodo za link
-                $activationCode = Crypt::encrypt('Time created:;'.time().';Time of exp.:;'. (time()+3600) .';'. $request->input('username'));
+                //$activationCode = Crypt::encrypt('Time created:;'.time().';Time of exp.:;'. (time()+3600) .';'. $request->input('username'));
                 
-                $idActivationCodeUser = DB::table('user_activations')->insertGetId(
-                    ['activation_code' => $activationCode, 'send_time' => time()]
-                );
+               // $idActivationCodeUser = DB::table('user_activations')->insertGetId(
+                //    ['activation_code' => $activationCode, 'send_time' => time()]
+               // );
 
-                if($idActivationCodeUser)
-                {
+               // if($idActivationCodeUser)
+                //{
                     $id = DB::table('users')->insertGetId(
-                        ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' =>  Hash::make($request->input('password')), 'email' => $request->input('email'), 'fk_user_role' => $request->input('user_role'), 'is_active' => 1, 'fk_activation_code' => $idActivationCodeUser, 'fk_id_vis_institution' => $request->input('id_vis_institution')]
+                        ['name' => $request->input('name'), 'surname' => $request->input('surname'), 'username' => $request->input('username'), 'password' =>  Hash::make($request->input('password')), 'email' => $request->input('email'), 'fk_user_role' => $request->input('user_role'), 'is_active' => 1, 'fk_activation_code' => 0, 'fk_id_vis_institution' => $request->input('id_vis_institution')]
                     );
                     
                     //popravi pri kreiranju is_active na 0 pošlji mail z aktivacijskim linkom :TODO
@@ -141,12 +141,8 @@ class RegisterController extends Controller{
                     //self::sendMail($request->input('email'), $activationCode);
                    
                     return response()->json(array('success' => 'user_created'));
-                }
-                else
-                {
-                    return response()->json(array('error' => 'activation_code_not_generated'), 400);
-                }
-              
+                //}
+             
 
 
             }   
