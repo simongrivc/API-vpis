@@ -28,7 +28,7 @@ class StudyProgramsController extends Controller{
                                    m.id AS id_municipality, m.municipality_name, u.id AS id_university,
                                    u.university_name
                                    FROM vis_institutions inst
-                                   INNER JOIN municipalities m ON inst.fk_id_minucipality = m.id
+                                   INNER JOIN municipalities m ON inst.fk_id_municipality = m.id
                                    INNER JOIN universities u ON inst.fk_id_university = u.id");
         
         return response()->json($institutions);
