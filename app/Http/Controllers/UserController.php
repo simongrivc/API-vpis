@@ -42,7 +42,7 @@ class UserController extends Controller{
             
             $user = User::where('fk_activation_code', '=', $idCode);
            
-            if($user){
+            if($user && $user != null){
                 $user->is_active = 1;
                 $user->save();
                 return response()->json(array('status' => 'activated'));
