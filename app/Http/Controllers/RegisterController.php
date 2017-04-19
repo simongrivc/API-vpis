@@ -88,7 +88,7 @@ class RegisterController extends Controller{
         //preveri da registrira administrator
         if($user->fk_user_role==1)
         {
-            if($request->input('name') && $request->input('surname') && $request->input('username') && $request->input('password') && $request->input('email') && $request->input('user_role') && $request->input('id_vis_institution'))
+            if($request->input('name') && $request->input('surname') && $request->input('username') && $request->input('password') && $request->input('email') && $request->input('user_role') && ($request->input('id_vis_institution') || $request->input('id_vis_institution') == 0))
             {
                  // ujemanje username-a ali email naslova
                 $usernamesMatch = User::where('username', '=', $request->input('username'))->get();
@@ -155,6 +155,42 @@ class RegisterController extends Controller{
     
     
     public function sendMail($rcpTo, $code){
+        $mail = new PHPMailer;
+       
+        try {
+        $mail->isSMTP(); 
+        $mail->CharSet = "utf-8";
+        $mail->Host = "mail@klement.tk";
+        $mail->SMTPAuth = true;
+        //$mail->SMTPSecure = 'tls';        
+        $mail->Port = 25; 
+        $mail->Username = "smrpo@klement.tk";
+        $mail->Password = "qd5NG1x5qc";
+        //$mail->setFrom("frismrpo@gmail.com");
+        $mail->From = "smrpo@klement.tk";
+        $mail->FromName = "Služba vpis";
+        $mail->IsHTML(true);
+        $mail->Subject = "Služba vpis - SMRPO 6";
+        //$mail->Body = '<a href="http://sistem-vpis-api.herokuapp.com/public/mockActivation?activation_code='.$code.'">Aktiviraj!</a>';
+        $mail->Body = '<a href="https://smrpo-web.herokuapp.com/user/activation?activation_code='.$code.'">Aktiviraj!</a>';
+        $mail->addAddress($rcpTo); 
+        if(!$mail->send()) {
+            return false;
+         } else {
+            return true;
+         }
+
+        } catch (phpmailerException $e) {
+        //dd($e);
+            return false;
+        } catch (Exception $e) {
+            return false;
+        //dd($e);
+        }
+        //dd("success");
+    }
+    
+    public function sendMailMailgun($rcpTo, $code){
         $mail = new PHPMailer;
        
         try {
