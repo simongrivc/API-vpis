@@ -167,10 +167,13 @@ class RegisterController extends Controller{
         $mail->SMTPDebug  = 2;
         $mail->Username = "smrpo@klement.tk";
         $mail->Password = "qd5NG1x5qc";
-        $mail->SMTPOptions = ['ssl'=>[
-        'allow_self_signed' => true,
-        'peer_fingerprint'=>['sha1'=>'93:05:7A:88:15:C6:4F:CE:88:2F:FA:91:16:52:28:78:BC:53:64:17']
-        ]];
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
         //$mail->setFrom("frismrpo@gmail.com");
         $mail->From = "smrpo@klement.tk";
         $mail->FromName = "Služba vpis";
