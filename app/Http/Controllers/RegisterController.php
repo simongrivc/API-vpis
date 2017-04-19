@@ -65,6 +65,7 @@ class RegisterController extends Controller{
                 );
                 
                 //popravi pri kreiranju is_active na 0 pošlji mail z aktivacijskim linkom :TODO
+                self::sendMail($request->input('email'), $activationCode);
                
                 return response()->json(array('success' => 'student_created'));
             }
