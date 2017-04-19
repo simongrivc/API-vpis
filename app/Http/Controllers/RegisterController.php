@@ -164,7 +164,6 @@ class RegisterController extends Controller{
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'tls';        
         $mail->Port = 587;
-        $mail->SMTPDebug  = 2;
         $mail->Username = "smrpo@klement.tk";
         $mail->Password = "qd5NG1x5qc";
         $mail->SMTPOptions = array(
@@ -175,7 +174,7 @@ class RegisterController extends Controller{
             )
         );
         //$mail->setFrom("frismrpo@gmail.com");
-        $mail->From = "smrpo@klement.tk";
+        $mail->From = "no-reply@sluzba-vpis-smrpo6.si";
         $mail->FromName = "Služba vpis";
         $mail->IsHTML(true);
         $mail->Subject = "Služba vpis - SMRPO 6";
