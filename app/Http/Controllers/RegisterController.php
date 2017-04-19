@@ -160,7 +160,7 @@ class RegisterController extends Controller{
         try {
         $mail->isSMTP(); 
         $mail->CharSet = "utf-8";
-        $mail->Host = "mail@klement.tk";
+        $mail->Host = "smtp@klement.tk";
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'tls';        
         $mail->Port = 587; 
