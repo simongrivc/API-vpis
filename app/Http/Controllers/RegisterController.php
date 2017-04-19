@@ -171,7 +171,8 @@ class RegisterController extends Controller{
         $mail->FromName = "Služba vpis";
         $mail->IsHTML(true);
         $mail->Subject = "Služba vpis - SMRPO 6";
-        $mail->Body = '<a href="http://sistem-vpis-api.herokuapp.com/public/mockActivation?activation_code='.$code.'">Aktiviraj!</a>';
+        //$mail->Body = '<a href="http://sistem-vpis-api.herokuapp.com/public/mockActivation?activation_code='.$code.'">Aktiviraj!</a>';
+        $mail->Body = '<a href="https://smrpo-web.herokuapp.com/user/activation?activation_code='.$code.'">Aktiviraj!</a>';
         $mail->addAddress($rcpTo); 
         if(!$mail->send()) {
             return false;
