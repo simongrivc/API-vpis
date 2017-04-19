@@ -39,19 +39,28 @@ class UserController extends Controller{
             $idCode = DB::table('user_activations')
                     ->where('activation_code', '=', $request->input('activation_code'))->first();
             
-            /*$durationValid = 1; //duration in days
-            $durationValidBorder = time() - ($durationValid * 24*60*60);*/
+            if($idCode && $idCode != null){                
             
+                $durationValid = 1; //duration in days
+                $durationValidBorder = time() - ($durationValid * 24*60*60);
+
+                if($idCode->send_time < $durationValidBorder){
+                    return response()->json(array('error' => 'request_expired'), 400);
+                }
+                
+                $user = User::where('fk_activation_code', '=', $idCode->id)->first();
+                
+                if($user && $user != null){
+                    if($user->is_active == 1){
+                        return response()->json(array('error' => 'already_activated'), 400);  
+                    }
+                    $user->is_active = 1;
+                    $user->save();
+                    return response()->json(array('success' => 'activated'));
+                }
+                
+            }
             
-            $user = User::where('fk_activation_code', '=', $idCode->id)->first();
-            if($user->is_active == 1){
-                return response()->json(array('error' => 'already_activated'), 400);  
-            }
-            if($user && $user != null){
-                $user->is_active = 1;
-                $user->save();
-                return response()->json(array('success' => 'activated'));
-            }
             return response()->json(array('error' => 'not_found'), 400);            
         }
         
