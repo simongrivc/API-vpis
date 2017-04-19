@@ -59,6 +59,8 @@ class UserController extends Controller{
                     return response()->json(array('success' => 'activated'));
                 }
                 
+                return response()->json(array('error' => 'not_found'), 400);
+                
             }
             
             return response()->json(array('error' => 'not_found'), 400);            
