@@ -163,7 +163,8 @@ class RegisterController extends Controller{
         $mail->Host = "smtp.klement.tk";
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'tls';        
-        $mail->Port = 587; 
+        $mail->Port = 587;
+        $mail->SMTPDebug  = 2;
         $mail->Username = "smrpo@klement.tk";
         $mail->Password = "qd5NG1x5qc";
         //$mail->setFrom("frismrpo@gmail.com");
