@@ -49,8 +49,7 @@ $app->get('application/study_programs/{id}', 'StudyProgramsController@getStudyPr
 //dobi vse razpisane programe
 $app->get('application/study_programs_calls', 'StudyProgramsController@getStudyProgramCalls');
 //dobi vse fakultete
-//$app->get('application/vis_institutions', 'VisInstitutionsController@index');
-$app->post('application/vis_institutionsUniversity', 'VisInstitutionsController@getVisByUniversity');
+$app->post('application/vis_institutions', 'VisInstitutionsController@index');
 
 
 
