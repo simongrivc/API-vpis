@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
  
 class VisInstitutionsController extends Controller{
 
-    public function index(){
+    public function index(Request $request){
         $university = "";
         
         if($request->input('id_university')){
