@@ -24,7 +24,7 @@ class VisInstitutionsController extends Controller{
     public function getVisByUniversity(Request $request){
         $university = "";
         
-        if($request->input('id_university')){
+        if($request->input('id_university') || $request->input('id_university') == 0){
             $university = " WHERE u.id = ".$request->input('id_university');
         }
         
