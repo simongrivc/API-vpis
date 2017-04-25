@@ -14,7 +14,7 @@ class VisInstitutionsController extends Controller{
         $university = "";
         
         if($request->input('id_university')){
-            $university = " WHERE u.iduniversity = ".$request->input('id_university');
+            $university = " WHERE u.id = ".$request->input('id_university');
         }
         
         $institutions = DB::select("SELECT inst.id, inst.institution_name AS name, inst.abbreviation,
