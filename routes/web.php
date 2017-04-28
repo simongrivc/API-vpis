@@ -52,8 +52,8 @@ $app->get('application/study_programs_calls', 'StudyProgramsController@getStudyP
 $app->get('application/vis_institutions', 'VisInstitutionsController@index');
 //$app->post('application/vis_institutionsUniversity', 'VisInstitutionsController@getVisByUniversity');
 
-
-
+//dobi vse občine
+$app->get('application/cities', 'CitiesController@index');
 /*$app->post('uporabnik','UporabnikController@ustvariUporabnika');
  
 $app->put('uporabnik/{id}','UporabnikController@urediUporabnika');
