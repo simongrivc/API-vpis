@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\DB;
  
 class ApplicationsController extends Controller{
 
-    public function index(){
+    public function getApplications(){
  		$user = Auth::user();
  		return $user;
+
+ 		//return "blabla";
         //$application = Application::all();
         //return response()->json($application);
     }

@@ -56,7 +56,7 @@ $app->get('application/vis_institutions', 'VisInstitutionsController@index');
 $app->get('application/cities', 'CitiesController@index');
 
 //dobi vse prijavnice
-$app->post('application/applications', ['middleware' => 'auth', 'uses' => 'ApplicationsController@index']);
+$app->post('application/applications', ['middleware' => 'auth', 'uses' => 'ApplicationsController@getApplications']);
 
 
 
