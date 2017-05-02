@@ -22,7 +22,7 @@ class ApplicationsController extends Controller{
  		else if($user->fk_id_vis_institution!=null && $user->fk_user_role==3)
  		{
  			//prefiltriraj prijavnice glede na id fakultete referenta
- 			$idFakulteta = $user->fk_id_vis_institution
+ 			$idFakulteta = $user->fk_id_vis_institution;
  			$applicationsWish1 = DB::table('applications')
 								    ->where('study_programs_calls_wish1_id', '!=', null)
 								    ->where('program_carrier_wish1_id', '=', $idFakulteta)
