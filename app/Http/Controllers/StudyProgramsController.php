@@ -54,7 +54,7 @@ class StudyProgramsController extends Controller{
           if($studyProgramCall){
             $studyProgramCall->is_active=0;
             $studyProgramCall->save();
-            return response()->json(array('success' => 'Program call deleted successfully"'));
+            return response()->json(array('success' => 'Program call deleted successfully'));
           }
           else
             return response()->json(array('error' => 'No program call with that id.'),400);
