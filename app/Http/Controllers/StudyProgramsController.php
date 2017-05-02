@@ -46,11 +46,11 @@ class StudyProgramsController extends Controller{
     }
     
 
-    public function deleteStudyProgramById(Request $request){
+    public function deleteStudyProgramCallById(Request $request){
         $id=$request->input('id');
         if($id)
         {
-          $studyProgramCall= StudyProgramsCall::find($id);
+          $studyProgramCall= StudyProgramCall::find($id);
           if($studyProgramCall){
             $studyProgramCall->is_active=0;
             $studyProgramCall->save();
