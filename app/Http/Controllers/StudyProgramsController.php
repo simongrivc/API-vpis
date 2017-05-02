@@ -36,7 +36,8 @@ class StudyProgramsController extends Controller{
             $program->nr_slo_eu_sprejeti_mock =0;
             $program->nr_foreigners_sprejeti_mock =0;
             $program->nr_without_citizenship_sprejeti_mock =0;
-            return response()->json($studyProgramCalls);
+          }
+          return response()->json($studyProgramCalls);
         }
         //$studyProgramCalls = DB::select("SELECT * FROM study_programs_calls_view");
 
