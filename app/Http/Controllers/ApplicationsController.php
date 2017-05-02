@@ -30,7 +30,8 @@ class ApplicationsController extends Controller{
 					$application->study_programs_wish2_double_is_active=null;			
 					$application->study_programs_wish2_double_id=null;
 					$application->study_programs_wish2_double_program_name=null;	
-					$application->program_carrier_wish2_id=null;	
+					$application->program_carrier_wish2_id=null;
+					$application->program_carrier_wish2_institution_name=null;
 					$application->study_programs_calls_wish3_id=null;	
 					$application->study_programs_wish3_is_active=null;			
 					$application->study_programs_wish3_id=null;
@@ -40,6 +41,7 @@ class ApplicationsController extends Controller{
 					$application->study_programs_wish3_double_id=null;
 					$application->study_programs_wish3_double_program_name=null;
 					$application->program_carrier_wish3_id=null;
+					$application->program_carrier_wish3_institution_name=null;
 					array_push($response,$application);
         	}
 
@@ -52,7 +54,8 @@ class ApplicationsController extends Controller{
 					$application->study_programs_wish1_double_is_active=null;			
 					$application->study_programs_wish1_double_id=null;
 					$application->study_programs_wish1_double_program_name=null;
-					$application->program_carrier_wish1_id=null;		
+					$application->program_carrier_wish1_id=null;
+					$application->program_carrier_wish1_institution_name=null;	
 					$application->study_programs_calls_wish3_id=null;	
 					$application->study_programs_wish3_is_active=null;			
 					$application->study_programs_wish3_id=null;
@@ -62,6 +65,7 @@ class ApplicationsController extends Controller{
 					$application->study_programs_wish3_double_id=null;
 					$application->study_programs_wish3_double_program_name=null;
 					$application->program_carrier_wish3_id=null;
+					$application->program_carrier_wish3_institution_name=null;
 					array_push($response,$application);
         	}
 
@@ -75,6 +79,7 @@ class ApplicationsController extends Controller{
 					$application->study_programs_wish1_double_id=null;
 					$application->study_programs_wish1_double_program_name=null;
 					$application->program_carrier_wish1_id=null;	
+					$application->program_carrier_wish1_institution_name=null;
 					$application->study_programs_calls_wish2_id=null;	
 					$application->study_programs_wish2_is_active=null;			
 					$application->study_programs_wish2_id=null;
@@ -84,6 +89,7 @@ class ApplicationsController extends Controller{
 					$application->study_programs_wish2_double_id=null;
 					$application->study_programs_wish2_double_program_name=null;
 					$application->program_carrier_wish2_id=null;
+					$application->program_carrier_wish2_institution_name=null;
 					array_push($response,$application);
         	}
 
