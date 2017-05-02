@@ -48,10 +48,15 @@ class StudyProgramsController extends Controller{
 
     public function deleteStudyProgramById(Request $request){
         $id=$request->input('id');
-        $studyProgramCall= StudyProgramCall::find($id);
-        $studyProgramCall->is_active=0;
-        $studyProgram->save();
-        return "Program call deleted successfully";
+        if($id)
+        {
+          $studyProgramCall= StudyProgramCall::find($id);
+          $studyProgramCall->is_active=0;
+          $studyProgram->save();
+          return "Program call deleted successfully";
+        }
+        else
+          return false;
     }
     
 
