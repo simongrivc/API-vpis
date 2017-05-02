@@ -46,8 +46,12 @@ $app->get('application/study_programs', 'StudyProgramsController@index');
 //program po id
 $app->get('application/study_programs/{id}', 'StudyProgramsController@getStudyProgramById');
 
-//dobi vse razpisane programe
-$app->get('application/study_programs_calls_active', 'StudyProgramsController@getStudyProgramCallsActive');
+//dobi vse razpisane programe(aktivne)
+$app->get('application/study_programs_calls/', 'StudyProgramsController@getStudyProgramCallsActive');
+
+//brisanje razpisanega programa
+$app->post('application/study_programs_calls/delete', 'StudyProgramsController@deleteStudyProgramById');
+
 //dobi vse fakultete
 $app->get('application/vis_institutions', 'VisInstitutionsController@index');
 //$app->post('application/vis_institutionsUniversity', 'VisInstitutionsController@getVisByUniversity');

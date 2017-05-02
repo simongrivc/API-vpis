@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
  
 use App\StudyProgram;
 use App\StudyProgramCallView;
+use App\StudyProgramCall;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +43,15 @@ class StudyProgramsController extends Controller{
         //$studyProgramCalls = DB::select("SELECT * FROM study_programs_calls_view");
 
         return [];
+    }
+    
+
+    public function deleteStudyProgramById(Request $request){
+        $id=$request->input('id');
+        $studyProgramCall= StudyProgramCall::find($id);
+        $studyProgramCall->is_active=0;
+        $studyProgram->save();
+        return "Program call deleted successfully";
     }
     
 
