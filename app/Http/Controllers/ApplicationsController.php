@@ -188,7 +188,7 @@ class ApplicationsController extends Controller{
         	return response()->json($response);
  		}
  		else
- 			return false;
+ 			 return response()->json(array('error' => 'Not sufficient rights to display applications.'),400);
     }
     
 

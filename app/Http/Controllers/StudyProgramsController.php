@@ -51,12 +51,16 @@ class StudyProgramsController extends Controller{
         if($id)
         {
           $studyProgramCall= StudyProgramCall::find($id);
-          $studyProgramCall->is_active=0;
-          $studyProgram->save();
-          return response()->json("Program call deleted successfully");
+          if($studyProgramCall){
+            $studyProgramCall->is_active=0;
+            $studyProgram->save();
+            return response()->json(array('success' => 'Program call deleted successfully"'));
+          }
+          else
+            return response()->json(array('error' => 'No program call with that id.'),400);
         }
         else
-          return false;
+           return response()->json(array('error' => 'Wrong or missing id header.'),400);
     }
     
 
