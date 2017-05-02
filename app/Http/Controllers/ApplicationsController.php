@@ -13,7 +13,7 @@ class ApplicationsController extends Controller{
 
     public function getApplications(){
  		$user = Auth::user();
- 		if($user->fk_id_vis_institution!=null && $user->fk_user_role==2)
+ 		if($user->fk_user_role==2)
  		{
  			//Vrni vse prijavnice služba vpis
  			$application = Application_view::all();
