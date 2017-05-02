@@ -104,11 +104,11 @@ class ApplicationsController extends Controller{
 								    ->where('study_programs_calls_wish1_id', '!=', null)
 								    ->where('program_carrier_wish1_id', '=', $idFakulteta)
 								    ->get();
-			$applicationsWish1 = DB::table('applications_view')
+			$applicationsWish2 = DB::table('applications_view')
 								    ->where('study_programs_calls_wish2_id', '!=', null)
 								    ->where('program_carrier_wish2_id', '=', $idFakulteta)
 								    ->get();
-			$applicationsWish1 = DB::table('applications_view')
+			$applicationsWish3 = DB::table('applications_view')
 								    ->where('study_programs_calls_wish3_id', '!=', null)
 								    ->where('program_carrier_wish3_id', '=', $idFakulteta)
 								    ->get();

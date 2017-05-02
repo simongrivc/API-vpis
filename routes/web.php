@@ -59,7 +59,7 @@ $app->get('application/vis_institutions', 'VisInstitutionsController@index');
 //dobi vse občine
 $app->get('application/cities', 'CitiesController@index');
 
-//dobi vse prijavnice
+//dobi vse prijavnice (za prijavnice moraš biti prijavljen kot referent oz. služba vpis)
 $app->post('application/applications', ['middleware' => 'auth', 'uses' => 'ApplicationsController@getApplications']);
 
 //dobi šifrante univerz
