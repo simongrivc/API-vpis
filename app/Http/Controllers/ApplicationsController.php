@@ -104,8 +104,88 @@ class ApplicationsController extends Controller{
 								    ->where('study_programs_calls_wish1_id', '!=', null)
 								    ->where('program_carrier_wish1_id', '=', $idFakulteta)
 								    ->get();
+			$applicationsWish1 = DB::table('applications_view')
+								    ->where('study_programs_calls_wish2_id', '!=', null)
+								    ->where('program_carrier_wish2_id', '=', $idFakulteta)
+								    ->get();
+			$applicationsWish1 = DB::table('applications_view')
+								    ->where('study_programs_calls_wish3_id', '!=', null)
+								    ->where('program_carrier_wish3_id', '=', $idFakulteta)
+								    ->get();
 
-        	return response()->json($applicationsWish1);
+			$response = [];
+        	foreach ($applicationsWish1 as $application) {
+	        		$application->study_programs_calls_wish2_id=null;
+					$application->study_programs_wish2_is_active=null;			
+					$application->study_programs_wish2_id=null;
+					$application->study_programs_wish2_program_name=null;
+					$application->study_programs_calls_wish2_double_id=null;	
+					$application->study_programs_wish2_double_is_active=null;			
+					$application->study_programs_wish2_double_id=null;
+					$application->study_programs_wish2_double_program_name=null;	
+					$application->program_carrier_wish2_id=null;
+					$application->program_carrier_wish2_institution_name=null;
+					$application->study_programs_calls_wish3_id=null;	
+					$application->study_programs_wish3_is_active=null;			
+					$application->study_programs_wish3_id=null;
+					$application->study_programs_wish3_program_name=null;	
+					$application->study_programs_calls_wish3_double_id=null;		
+					$application->study_programs_wish3_double_is_active=null;	
+					$application->study_programs_wish3_double_id=null;
+					$application->study_programs_wish3_double_program_name=null;
+					$application->program_carrier_wish3_id=null;
+					$application->program_carrier_wish3_institution_name=null;
+					array_push($response,$application);
+        	}
+
+        	foreach ($applicationsWish2 as $application) {
+	        		$application->study_programs_calls_wish1_id=null;
+					$application->study_programs_wish1_is_active=null;			
+					$application->study_programs_wish1_id=null;
+					$application->study_programs_wish1_program_name=null;
+					$application->study_programs_calls_wish1_double_id=null;	
+					$application->study_programs_wish1_double_is_active=null;			
+					$application->study_programs_wish1_double_id=null;
+					$application->study_programs_wish1_double_program_name=null;
+					$application->program_carrier_wish1_id=null;
+					$application->program_carrier_wish1_institution_name=null;	
+					$application->study_programs_calls_wish3_id=null;	
+					$application->study_programs_wish3_is_active=null;			
+					$application->study_programs_wish3_id=null;
+					$application->study_programs_wish3_program_name=null;	
+					$application->study_programs_calls_wish3_double_id=null;		
+					$application->study_programs_wish3_double_is_active=null;	
+					$application->study_programs_wish3_double_id=null;
+					$application->study_programs_wish3_double_program_name=null;
+					$application->program_carrier_wish3_id=null;
+					$application->program_carrier_wish3_institution_name=null;
+					array_push($response,$application);
+        	}
+
+        	foreach ($applicationsWish3 as $application) {
+	        		$application->study_programs_calls_wish1_id=null;
+					$application->study_programs_wish1_is_active=null;			
+					$application->study_programs_wish1_id=null;
+					$application->study_programs_wish1_program_name=null;
+					$application->study_programs_calls_wish1_double_id=null;	
+					$application->study_programs_wish1_double_is_active=null;			
+					$application->study_programs_wish1_double_id=null;
+					$application->study_programs_wish1_double_program_name=null;
+					$application->program_carrier_wish1_id=null;	
+					$application->program_carrier_wish1_institution_name=null;
+					$application->study_programs_calls_wish2_id=null;	
+					$application->study_programs_wish2_is_active=null;			
+					$application->study_programs_wish2_id=null;
+					$application->study_programs_wish2_program_name=null;	
+					$application->study_programs_calls_wish2_double_id=null;		
+					$application->study_programs_wish2_double_is_active=null;	
+					$application->study_programs_wish2_double_id=null;
+					$application->study_programs_wish2_double_program_name=null;
+					$application->program_carrier_wish2_id=null;
+					$application->program_carrier_wish2_institution_name=null;
+					array_push($response,$application);
+        	}
+        	return response()->json($response);
  		}
  		else
  			return false;
