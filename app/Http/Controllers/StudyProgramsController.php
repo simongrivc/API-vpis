@@ -53,7 +53,7 @@ class StudyProgramsController extends Controller{
           $studyProgramCall= StudyProgramCall::find($id);
           $studyProgramCall->is_active=0;
           $studyProgram->save();
-          return "Program call deleted successfully";
+          return response()->json("Program call deleted successfully");
         }
         else
           return false;
