@@ -58,6 +58,8 @@ $app->get('application/cities', 'CitiesController@index');
 //dobi vse prijavnice
 $app->post('application/applications', ['middleware' => 'auth', 'uses' => 'ApplicationsController@getApplications']);
 
+//dobi šifrante univerz
+$app->get('application/universities', 'UniversitiesController@index');
 
 
 
