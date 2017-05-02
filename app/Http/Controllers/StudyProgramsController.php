@@ -50,7 +50,7 @@ class StudyProgramsController extends Controller{
         $id=$request->input('id');
         if($id)
         {
-          $studyProgramCall= StudyProgramCall::find($id);
+          $studyProgramCall= StudyProgramsCall::find($id);
           if($studyProgramCall){
             $studyProgramCall->is_active=0;
             $studyProgramCall->save();

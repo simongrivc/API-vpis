@@ -9,7 +9,7 @@ class StudyProgramCall extends Model
 
  	protected $attributes  = ['id', 'fk_id_call_type', 'nr_slo_eu', 'nr_without_citizenship_foreigners', 'fk_id_study_program', 'min_nr_points', 'is_active'];
  
- 	protected $table = 'study_programs';
+ 	protected $table = 'study_programs_calls';
  	//da eloquent ne dodaja timestamp v bazo
  	public $timestamps  = false;
 }
