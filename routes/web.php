@@ -54,6 +54,11 @@ $app->get('application/vis_institutions', 'VisInstitutionsController@index');
 
 //dobi vse občine
 $app->get('application/cities', 'CitiesController@index');
+
+//dobi vse prijavnice
+$app->get('application/applications', 'ApplicationsController@index');
+
+
 /*$app->post('uporabnik','UporabnikController@ustvariUporabnika');
  
 $app->put('uporabnik/{id}','UporabnikController@urediUporabnika');
