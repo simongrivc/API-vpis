@@ -20,7 +20,7 @@ class ApplicationsController extends Controller{
  			$applicationsWish1 = Application_view::where('study_programs_calls_wish1_id', '!=', null)->get();
  			$applicationsWish2 = Application_view::where('study_programs_calls_wish2_id', '!=', null)->get();
  			$applicationsWish3 = Application_view::where('study_programs_calls_wish3_id', '!=', null)->get();
-        	
+        	$response = [];
         	foreach ($applicationsWish1 as $application) {
 	        		$application->study_programs_calls_wish2_id=null;
 					$application->study_programs_wish2_is_active=null;			
@@ -38,6 +38,7 @@ class ApplicationsController extends Controller{
 					$application->study_programs_wish3_double_is_active=null;	
 					$application->study_programs_wish3_double_id=null;
 					$application->study_programs_wish3_double_program_name=null;
+					array_push($response,$application);
         	}
 
         	foreach ($applicationsWish2 as $application) {
@@ -57,6 +58,7 @@ class ApplicationsController extends Controller{
 					$application->study_programs_wish3_double_is_active=null;	
 					$application->study_programs_wish3_double_id=null;
 					$application->study_programs_wish3_double_program_name=null;
+					array_push($response,$application);
         	}
 
         	foreach ($applicationsWish3 as $application) {
@@ -76,10 +78,11 @@ class ApplicationsController extends Controller{
 					$application->study_programs_wish2_double_is_active=null;	
 					$application->study_programs_wish2_double_id=null;
 					$application->study_programs_wish2_double_program_name=null;
+					array_push($response,$application);
         	}
 
 
-        	return response()->json(array_merge($applicationsWish1, $applicationsWish2,  $applicationsWish3));
+        	return response()->json($response);
  		}
  		else if($user->fk_id_vis_institution!=null && $user->fk_user_role==3)
  		{
