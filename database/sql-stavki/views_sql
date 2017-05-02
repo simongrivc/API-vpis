@@ -45,15 +45,17 @@ AND vis_institutions.fk_id_university = universities.id
 AND study_programs_calls.fk_id_call_type = call_type.id
 
 
-CREATE VIEW applications_view AS
 SELECT applications.*, users.email, users.username, users.name, users.surname, users.is_active,
 stalni.city_name as city_address_name, stalni.city_number as city_address_number, zacasni.city_name as city_address_temp_name, zacasni.city_number as city_address_temp_number,
 citizenships.id as id_citizenship, citizenships.citizenship_name,
 wish1.id as study_programs_calls_wish1_id, wish1.is_active as study_programs_wish1_is_active, programwish1.id as study_programs_wish1_id, programwish1.program_name as study_programs_wish1_program_name,
+programwish1_carrier.id as program_carrier_wish1_id, programwish1_carrier.institution_name as program_carrier_wish1_institution_name,
 wish1_double.id as study_programs_calls_wish1_double_id, wish1_double.is_active as study_programs_wish1_double_is_active, programwish1_double.id as study_programs_wish1_double_id, programwish1_double.program_name as study_programs_wish1_double_program_name,
 wish2.id as study_programs_calls_wish2_id, wish2.is_active as study_programs_wish2_is_active, programwish2.id as study_programs_wish2_id, programwish2.program_name as study_programs_wish2_program_name,
+programwish2_carrier.id as program_carrier_wish2_id, programwish2_carrier.institution_name as program_carrier_wish2_institution_name,
 wish2_double.id as study_programs_calls_wish2_double_id, wish2_double.is_active as study_programs_wish2_double_is_active, programwish2_double.id as study_programs_wish2_double_id, programwish2_double.program_name as study_programs_wish2_double_program_name,
 wish3.id as study_programs_calls_wish3_id, wish3.is_active as study_programs_wish3_is_active, programwish3.id as study_programs_wish3_id, programwish3.program_name as study_programs_wish3_program_name,
+programwish3_carrier.id as program_carrier_wish3_id, programwish3_carrier.institution_name as program_carrier_wish3_institution_name,
 wish3_double.id as study_programs_calls_wish3_double_id, wish3_double.is_active as study_programs_wish3_double_is_active, programwish3_double.id as study_programs_wish3_double_id, programwish3_double.program_name as study_programs_wish3_double_program_name,
 middle_schools.id as middle_school_id, middle_schools.middle_school_name,
 klasius_srv.id as klasius_srv_id, klasius_srv.klasius_nr, klasius_srv.klasius_name,
@@ -71,32 +73,38 @@ INNER JOIN citizenships
 LEFT JOIN 
     study_programs_calls wish1 ON (wish1.id = applications.fk_id_wish1)
 LEFT JOIN
-	study_programs programwish1 ON (wish1.fk_id_study_program=programwish1.id)
+    study_programs programwish1 ON (wish1.fk_id_study_program=programwish1.id)
+LEFT JOIN 
+    vis_institutions programwish1_carrier ON (programwish1_carrier.id = programwish1.fk_id_program_carrier)
 LEFT JOIN 
     study_programs_calls wish1_double ON (wish1_double.id = applications.wish1_second_wish)
 LEFT JOIN
-	study_programs programwish1_double ON (wish1_double.fk_id_study_program=programwish1_double.id)  
+    study_programs programwish1_double ON (wish1_double.fk_id_study_program=programwish1_double.id)  
 LEFT JOIN
     study_programs_calls wish2 ON (wish2.id = applications.fk_id_wish2)
 LEFT JOIN
-	study_programs programwish2 ON (wish2.fk_id_study_program=programwish2.id)
+    study_programs programwish2 ON (wish2.fk_id_study_program=programwish2.id)
+LEFT JOIN 
+    vis_institutions programwish2_carrier ON (programwish2_carrier.id = programwish2.fk_id_program_carrier)
 LEFT JOIN 
     study_programs_calls wish2_double ON (wish2_double.id = applications.wish2_second_wish)
 LEFT JOIN
-	study_programs programwish2_double ON (wish2_double.fk_id_study_program=programwish2_double.id)  
+    study_programs programwish2_double ON (wish2_double.fk_id_study_program=programwish2_double.id)  
 LEFT JOIN
     study_programs_calls wish3 ON (wish3.id = applications.fk_id_wish3)
 LEFT JOIN
-	study_programs programwish3 ON (wish3.fk_id_study_program=programwish3.id)
+    study_programs programwish3 ON (wish3.fk_id_study_program=programwish3.id)
+LEFT JOIN 
+    vis_institutions programwish3_carrier ON (programwish3_carrier.id = programwish3.fk_id_program_carrier)
 LEFT JOIN 
     study_programs_calls wish3_double ON (wish3_double.id = applications.wish3_second_wish)
 LEFT JOIN
-	study_programs programwish3_double ON (wish3_double.fk_id_study_program=programwish3_double.id)
+    study_programs programwish3_double ON (wish3_double.fk_id_study_program=programwish3_double.id)
 LEFT JOIN middle_schools
-	 ON middle_schools.id = applications.fk_id_middle_school
+     ON middle_schools.id = applications.fk_id_middle_school
 LEFT JOIN klasius_srv
-	ON klasius_srv.id = applications.fk_id_klasius_srv
+    ON klasius_srv.id = applications.fk_id_klasius_srv
 LEFT JOIN gained_professions
-	ON gained_professions.id = applications.fk_gained_profession
+    ON gained_professions.id = applications.fk_gained_profession
 INNER JOIN application_status
     ON application_status.id = applications.fk_id_status
