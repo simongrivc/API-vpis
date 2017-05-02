@@ -14,8 +14,10 @@ INNER JOIN universities
 
 
 CREATE VIEW study_programs_calls_view AS
-SELECT study_programs.*, program_types.type_name, vis_institutions.institution_name, vis_institutions.abbreviation, vis_institutions.fk_id_municipality, vis_institutions.fk_id_university, municipalities.municipality_name, universities.university_name, study_programs_calls.fk_id_call_type, call_type.type_name as call_type_name, study_programs_calls.nr_slo_eu, study_programs_calls.nr_foreigners, study_programs_calls.nr_without_citizenship_foreigners, study_programs_calls.min_nr_points
-FROM study_programs
+SELECT study_programs_calls.id, study_programs.fk_id_type, study_programs.fk_id_program_carrier, study_programs.sequence_number, study_programs.serial_id, study_programs.program_name,  program_types.type_name, vis_institutions.institution_name, vis_institutions.abbreviation, vis_institutions.fk_id_municipality, vis_institutions.fk_id_university, municipalities.municipality_name, universities.university_name, study_programs_calls.fk_id_call_type, call_type.type_name as call_type_name, study_programs_calls.nr_slo_eu, study_programs_calls.nr_without_citizenship_foreigners, study_programs_calls.min_nr_points, study_programs_calls.is_active
+FROM study_programs_calls
+INNER JOIN study_programs
+    ON study_programs_calls.fk_id_study_program=study_programs.id
 INNER JOIN program_types
     on study_programs.fk_id_type = program_types.id
 INNER JOIN vis_institutions
@@ -25,8 +27,6 @@ INNER JOIN municipalities
 INNER JOIN universities    
     on vis_institutions.fk_id_university=universities.id
     AND vis_institutions.fk_id_university = universities.id
-INNER JOIN study_programs_calls
-	ON study_programs_calls.fk_id_study_program=study_programs.id
 INNER JOIN call_type
     ON study_programs_calls.fk_id_call_type = call_type.id
 
@@ -44,7 +44,7 @@ AND vis_institutions.fk_id_university=universities.id
 AND vis_institutions.fk_id_university = universities.id
 AND study_programs_calls.fk_id_call_type = call_type.id
 
-
+CREATE VIEW applications_view AS
 SELECT applications.*, users.email, users.username, users.name, users.surname, users.is_active,
 stalni.city_name as city_address_name, stalni.city_number as city_address_number, zacasni.city_name as city_address_temp_name, zacasni.city_number as city_address_temp_number,
 citizenships.id as id_citizenship, citizenships.citizenship_name,

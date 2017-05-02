@@ -24,20 +24,23 @@ class StudyProgramsController extends Controller{
         return response()->json($studyProgram);
     }
 
-    public function getStudyProgramCalls(Request $request){
-        $studyProgramCalls = StudyProgramCallView::all();
-
-        foreach ($studyProgramCalls as $program) {
-           $program->nr_slo_eu_vpis_mock =0;
-           $program->nr_foreigners_vpis_mock =0;
-           $program->nr_without_citizenship_vpis_mock =0;
-           $program->nr_slo_eu_sprejeti_mock =0;
-           $program->nr_foreigners_sprejeti_mock =0;
-           $program->nr_without_citizenship_sprejeti_mock =0;
+    public function getStudyProgramCallsActive(Request $request){
+        
+        $studyProgramCalls = StudyProgramCallView::where('is_active', '!=', 0)->get();
+        if($studyProgramCalls)
+        {
+          foreach ($studyProgramCalls as $program) {
+            $program->nr_slo_eu_vpis_mock =0;
+            $program->nr_foreigners_vpis_mock =0;
+            $program->nr_without_citizenship_vpis_mock =0;
+            $program->nr_slo_eu_sprejeti_mock =0;
+            $program->nr_foreigners_sprejeti_mock =0;
+            $program->nr_without_citizenship_sprejeti_mock =0;
+            return response()->json($studyProgramCalls);
         }
         //$studyProgramCalls = DB::select("SELECT * FROM study_programs_calls_view");
 
-        return response()->json($studyProgramCalls);
+        return [];
     }
     
 
