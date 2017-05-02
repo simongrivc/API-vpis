@@ -23,7 +23,7 @@ class ApplicationsController extends Controller{
  		{
  			//prefiltriraj prijavnice glede na id fakultete referenta
  			$idFakulteta = $user->fk_id_vis_institution
- 			$applicationsWish1 = Application::whereRaw('study_programs_calls_wish1_id != null AND program_carrier_wish1_id ==' + $idFakulteta)->get();
+ 			$applicationsWish1 = Application::whereRaw('study_programs_calls_wish1_id != null AND program_carrier_wish1_id ==' . $idFakulteta)->get();
 
         	return response()->json($applicationsWish1);
  		}
