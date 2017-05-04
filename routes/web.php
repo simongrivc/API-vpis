@@ -50,7 +50,7 @@ $app->get('application/study_programs/{id}', 'StudyProgramsController@getStudyPr
 $app->get('application/study_programs_calls/', 'StudyProgramsController@getStudyProgramCallsActive');
 
 //dodaj za vse razpisane programe na posameznem razpisu
-//$app->get('application/study_programs_calls/{id}', 'StudyProgramsController@getStudyProgramCallsActiveFromGroup');
+$app->get('application/study_programs_calls/{id}', 'StudyProgramsController@getStudyProgramCallsActiveFromGroup');
 
 //brisanje razpisanega programa
 $app->post('application/study_programs_calls/delete', 'StudyProgramsController@deleteStudyProgramCallById');
