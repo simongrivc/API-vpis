@@ -71,6 +71,8 @@ $app->get('application/universities', 'UniversitiesController@index');
 //dobi vse razpise
 $app->get('application/group_calls', 'CallGroupsController@index');
 
+//dobi vse šifrante za pogoje
+$app->get('application/condition_codes', 'ConditionCodesController@index');
 
 
 /*$app->post('uporabnik','UporabnikController@ustvariUporabnika');
