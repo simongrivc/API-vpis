@@ -72,6 +72,8 @@ class StudyProgramsController extends Controller{
          return response()->json([]);
 
           }
+          else
+             return response()->json(array('error' => 'Wrong call group id.'),400);
         
     }
 
