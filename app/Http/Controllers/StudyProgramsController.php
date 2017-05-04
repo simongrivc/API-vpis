@@ -48,7 +48,7 @@ class StudyProgramsController extends Controller{
     //dobi vse razpisane programe na posameznem razpisu
      public function getStudyProgramCallsActiveFromGroup(Request $request){
         $idGroup = $request->input('id');
-        if($idGroup)
+        if($idGroup>0)
         {
           //$studyProgramCalls = StudyProgramCallView::where('is_active', '!=', 0)->get();
           $studyProgramCalls = DB::table('study_programs_calls_view')
