@@ -69,7 +69,7 @@ $app->post('application/applications', ['middleware' => 'auth', 'uses' => 'Appli
 $app->get('application/universities', 'UniversitiesController@index');
 
 //dobi vse razpise
-$app->post('application/group_calls', 'CallGroupsController@index');
+$app->get('application/group_calls', 'CallGroupsController@index');
 
 
 
