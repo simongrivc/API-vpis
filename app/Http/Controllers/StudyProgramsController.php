@@ -46,14 +46,13 @@ class StudyProgramsController extends Controller{
     }
     
     //dobi vse razpisane programe na posameznem razpisu
-     public function getStudyProgramCallsActiveFromGroup(Request $request){
-        $idGroup = $request->input('id');
-        if($idGroup>0)
+     public function getStudyProgramCallsActiveFromGroup(Request $request, $id){
+        if($id>0)
         {
           //$studyProgramCalls = StudyProgramCallView::where('is_active', '!=', 0)->get();
           $studyProgramCalls = DB::table('study_programs_calls_view')
                       ->where('is_active', '!=', 0)
-                      ->where('fk_id_call_group', '=', $idGroup)
+                      ->where('fk_id_call_group', '=', $id)
                       ->get();
           if($studyProgramCalls)
           {
@@ -71,9 +70,9 @@ class StudyProgramsController extends Controller{
 
          return response()->json([]);
 
-          }
-          else
-             return response()->json(array('error' => 'Wrong call group id.'),400);
+        }
+        else
+            return response()->json(array('error' => 'Wrong call group id.'),400);
         
     }
 
