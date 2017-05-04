@@ -49,6 +49,9 @@ $app->get('application/study_programs/{id}', 'StudyProgramsController@getStudyPr
 //dobi vse razpisane programe(aktivne)
 $app->get('application/study_programs_calls/', 'StudyProgramsController@getStudyProgramCallsActive');
 
+//dodaj za vse razpisane programe na posameznem razpisu
+//$app->get('application/study_programs_calls/{id}', 'StudyProgramsController@getStudyProgramCallsActiveFromGroup');
+
 //brisanje razpisanega programa
 $app->post('application/study_programs_calls/delete', 'StudyProgramsController@deleteStudyProgramCallById');
 
@@ -64,6 +67,9 @@ $app->post('application/applications', ['middleware' => 'auth', 'uses' => 'Appli
 
 //dobi šifrante univerz
 $app->get('application/universities', 'UniversitiesController@index');
+
+//dobi vse razpise
+$app->post('application/group_calls', 'CallGroupsController@index');
 
 
 
