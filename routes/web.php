@@ -55,6 +55,9 @@ $app->get('application/study_programs_calls/{id}', 'StudyProgramsController@getS
 //brisanje razpisanega programa
 $app->post('application/study_programs_calls/delete', 'StudyProgramsController@deleteStudyProgramCallById');
 
+//dodajanje študijskega programa
+$app->post('application/study_programs_calls/add', 'StudyProgramsController@addStudyProgramCallById');
+
 //dobi vse fakultete
 $app->get('application/vis_institutions', 'VisInstitutionsController@index');
 //$app->post('application/vis_institutionsUniversity', 'VisInstitutionsController@getVisByUniversity');
@@ -73,6 +76,9 @@ $app->get('application/group_calls', 'CallGroupsController@index');
 
 //dobi vse šifrante za pogoje
 $app->get('application/condition_codes', 'ConditionCodesController@index');
+
+
+
 
 
 /*$app->post('uporabnik','UporabnikController@ustvariUporabnika');

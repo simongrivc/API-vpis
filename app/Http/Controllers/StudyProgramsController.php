@@ -93,7 +93,23 @@ class StudyProgramsController extends Controller{
            return response()->json(array('error' => 'Wrong or missing id data.'),400);
     }
     
+    public function addStudyProgramCallById(Request $request){
+        $fk_id_call_type=$request->input('fk_id_call_type');
+        $nr_slo_eu=$request->input('nr_slo_eu');
+        $nr_without_citizenship_foreigners=$request->input('nr_without_citizenship_foreigners');
+        $fk_id_study_program=$request->input('fk_id_study_program');
+        $min_nr_points=$request->input('min_nr_points');
+        $fk_id_call_group=$request->input('fk_id_call_group');
 
+        if($fk_id_call_type && $nr_slo_eu &&  $nr_without_citizenship_foreigners && $fk_id_study_program && $min_nr_points && $fk_id_call_group)
+        {
+        
+            return response()->json(array('success' => 'Program call inserted successfully.'));
+        }
+          else
+            return response()->json(array('error' => 'Wrong or missing input data.'),400);
+    
+    }
 
 }
 ?>
