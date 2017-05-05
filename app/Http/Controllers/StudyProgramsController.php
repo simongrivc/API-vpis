@@ -122,8 +122,9 @@ class StudyProgramsController extends Controller{
         $fk_id_study_program=$request->input('fk_id_study_program');
         $min_nr_points=$request->input('min_nr_points');
         $fk_id_call_group=$request->input('fk_id_call_group');
+        $is_active=$request->input('is_active');
         //dodajanje
-        if($fk_id_call_type>0 && $nr_slo_eu>=0 &&  $nr_without_citizenship_foreigners>=0 && $fk_id_study_program>0 && $min_nr_points>=0 && $fk_id_call_group>0)
+        if($fk_id_call_type>0 && $nr_slo_eu>=0 &&  $nr_without_citizenship_foreigners>=0 && $fk_id_study_program>0 && $min_nr_points>=0 && $fk_id_call_group>0 && $is_active>=0)
         {
           if($id==null)
           {
@@ -140,6 +141,7 @@ class StudyProgramsController extends Controller{
                 $ProgramCall->fk_id_study_program=$fk_id_study_program;
                 $ProgramCall->min_nr_points=$min_nr_points;
                 $ProgramCall->fk_id_call_group=$fk_id_call_group;
+                $ProgramCall->is_active=$is_active;
                 $ProgramCall->save();
                  return response()->json($ProgramCall);
             }
