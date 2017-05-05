@@ -105,6 +105,7 @@ class StudyProgramsController extends Controller{
         {
             
             $ProgramCall = new StudyProgramCall();
+            $ProgramCall->id=18;
             $ProgramCall->fk_id_call_type=$fk_id_call_type;
             $ProgramCall->nr_slo_eu=$nr_slo_eu;
             $ProgramCall->nr_without_citizenship_foreigners=$nr_without_citizenship_foreigners;
