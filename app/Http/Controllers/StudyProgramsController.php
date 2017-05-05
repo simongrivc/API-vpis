@@ -101,7 +101,7 @@ class StudyProgramsController extends Controller{
         $min_nr_points=$request->input('min_nr_points');
         $fk_id_call_group=$request->input('fk_id_call_group');
 
-        if($fk_id_call_type && $nr_slo_eu &&  $nr_without_citizenship_foreigners && $fk_id_study_program && $min_nr_points && $fk_id_call_group)
+        if($fk_id_call_type>0 && $nr_slo_eu>=0 &&  $nr_without_citizenship_foreigners>=0 && $fk_id_study_program>0 && $min_nr_points>=0 && $fk_id_call_group>0)
         {
         
             return response()->json(array('success' => 'Program call inserted successfully.'));
