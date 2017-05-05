@@ -140,7 +140,7 @@ class StudyProgramsController extends Controller{
                 $ProgramCall->fk_id_study_program=$fk_id_study_program;
                 $ProgramCall->min_nr_points=$min_nr_points;
                 $ProgramCall->fk_id_call_group=$fk_id_call_group;
-                $ProgramCall->Save();
+                $ProgramCall->save();
                  return response()->json($ProgramCall);
             }
             else
