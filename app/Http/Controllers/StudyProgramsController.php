@@ -104,16 +104,6 @@ class StudyProgramsController extends Controller{
         if($fk_id_call_type>0 && $nr_slo_eu>=0 &&  $nr_without_citizenship_foreigners>=0 && $fk_id_study_program>0 && $min_nr_points>=0 && $fk_id_call_group>0)
         {
             
-            /*$ProgramCall = new StudyProgramCall();
-            $ProgramCall->id=18;
-            $ProgramCall->fk_id_call_type=$fk_id_call_type;
-            $ProgramCall->nr_slo_eu=$nr_slo_eu;
-            $ProgramCall->nr_without_citizenship_foreigners=$nr_without_citizenship_foreigners;
-            $ProgramCall->fk_id_study_program=$fk_id_study_program;
-            $ProgramCall->min_nr_points=$min_nr_points;
-            $ProgramCall->fk_id_call_group=$fk_id_call_group;
-            $ProgramCall->is_active=1;
-            $ProgramCall->save();*/
             $ProgramCall=StudyProgramCall::create($request->all());
 
 
