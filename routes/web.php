@@ -55,8 +55,8 @@ $app->get('application/study_programs_calls/{id}', 'StudyProgramsController@getS
 //brisanje razpisanega programa
 $app->post('application/study_programs_calls/delete', 'StudyProgramsController@deleteStudyProgramCallById');
 
-//dodajanje študijskega programa
-$app->post('application/study_programs_calls/add', 'StudyProgramsController@addStudyProgramCallById');
+//dodajanje in urejanje študijskega programa
+$app->post('application/study_programs_calls/edit', 'StudyProgramsController@editStudyProgramCall');
 
 //dobi vse fakultete
 $app->get('application/vis_institutions', 'VisInstitutionsController@index');
