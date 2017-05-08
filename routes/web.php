@@ -81,6 +81,17 @@ $app->get('application/condition_codes', 'ConditionCodesController@index');
 //način zaključka srednje šole
 //spričevalo že imam 0 1
 
+//dodaj pogoj za razpisan program
+$app->post('application/programs_call_conditions/add', 'ProgramCallCondition@addCondition');
+
+//izbrisi pogoj za razpisan program
+$app->post('application/programs_call_conditions/delete', 'ProgramCallCondition@deleteCondition');
+
+//posodobi pogoj za razpisan program
+$app->post('application/programs_call_conditions/edit', 'ProgramCallCondition@updateCondition');
+
+//dobi vse pogoje za razpisan program
+$app->get('application/programs_call_conditions/{id}', 'ProgramCallCondition@getProgramCallConditions');
 
 
 /*$app->post('uporabnik','UporabnikController@ustvariUporabnika');
