@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\StudyProgram;
 use App\StudyProgramCallView;
 use App\StudyProgramCall;
+use App\Application_view;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,12 +32,24 @@ class StudyProgramsController extends Controller{
         if($studyProgramCalls)
         {
           foreach ($studyProgramCalls as $program) {
-            $program->nr_slo_eu_vpis_mock =0;
-            $program->nr_foreigners_vpis_mock =0;
-            $program->nr_without_citizenship_vpis_mock =0;
-            $program->nr_slo_eu_sprejeti_mock =0;
-            $program->nr_foreigners_sprejeti_mock =0;
-            $program->nr_without_citizenship_sprejeti_mock =0;
+           
+          /*  $program->nr_slo_eu_applications = DB::table('study_programs_calls_view')
+                                                  ->where('study_programs_calls_wish1_id', '==', $program->id)
+                                                  ->where('study_programs_calls_wish2_id', '==', $program->id)
+                                                  ->where('study_programs_calls_wish3_id', '==', $program->id)->count();*/
+
+                                                  
+            $program->nr_slo_eu_applications =  Application_view::where(function ($query) {
+                                                  $query->where('study_programs_calls_wish1_id', '=', $program->id)
+                                                            ->orWhere('study_programs_calls_wish2_id', '=',  $program->id)
+                                                            ->orWhere('study_programs_calls_wish3_id', '=',  $program->id);
+                                                  })->where(function ($query) {
+                                                      $query->where('fk_id_citizenship', '=', 1);          
+                                                })->count();
+            $program->nr_foreigners_applications =0;
+            $program->nr_slo_eu_accepted =0;
+            $program->nr_foreigners_accepted =0;
+           
           }
           return response()->json($studyProgramCalls);
         }
@@ -57,12 +70,10 @@ class StudyProgramsController extends Controller{
           if($studyProgramCalls)
           {
             foreach ($studyProgramCalls as $program) {
-              $program->nr_slo_eu_vpis_mock =0;
-              $program->nr_foreigners_vpis_mock =0;
-              $program->nr_without_citizenship_vpis_mock =0;
-              $program->nr_slo_eu_sprejeti_mock =0;
-              $program->nr_foreigners_sprejeti_mock =0;
-              $program->nr_without_citizenship_sprejeti_mock =0;
+              $program->nr_slo_eu_applications =0;
+              $program->nr_foreigners_applications =0;
+              $program->nr_slo_eu_accepted =0;
+              $program->nr_foreigners_accepted =0;
             }
             return response()->json($studyProgramCalls);
           }
