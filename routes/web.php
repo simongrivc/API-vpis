@@ -69,7 +69,6 @@ $app->get('application/cities', 'CitiesController@index');
 $app->get('application/countries', 'CountriesController@index');
 
 
-
 //dobi vse prijavnice (za prijavnice moraš biti prijavljen kot referent oz. služba vpis)
 $app->post('application/applications', ['middleware' => 'auth', 'uses' => 'ApplicationsController@getApplications']);
 
@@ -87,7 +86,9 @@ $app->get('application/klasius_srv', 'KlasiusSrvController@index');
 //način zaključka srednje šole
 $app->get('application/MiddleSchoolCompletionTypes', 'MiddleSchoolCompletionTypeController@index');
 
-//spričevalo že imam 0 1
+
+//edit add prijavnica
+$app->post('application/edit', 'ApplicationsController@editApplication');
 
 //dodaj pogoj za razpisan program
 $app->post('application/programs_call_conditions/add', 'ProgramCallCondition@addCondition');
