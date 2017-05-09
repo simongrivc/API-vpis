@@ -82,23 +82,29 @@ class StudyProgramsController extends Controller{
               $program->nr_slo_eu_applications =  Application_view::where(function ($query) use ($programId) {
                                                     $query->where('study_programs_calls_wish1_id', '=', $programId)
                                                               ->orWhere('study_programs_calls_wish2_id', '=',  $programId)
-                                                              ->orWhere('study_programs_calls_wish3_id', '=',  $programId)
-                                                              ->orWhere('study_programs_wish1_double_id', '=',  $programId)
+                                                              ->orWhere('study_programs_calls_wish3_id', '=',  $programId);
+                                                    })->where(function ($query) {
+                                                        $query->where('fk_id_citizenship', '=', 1);          
+                                                  })->count()+Application_view::where(function ($query) use ($programId) {
+                                                    $query->where('study_programs_wish1_double_id', '=',  $programId)
                                                             ->orWhere('study_programs_wish2_double_id', '=',  $programId)
                                                             ->orWhere('study_programs_wish3_double_id', '=',  $programId);
                                                     })->where(function ($query) {
                                                         $query->where('fk_id_citizenship', '=', 1);          
                                                   })->count();
               $program->nr_foreigners_applications = Application_view::where(function ($query) use ($programId) {
-                                                      $query->where('study_programs_calls_wish1_id', '=', $programId)
-                                                                ->orWhere('study_programs_calls_wish2_id', '=',  $programId)
-                                                                ->orWhere('study_programs_calls_wish3_id', '=',  $programId)
-                                                                ->orWhere('study_programs_wish1_double_id', '=',  $programId)
+                                                    $query->where('study_programs_calls_wish1_id', '=', $programId)
+                                                              ->orWhere('study_programs_calls_wish2_id', '=',  $programId)
+                                                              ->orWhere('study_programs_calls_wish3_id', '=',  $programId);
+                                                    })->where(function ($query) {
+                                                        $query->where('fk_id_citizenship', '=', 2);          
+                                                  })->count()+Application_view::where(function ($query) use ($programId) {
+                                                    $query->where('study_programs_wish1_double_id', '=',  $programId)
                                                             ->orWhere('study_programs_wish2_double_id', '=',  $programId)
                                                             ->orWhere('study_programs_wish3_double_id', '=',  $programId);
-                                                      })->where(function ($query) {
-                                                          $query->where('fk_id_citizenship', '=', 2);          
-                                                    })->count();
+                                                    })->where(function ($query) {
+                                                        $query->where('fk_id_citizenship', '=', 2);          
+                                                  })->count();
               $program->nr_slo_eu_accepted =0;
               $program->nr_foreigners_accepted =0;
             }
