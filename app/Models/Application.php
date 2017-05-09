@@ -31,7 +31,7 @@ class Application extends Model
 							'fk_id_middle_school_completion_type'
 							];
 
- 	protected $attributes  = ['id',
+ 	/*protected $attributes  = ['id',
 							'fk_id_user',
 							'address',
 							'fk_id_city_address',
@@ -56,7 +56,7 @@ class Application extends Model
 							'fk_gained_profession',
 							'fk_id_status',
 							'fk_id_middle_school_completion_type'
-							];
+							];*/
  	
  	protected $table = 'applications';
  	//da eloquent ne dodaja timestamp v bazo
