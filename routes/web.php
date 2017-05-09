@@ -66,7 +66,7 @@ $app->get('application/vis_institutions', 'VisInstitutionsController@index');
 $app->get('application/cities', 'CitiesController@index');
 
 //dobi vse države
-$app->get('application/drzave', 'CountriesController@index');
+$app->get('application/countries', 'CountriesController@index');
 
 
 
