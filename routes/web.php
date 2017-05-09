@@ -100,17 +100,19 @@ $app->post('application/edit',  'ApplicationsController@editApplication');
 $app->post('application/delete', 'ApplicationsController@deleteApplicationById');
 
 
-//dodaj pogoj za razpisan program
-$app->post('application/programs_call_conditions/add', 'ProgramCallCondition@addCondition');
+//POGOJI<-------
+//dodaj pogoje za razpisan program
+$app->post('application/programs_call_conditions/add', 'ProgramCallCondition@addConditionGroup');
 
-//izbrisi pogoj za razpisan program
-$app->post('application/programs_call_conditions/delete', 'ProgramCallCondition@deleteCondition');
+//izbrisi pogoje za razpisan program
+$app->post('application/programs_call_conditions/delete', 'ProgramCallCondition@deleteConditionGroup');
 
-//posodobi pogoj za razpisan program
-$app->post('application/programs_call_conditions/edit', 'ProgramCallCondition@updateCondition');
+//posodobi pogoje za razpisan program
+$app->post('application/programs_call_conditions/edit', 'ProgramCallCondition@updateConditionGroup');
 
+//TODO
 //dobi vse pogoje za razpisan program
-$app->get('application/programs_call_conditions/{id}', 'ProgramCallCondition@getProgramCallConditions');
+//$app->get('application/programs_call_conditions/{id}', 'ProgramCallCondition@getProgramCallConditions');
 
 
 /*$app->post('uporabnik','UporabnikController@ustvariUporabnika');

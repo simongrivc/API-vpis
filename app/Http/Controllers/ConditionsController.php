@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
  
 use App\ProgramCallCondition;
+use App\ConditionGroup;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,42 +13,86 @@ class ConditionsController extends Controller{
 
     public function index(){
  
-        $condition = ProgramCallCondition::all();
-        return response()->json($condition);
+        /*$condition = ProgramCallCondition::all();
+        return response()->json($condition);*/
     }
     
-    public function addCondition(Request $request){
+    //pri dodajanju je pomemben weight; vmes so lahko pogoji tudi z 0, kar pomeni da je ta predmet obvezen,
+    //pri tem ne rabmo must_have
+    //seštevek vseh pogojev pa mora bit 0 ali pa 100
+    public function addConditionGroup(Request $request){
 
-        if($request->input('program_call_id') && $request->input('condition_code_id') && ($request->input('condition_weight') || $request->input('condition_weight') == 0 && $request->input('condition_weight') != "") && ($request->input('must_have') || $request->input('must_have') == 0 && $request->input('must_have') != ""))
+        if($request->input('program_call_id') && $request->input('conditions'))
         {            
-            $id = DB::table('program_call_conditions')->insertGetId(
-                ['must_have' => $request->input('must_have'), 'condition_weight' => $request->input('condition_weight'), 'fk_condition_code_id' => $request->input('condition_code_id'), 'fk_program_call_id' =>  $request->input('program_call_id')]
-            );
-            return response()->json(array('success' => 'condition_added'));
+            //preveri če je weight skupaj == 100% ali pa 0%
+            $totalWeight = 0;
+            foreach ($request->input('conditions') as $pogoj) {
+                $totalWeight += $pogoj["condition_weight"];
+            }
+            
+            if($totalWeight != 100 && $totalWeight != 0){
+                //pogoji niso ustrezni
+                return  response()->json(array('error' => 'weight_error'), 400);
+            }
+            
+            //kreiraj grupo
+            $groupID = DB::table('condition_groups')->insertGetId(
+                ['fk_program_call_id' => $request->input('program_call_id')]);
+            
+            //poveži pogoje z grupo
+            foreach ($request->input('conditions') as $pogoj) {
+                $id = DB::table('program_call_conditions')->insertGetId(
+                    ['fk_condition_group' => $groupID, 'condition_weight' => $pogoj["condition_weight"], 'fk_condition_code_id' => $pogoj['condition_code_id']]
+                );
+            }
+            
+            return response()->json(array('success' => 'conditions_added'));
         }
         return  response()->json(array('error' => 'missing_data'), 400);
     }
     
-    public function deleteCondition(Request $request){
-        if($request->input('condition_id'))
+    public function deleteConditionGroup(Request $request){
+        if($request->input('condition_group_id'))
         {
-            $cond = ProgramCallCondition::find($request->input('condition_id'));
+            //zbriši vse pogoje vezane na grupo
+            $cond = ProgramCallCondition::find($request->input('condition_group_id'));
             $cond->delete();
-            return response()->json(array('success' => 'condition_deleted'));
+            
+            //nato zbriši še grupo
+            $group = ConditionGroup::find($request->input('condition_group_id'));
+            $group->delete();
+            
+            return response()->json(array('success' => 'conditions_deleted'));
         }
         return  response()->json(array('error' => 'missing_data'), 400);
     }
     
-    public function updateCondition(Request $request){    
-        if($request->input('program_call_id') && $request->input('condition_code_id') && ($request->input('condition_weight') || $request->input('condition_weight') == 0 && $request->input('condition_weight') != "") && ($request->input('must_have') || $request->input('must_have') == 0 && $request->input('must_have') != ""))
+    public function updateConditionGroup(Request $request){    
+        if($request->input('condition_group_id') && $request->input('conditions'))
         {
-            $cond = ProgramCallCondition::find($request->input('condition_id'));
-            $cond->must_have = $request->input('name');
-            $cond->condition_weight = $request->input('condition_weight');
-            $cond->fk_condition_code_id = $request->input('fk_condition_code_id');
-            $cond->fk_program_call_id = $request->input('fk_program_call_id');
-            $cond->save();
-            return response()->json(array('success' => 'condition_updated'));
+            //najlažja implementacija: zbriši vse pogoje vezane na grupo in jih dodaj na novo
+            $cond = ProgramCallCondition::find($request->input('condition_group_id'));
+            $cond->delete();
+            
+            //preveri če je weight skupaj == 100% ali pa 0%
+            $totalWeight = 0;
+            foreach ($request->input('conditions') as $pogoj) {
+                $totalWeight += $pogoj["condition_weight"];
+            }
+            
+            if($totalWeight != 100 && $totalWeight != 0){
+                //pogoji niso ustrezni
+                return  response()->json(array('error' => 'weight_error'), 400);
+            }
+            
+            //poveži pogoje z grupo
+            foreach ($request->input('conditions') as $pogoj) {
+                $id = DB::table('program_call_conditions')->insertGetId(
+                    ['fk_condition_group' => $request->input('condition_group_id'), 'condition_weight' => $pogoj["condition_weight"], 'fk_condition_code_id' => $pogoj['condition_code_id']]
+                );
+            }
+           
+            return response()->json(array('success' => 'conditions_updated'));
         }
         return  response()->json(array('error' => 'missing_data'), 400);
     }
@@ -55,7 +100,14 @@ class ConditionsController extends Controller{
     public function getProgramCallConditions(Request $request, $id){
         if($id>0)
         {
-          $programCallConditions = DB::table('program_call_conditions')
+            //-->TODO<--
+            //naredi view
+            //poglej v grupo kje se nahaja program_call_id oz. $id
+            //tako dobiš vse id-je od grup, ki so vezane na ta razpisan program
+            //potem pa v arrayu izpišeš vse pogoje po grupah
+            
+            
+          /*$programCallConditions = DB::table('program_call_conditions')
                       ->where('fk_program_call_id', '=', $id)
                       ->get();
           if($programCallConditions)
@@ -64,7 +116,7 @@ class ConditionsController extends Controller{
           }
           else{
             return response()->json([]);
-          }
+          }*/
         }
         else
             return response()->json(array('error' => 'input_id_error'),400);
