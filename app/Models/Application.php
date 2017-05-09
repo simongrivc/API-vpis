@@ -15,7 +15,7 @@ class Application extends Model
 							'fk_id_wish2',
 							'fk_id_wish3',
 							'emso',
-							'wish1_isDouble_major' ,
+							'wish1_isDouble_major',
 							'wish2_isDouble_major',
 							'wish3_isDouble_major',
 							'wish1_second_wish',
