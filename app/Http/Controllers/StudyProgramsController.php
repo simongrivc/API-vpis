@@ -37,9 +37,8 @@ class StudyProgramsController extends Controller{
                                                   ->where('study_programs_calls_wish1_id', '==', $program->id)
                                                   ->where('study_programs_calls_wish2_id', '==', $program->id)
                                                   ->where('study_programs_calls_wish3_id', '==', $program->id)->count();*/
-
-            $programId=$program->id;                                      
-            $program->nr_slo_eu_applications =  Application_view::where(function ($query) {
+            $programId = $program->id;
+            $program->nr_slo_eu_applications =  Application_view::where(function ($query) use ($programId) {
                                                   $query->where('study_programs_calls_wish1_id', '=', $programId)
                                                             ->orWhere('study_programs_calls_wish2_id', '=',  $programId)
                                                             ->orWhere('study_programs_calls_wish3_id', '=',  $programId);
