@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
  
 class Application extends Model
 { 
- 	protected $fillable = ['id',
+ 	protected $attributes = ['id',
 							'fk_id_user',
 							'address',
 							'fk_id_city_address',

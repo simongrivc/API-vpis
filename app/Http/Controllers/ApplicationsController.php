@@ -296,7 +296,7 @@ class ApplicationsController extends Controller{
                 $application->fk_id_wish2=$fk_id_wish2;
                 $application->fk_id_wish3=$fk_id_wish3;
                 $application->emso=$emso;
-                $application->{"wish1_isDouble_major"}=$wish1_isDouble_major;
+                $application->wish1_isDouble_major=$wish1_isDouble_major;
                 $application->wish2_isDouble_major=$wish2_isDouble_major;
                 $application->wish3_isDouble_major=$wish3_isDouble_major;
                 $application->wish1_second_wish=$wish1_second_wish;
