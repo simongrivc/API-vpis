@@ -286,6 +286,7 @@ class ApplicationsController extends Controller{
             $application=ApplicationModel::find($id);
             if($application)
             {
+            	$application->$id=$id;
                 $application->fk_id_user=$fk_id_user;
                 $application->address=$address;
                 $application->fk_id_city_address=$fk_id_city_address;
