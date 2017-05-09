@@ -89,6 +89,7 @@ class ApplicationsController extends Controller{
         	}
 
         	foreach ($applicationsWish3 as $application) {
+        		$studyProgramCallWish = StudyProgramCall::find($application->id);
         			if($studyProgramCallWish)
         			{
         				if($studyProgramCallWish->is_active==1)
@@ -142,6 +143,7 @@ class ApplicationsController extends Controller{
 
 			$response = [];
         	foreach ($applicationsWish1 as $application) {
+        		$studyProgramCallWish = StudyProgramCall::find($application->id);
         			if($studyProgramCallWish)
         			{
         				if($studyProgramCallWish->is_active==1)
@@ -174,6 +176,7 @@ class ApplicationsController extends Controller{
         	}
 
         	foreach ($applicationsWish2 as $application) {
+        		$studyProgramCallWish = StudyProgramCall::find($application->id);
         			if($studyProgramCallWish)
         			{
         				if($studyProgramCallWish->is_active==1)
@@ -206,6 +209,7 @@ class ApplicationsController extends Controller{
         	}
 
         	foreach ($applicationsWish3 as $application) {
+        		$studyProgramCallWish = StudyProgramCall::find($application->id);
         			if($studyProgramCallWish)
         			{
         				if($studyProgramCallWish->is_active==1)
