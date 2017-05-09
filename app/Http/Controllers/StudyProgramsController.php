@@ -41,11 +41,11 @@ class StudyProgramsController extends Controller{
             $stWish3SloEu = Application_view::where('study_programs_calls_wish3_id', '=', $programId)
                                       ->where('fk_id_citizenship', '=', 1)->count();
 
-            $stWish1SloEuDouble = Application_view::where('study_programs_wish1_double_id', '=', $programId)
+            $stWish1SloEuDouble = Application_view::where('study_programs_calls_wish1_double_id', '=', $programId)
                                       ->where('fk_id_citizenship', '=', 1)->count();
-            $stWish2SloEuDouble = Application_view::where('study_programs_wish2_double_id', '=', $programId)
+            $stWish2SloEuDouble = Application_view::where('study_programs_calls_wish2_double_id', '=', $programId)
                                       ->where('fk_id_citizenship', '=', 1)->count();
-            $stWish3SloEuDouble = Application_view::where('study_programs_wish3_double_id', '=', $programId)
+            $stWish3SloEuDouble = Application_view::where('study_programs_calls_wish3_double_id', '=', $programId)
                                       ->where('fk_id_citizenship', '=', 1)->count();
 
             $stWish1Foreigners = Application_view::where('study_programs_calls_wish1_id', '=', $programId)
@@ -55,11 +55,11 @@ class StudyProgramsController extends Controller{
             $stWish3Foreigners = Application_view::where('study_programs_calls_wish3_id', '=', $programId)
                                       ->where('fk_id_citizenship', '=', 2)->count();
 
-            $stWish1ForeignersDouble = Application_view::where('study_programs_wish1_double_id', '=', $programId)
+            $stWish1ForeignersDouble = Application_view::where('study_programs_calls_wish1_double_id', '=', $programId)
                                       ->where('fk_id_citizenship', '=', 2)->count();
-            $stWish2ForeignersDouble = Application_view::where('study_programs_wish2_double_id', '=', $programId)
+            $stWish2ForeignersDouble = Application_view::where('study_programs_calls_wish2_double_id', '=', $programId)
                                       ->where('fk_id_citizenship', '=', 2)->count();
-            $stWish3ForeignersDouble = Application_view::where('study_programs_wish3_double_id', '=', $programId)
+            $stWish3ForeignersDouble = Application_view::where('study_programs_calls_wish3_double_id', '=', $programId)
                                       ->where('fk_id_citizenship', '=', 2)->count();
 
               $program->nr_slo_eu_applications = $stWish1SloEu + $stWish2SloEu + $stWish3SloEu + $stWish1SloEuDouble + $stWish2SloEuDouble + $stWish3SloEuDouble;
