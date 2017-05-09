@@ -32,11 +32,7 @@ class StudyProgramsController extends Controller{
         if($studyProgramCalls)
         {
           foreach ($studyProgramCalls as $program) {
-           
-          /*  $program->nr_slo_eu_applications = DB::table('study_programs_calls_view')
-                                                  ->where('study_programs_calls_wish1_id', '==', $program->id)
-                                                  ->where('study_programs_calls_wish2_id', '==', $program->id)
-                                                  ->where('study_programs_calls_wish3_id', '==', $program->id)->count();*/
+            
             $programId = $program->id;
             $program->nr_slo_eu_applications =  Application_view::where(function ($query) use ($programId) {
                                                   $query->where('study_programs_calls_wish1_id', '=', $programId)
@@ -45,7 +41,13 @@ class StudyProgramsController extends Controller{
                                                   })->where(function ($query) {
                                                       $query->where('fk_id_citizenship', '=', 1);          
                                                 })->count();
-            $program->nr_foreigners_applications =0;
+            $program->nr_foreigners_applications = Application_view::where(function ($query) use ($programId) {
+                                                    $query->where('study_programs_calls_wish1_id', '=', $programId)
+                                                              ->orWhere('study_programs_calls_wish2_id', '=',  $programId)
+                                                              ->orWhere('study_programs_calls_wish3_id', '=',  $programId);
+                                                    })->where(function ($query) {
+                                                        $query->where('fk_id_citizenship', '=', 2);          
+                                                  })->count();
             $program->nr_slo_eu_accepted =0;
             $program->nr_foreigners_accepted =0;
            
@@ -69,8 +71,21 @@ class StudyProgramsController extends Controller{
           if($studyProgramCalls)
           {
             foreach ($studyProgramCalls as $program) {
-              $program->nr_slo_eu_applications =0;
-              $program->nr_foreigners_applications =0;
+              $programId = $program->id;
+              $program->nr_slo_eu_applications =  Application_view::where(function ($query) use ($programId) {
+                                                    $query->where('study_programs_calls_wish1_id', '=', $programId)
+                                                              ->orWhere('study_programs_calls_wish2_id', '=',  $programId)
+                                                              ->orWhere('study_programs_calls_wish3_id', '=',  $programId);
+                                                    })->where(function ($query) {
+                                                        $query->where('fk_id_citizenship', '=', 1);          
+                                                  })->count();
+              $program->nr_foreigners_applications = Application_view::where(function ($query) use ($programId) {
+                                                      $query->where('study_programs_calls_wish1_id', '=', $programId)
+                                                                ->orWhere('study_programs_calls_wish2_id', '=',  $programId)
+                                                                ->orWhere('study_programs_calls_wish3_id', '=',  $programId);
+                                                      })->where(function ($query) {
+                                                          $query->where('fk_id_citizenship', '=', 2);          
+                                                    })->count();
               $program->nr_slo_eu_accepted =0;
               $program->nr_foreigners_accepted =0;
             }
