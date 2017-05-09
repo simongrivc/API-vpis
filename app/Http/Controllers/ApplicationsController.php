@@ -259,9 +259,9 @@ class ApplicationsController extends Controller{
         $fk_id_wish2=$request->input('fk_id_wish2');
         $fk_id_wish3=$request->input('fk_id_wish3');
         $emso=$request->input('emso');
-        $wish1_isDouble_major=$request->input('wish1_isDouble_major');
-        $wish2_isDouble_major=$request->input('wish2_isDouble_major');
-        $wish3_isDouble_major=$request->input('wish3_isDouble_major');
+        //$wish1_isDouble_major=$request->input('wish1_isDouble_major');
+        //$wish2_isDouble_major=$request->input('wish2_isDouble_major');
+       // $wish3_isDouble_major=$request->input('wish3_isDouble_major');
         $wish1_second_wish=$request->input('wish1_second_wish');
         $wish2_second_wish=$request->input('wish2_second_wish');
         $wish3_second_wish=$request->input('wish3_second_wish');
@@ -296,9 +296,9 @@ class ApplicationsController extends Controller{
                 $application->fk_id_wish2=$fk_id_wish2;
                 $application->fk_id_wish3=$fk_id_wish3;
                 $application->emso=$emso;
-                $application->wish1_isDouble_major=$wish1_isDouble_major;
-                $application->wish2_isDouble_major=$wish2_isDouble_major;
-                $application->wish3_isDouble_major=$wish3_isDouble_major;
+                //$application->wish1_isDouble_major=$wish1_isDouble_major;
+                //$application->wish2_isDouble_major=$wish2_isDouble_major;
+               // $application->wish3_isDouble_major=$wish3_isDouble_major;
                 $application->wish1_second_wish=$wish1_second_wish;
                 $application->wish2_second_wish=$wish2_second_wish;
                 $application->wish3_second_wish=$wish3_second_wish;
