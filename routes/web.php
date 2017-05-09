@@ -78,9 +78,9 @@ $app->get('application/group_calls', 'CallGroupsController@index');
 $app->get('application/condition_codes', 'ConditionCodesController@index');
 
 //endpoint klasius srv
-$app->post('application/klasius_srv', 'KlasiusSrvController@index');
+$app->get('application/klasius_srv', 'KlasiusSrvController@index');
 //način zaključka srednje šole
-$app->post('application/MiddleSchoolCompletionTypes', 'MiddleSchoolCompletionTypeController@index');
+$app->get('application/MiddleSchoolCompletionTypes', 'MiddleSchoolCompletionTypeController@index');
 
 //spričevalo že imam 0 1
 
