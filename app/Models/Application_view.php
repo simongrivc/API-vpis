@@ -36,8 +36,12 @@ class Application_view extends Model
 							'is_active',
 							'city_address_name',
 							'city_address_number',
+							'country_name',
 							'city_address_temp_name',
 							'city_address_temp_number',
+							'country_name_temp',
+							'city_name_place_of_birth',
+							'city_number_place_of_birth',
 							'id_citizenship',
 							'citizenship_name',
 							'study_programs_calls_wish1_id',
@@ -115,8 +119,12 @@ class Application_view extends Model
 							'is_active',
 							'city_address_name',
 							'city_address_number',
+							'country_name',
 							'city_address_temp_name',
 							'city_address_temp_number',
+							'country_name_temp',
+							'city_name_place_of_birth',
+							'city_number_place_of_birth',
 							'id_citizenship',
 							'citizenship_name',
 							'study_programs_calls_wish1_id',
@@ -161,7 +169,7 @@ class Application_view extends Model
 							'gained_profession_id',
 							'gained_profession_name',
 							'application_status_id',
-							'application_status_name'];
+							'application_status_name';
  	
  	protected $table = 'applications_view';
  	//da eloquent ne dodaja timestamp v bazo
