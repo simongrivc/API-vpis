@@ -7,10 +7,13 @@ class ApplicationModel extends Model
  	protected $fillable = ['id',
 							'fk_id_user',
 							'address',
+							'fk_id_country',
 							'fk_id_city_address',
 							'address_temp',
+							'fk_id_country_temp',
 							'fk_id_city_address_temp',
 							'fk_id_citizenship',
+							'fk_id_place_of_birth'
 							'fk_id_wish1',
 							'fk_id_wish2',
 							'fk_id_wish3',
