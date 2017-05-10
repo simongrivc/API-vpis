@@ -90,6 +90,10 @@ $app->get('application/MiddleSchoolCompletionTypes', 'MiddleSchoolCompletionType
 //edit add prijavnica
 $app->post('application/edit', 'ApplicationsController@editApplication');
 
+//daj status prijavnice na deleted
+$app->post('application/delete', 'ApplicationsController@deleteApplicationById');
+
+
 //dodaj pogoj za razpisan program
 $app->post('application/programs_call_conditions/add', 'ProgramCallCondition@addCondition');
 

@@ -323,6 +323,22 @@ class ApplicationsController extends Controller{
 
     }
 
+     public function deleteApplicationById(Request $request){
+        $id=$request->input('id');
+        if($id)
+        {
+          $application= ApplicationModel::find($id);
+          if($application){
+            $application->fk_id_status=3;
+            $application->save();
+            return response()->json(array('success' => 'Application deleted successfully'));
+          }
+          else
+            return response()->json(array('error' => 'No application with that id.'),400);
+        }
+        else
+           return response()->json(array('error' => 'Wrong or missing id data.'),400);
+    }
 
 }
 ?>
