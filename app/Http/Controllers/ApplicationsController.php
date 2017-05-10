@@ -352,6 +352,12 @@ class ApplicationsController extends Controller{
  			 return response()->json(array('error' => 'Not sufficient rights to display applications.'),400);
     }
     
+    public function getApplicationsUser(Request $request){
+     	$idUser=$request->input('id_user');
+     	$applications = Application_view::where('fk_id_user', '=', $idUser)->get();
+        return response()->json($applications);
+    }
+
     public function editApplication(Request $request){
     	//$user = Auth::user();
     	$id=$request->input('id');
