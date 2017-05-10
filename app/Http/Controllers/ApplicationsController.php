@@ -128,7 +128,7 @@ class ApplicationsController extends Controller{
         	}
 
         	foreach ($applicationsWish3double as $application) {
-        		$studyProgramCallWish = StudyProgramCall::find($application->wish1_second_wish);
+        		$studyProgramCallWish = StudyProgramCall::find($application->wish3_second_wish);
         			if($studyProgramCallWish)
         			{
         				if($studyProgramCallWish->is_active==1)
