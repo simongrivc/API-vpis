@@ -387,8 +387,6 @@ class ApplicationsController extends Controller{
         
        
         //dodajanje
-        if($fk_id_user && $address && $fk_id_city_address && $address_temp && $fk_id_city_address_temp && $fk_id_citizenship && $fk_id_wish1 && $fk_id_wish2 && $fk_id_wish3 && $emso && $timestamp_created && $timestamp_sent && $fk_id_middle_school && $contact_phone && $fk_id_klasius_srv && $fk_gained_profession && $fk_id_status && $fk_id_middle_school_completion_type)
-        {
           if($id==null)
           {
               $application=ApplicationModel::create($request->all());
@@ -433,9 +431,9 @@ class ApplicationsController extends Controller{
               return response()->json(array('error' => 'Wrong application id.'),400);
           }
            
-        }
-          else
-            return response()->json(array('error' => 'Wrong or missing input data.'),400);
+        
+          /*else
+            return response()->json(array('error' => 'Wrong or missing input data.'),400);*/
 
     }
 
