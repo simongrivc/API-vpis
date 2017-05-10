@@ -353,9 +353,9 @@ class ApplicationsController extends Controller{
     }
     
     public function editApplication(Request $request){
-    	$user = Auth::user();
+    	//$user = Auth::user();
     	$id=$request->input('id');
-        $fk_id_user=$user->id;
+        $fk_id_user= $request->input('fk_id_user');
         $address=$request->input('address');
         $fk_id_city_address=$request->input('fk_id_city_address');
         $address_temp=$request->input('address_temp');
