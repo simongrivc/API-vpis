@@ -73,7 +73,7 @@ $app->get('application/countries', 'CountriesController@index');
 $app->post('application/applications', ['middleware' => 'auth', 'uses' => 'ApplicationsController@getApplications']);
 
 //dobi šifrante univerz
-$app->get('application/applications_user', 'ApplicationsController@getApplicationsUser');
+$app->post('application/applications_user', 'ApplicationsController@getApplicationsUser');
 
 //dobi šifrante univerz
 $app->get('application/universities', 'UniversitiesController@index');
