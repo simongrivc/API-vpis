@@ -169,7 +169,7 @@ class Application_view extends Model
 							'gained_profession_id',
 							'gained_profession_name',
 							'application_status_id',
-							'application_status_name';
+							'application_status_name'];
  	
  	protected $table = 'applications_view';
  	//da eloquent ne dodaja timestamp v bazo
