@@ -88,7 +88,7 @@ $app->get('application/MiddleSchoolCompletionTypes', 'MiddleSchoolCompletionType
 
 
 //edit add prijavnica
-$app->post('application/edit', 'ApplicationsController@editApplication');
+$app->post('application/edit',  ['middleware' => 'auth', 'uses' => 'ApplicationsController@editApplication']);
 
 //daj status prijavnice na deleted
 $app->post('application/delete', 'ApplicationsController@deleteApplicationById');

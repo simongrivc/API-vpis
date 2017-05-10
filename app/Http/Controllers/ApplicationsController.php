@@ -159,7 +159,7 @@ class ApplicationsController extends Controller{
 						}
 					}
         	}
-        	
+
         	foreach ($applicationsWish2double as $application) {
         		$studyProgramCallWish = StudyProgramCall::find($application->wish2_second_wish);
         			if($studyProgramCallWish)
@@ -353,8 +353,9 @@ class ApplicationsController extends Controller{
     }
     
     public function editApplication(Request $request){
+    	$user = Auth::user();
     	$id=$request->input('id');
-        $fk_id_user=$request->input('fk_id_user');
+        $fk_id_user=$user->id;
         $address=$request->input('address');
         $fk_id_city_address=$request->input('fk_id_city_address');
         $address_temp=$request->input('address_temp');
