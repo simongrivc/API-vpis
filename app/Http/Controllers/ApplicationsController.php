@@ -411,7 +411,7 @@ class ApplicationsController extends Controller{
                 $application->timestamp_created=null;
                 $application->timestamp_sent=time();
                 $application->fk_id_middle_school=null;
-                $application->contact_phone=null;
+                $application->contact_phone=$contact_phone;
                 $application->fk_id_klasius_srv=$fk_id_klasius_srv;
                 $application->fk_gained_profession=$fk_gained_profession;
                 $application->fk_id_status=$fk_id_status;
@@ -446,7 +446,7 @@ class ApplicationsController extends Controller{
                 $application->timestamp_created=null;
                 $application->timestamp_sent=time();
                 $application->fk_id_middle_school=null;
-                $application->contact_phone=null;
+                $application->contact_phone=$contact_phone;
                 $application->fk_id_klasius_srv=$fk_id_klasius_srv;
                 $application->fk_gained_profession=$fk_gained_profession;
                 $application->fk_id_status=$fk_id_status;
