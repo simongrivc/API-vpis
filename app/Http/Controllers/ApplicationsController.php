@@ -378,6 +378,7 @@ class ApplicationsController extends Controller{
         $fk_id_klasius_srv=$request->input('fk_id_klasius_srv');
         $fk_gained_profession=$request->input('fk_gained_profession');
         //$fk_id_status=$request->input('fk_id_status');
+        $gender=$request->input('gender');
         $fk_id_status=2;
         $fk_id_middle_school_completion_type=$request->input('fk_id_middle_school_completion_type');
  		
@@ -415,7 +416,7 @@ class ApplicationsController extends Controller{
                 $application->fk_gained_profession=$fk_gained_profession;
                 $application->fk_id_status=$fk_id_status;
                 $application->fk_id_middle_school_completion_type=$fk_id_middle_school_completion_type;
-
+                $application->gender=$gender;
                 $application->fk_id_country= $fk_id_country;
                 $application->fk_id_country_temp=$fk_id_country_temp;
                 $application->fk_id_place_of_birth=$fk_id_place_of_birth;
@@ -450,7 +451,7 @@ class ApplicationsController extends Controller{
                 $application->fk_gained_profession=$fk_gained_profession;
                 $application->fk_id_status=$fk_id_status;
                 $application->fk_id_middle_school_completion_type=$fk_id_middle_school_completion_type;
-
+  				$application->gender=$gender;
                 $application->fk_id_country= $fk_id_country;
                 $application->fk_id_country_temp=$fk_id_country_temp;
                 $application->fk_id_place_of_birth=$fk_id_place_of_birth;
