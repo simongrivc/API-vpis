@@ -389,7 +389,37 @@ class ApplicationsController extends Controller{
         //dodajanje
           if($id==null)
           {
-              $application=ApplicationModel::create($request->all());
+              //$application=ApplicationModel::create($request->all());
+              $application=new ApplicationModel();
+              $application->fk_id_user=$fk_id_user;
+                $application->address=$address;
+                $application->fk_id_city_address=$fk_id_city_address;
+                $application->address_temp=$address_temp;
+                $application->fk_id_city_address_temp=$fk_id_city_address_temp;
+                $application->fk_id_citizenship=$fk_id_citizenship;
+                $application->fk_id_wish1=$fk_id_wish1;
+                $application->fk_id_wish2=$fk_id_wish2;
+                $application->fk_id_wish3=$fk_id_wish3;
+                $application->emso=$emso;
+                $application->wish1_isdouble_major=$wish1_isdouble_major;
+                $application->wish2_isdouble_major=$wish2_isdouble_major;
+                $application->wish3_isdouble_major=$wish3_isdouble_major;
+                $application->wish1_second_wish=$wish1_second_wish;
+                $application->wish2_second_wish=$wish2_second_wish;
+                $application->wish3_second_wish=$wish3_second_wish;
+                $application->timestamp_created=$timestamp_created;
+                $application->timestamp_sent=$timestamp_sent;
+                $application->fk_id_middle_school=$fk_id_middle_school;
+                $application->contact_phone=$contact_phone;
+                $application->fk_id_klasius_srv=$fk_id_klasius_srv;
+                $application->fk_gained_profession=$fk_gained_profession;
+                $application->fk_id_status=$fk_id_status;
+                $application->fk_id_middle_school_completion_type=$fk_id_middle_school_completion_type;
+
+                $application->fk_id_country= $fk_id_country;
+                $application->fk_id_country_temp=$fk_id_country_temp;
+                $application->fk_id_place_of_birth=$fk_id_place_of_birth;
+                $application->save();
               return response()->json($application);
           }
           else{
