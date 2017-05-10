@@ -127,6 +127,72 @@ class ApplicationsController extends Controller{
 					}
         	}
 
+        	foreach ($applicationsWish1double as $application) {
+        		$studyProgramCallWish = StudyProgramCall::find($application->wish1_second_wish);
+        			if($studyProgramCallWish)
+        			{
+        				if($studyProgramCallWish->is_active==1)
+        				{
+			        		$application->study_programs_calls_wish2_id=null;
+			        		$application->study_programs_calls_wish2_call_type=null;
+							$application->study_programs_wish2_is_active=null;			
+							$application->study_programs_wish2_id=null;
+							$application->study_programs_wish2_program_name=null;
+							$application->study_programs_calls_wish2_double_id=null;	
+							$application->study_programs_wish2_double_is_active=null;			
+							$application->study_programs_wish2_double_id=null;
+							$application->study_programs_wish2_double_program_name=null;
+							$application->program_carrier_wish2_id=null;	
+							$application->program_carrier_wish2_institution_name=null;
+							$application->study_programs_calls_wish3_id=null;
+							$application->study_programs_calls_wish3_call_type=null;
+							$application->study_programs_wish3_is_active=null;			
+							$application->study_programs_wish3_id=null;
+							$application->study_programs_wish3_program_name=null;	
+							$application->study_programs_calls_wish3_double_id=null;		
+							$application->study_programs_wish3_double_is_active=null;	
+							$application->study_programs_wish3_double_id=null;
+							$application->study_programs_wish3_double_program_name=null;
+							$application->program_carrier_wish3_id=null;
+							$application->program_carrier_wish3_institution_name=null;
+							array_push($response,$application);
+						}
+					}
+        	}
+        	
+        	foreach ($applicationsWish2double as $application) {
+        		$studyProgramCallWish = StudyProgramCall::find($application->wish2_second_wish);
+        			if($studyProgramCallWish)
+        			{
+        				if($studyProgramCallWish->is_active==1)
+        				{
+			        		$application->study_programs_calls_wish1_id=null;
+			        		$application->study_programs_calls_wish1_call_type=null;
+							$application->study_programs_wish1_is_active=null;			
+							$application->study_programs_wish1_id=null;
+							$application->study_programs_wish1_program_name=null;
+							$application->study_programs_calls_wish1_double_id=null;	
+							$application->study_programs_wish1_double_is_active=null;			
+							$application->study_programs_wish1_double_id=null;
+							$application->study_programs_wish1_double_program_name=null;
+							$application->program_carrier_wish1_id=null;	
+							$application->program_carrier_wish1_institution_name=null;
+							$application->study_programs_calls_wish3_id=null;
+							$application->study_programs_calls_wish3_call_type=null;
+							$application->study_programs_wish3_is_active=null;			
+							$application->study_programs_wish3_id=null;
+							$application->study_programs_wish3_program_name=null;	
+							$application->study_programs_calls_wish3_double_id=null;		
+							$application->study_programs_wish3_double_is_active=null;	
+							$application->study_programs_wish3_double_id=null;
+							$application->study_programs_wish3_double_program_name=null;
+							$application->program_carrier_wish3_id=null;
+							$application->program_carrier_wish3_institution_name=null;
+							array_push($response,$application);
+						}
+					}
+        	}
+
         	foreach ($applicationsWish3double as $application) {
         		$studyProgramCallWish = StudyProgramCall::find($application->wish3_second_wish);
         			if($studyProgramCallWish)
@@ -161,6 +227,7 @@ class ApplicationsController extends Controller{
         	}
 
 
+			
         	return response()->json($response);
  		}
  		else if($user->fk_id_vis_institution!=null && $user->fk_user_role==3)
