@@ -19,13 +19,13 @@ class ApplicationsController extends Controller{
  		{
  			//Vrni vse prijavnice služba vpis
  			//$application = Application_view::all();
- 			$applicationsWish1 = Application_view::where('study_programs_calls_wish1_id', '!=', null)->get();
- 			$applicationsWish2 = Application_view::where('study_programs_calls_wish2_id', '!=', null)->get();
- 			$applicationsWish3 = Application_view::where('study_programs_calls_wish3_id', '!=', null)->get();
+ 			$applicationsWish1 = Application_view::where('study_programs_calls_wish1_id', '!=', null)->where('fk_id_status', '!=', 3)->get();
+ 			$applicationsWish2 = Application_view::where('study_programs_calls_wish2_id', '!=', null)->where('fk_id_status', '!=', 3)->get();
+ 			$applicationsWish3 = Application_view::where('study_programs_calls_wish3_id', '!=', null)->where('fk_id_status', '!=', 3)->get();
 
- 			$applicationsWish1double = Application_view::where('study_programs_calls_wish1_double_id', '!=', null)->get();
- 			$applicationsWish2double = Application_view::where('study_programs_calls_wish2_double_id', '!=', null)->get();
- 			$applicationsWish3double = Application_view::where('study_programs_calls_wish3_double_id', '!=', null)->get();
+ 			$applicationsWish1double = Application_view::where('study_programs_calls_wish1_double_id', '!=', null)->where('fk_id_status', '!=', 3)->get();
+ 			$applicationsWish2double = Application_view::where('study_programs_calls_wish2_double_id', '!=', null)->where('fk_id_status', '!=', 3)->get();
+ 			$applicationsWish3double = Application_view::where('study_programs_calls_wish3_double_id', '!=', null)->where('fk_id_status', '!=', 3)->get();
 
         	$response = [];
         	foreach ($applicationsWish1 as $application) {
