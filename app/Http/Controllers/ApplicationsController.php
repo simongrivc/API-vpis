@@ -354,7 +354,7 @@ class ApplicationsController extends Controller{
     
     public function getApplicationsUser(Request $request){
      	$idUser=$request->input('id_user');
-     	$applications = Application_view::where('fk_id_user', '=', $idUser)->where('status', '!=', 3)->get();
+     	$applications = Application_view::where('fk_id_user', '=', $idUser)->where('fk_id_status', '!=', 3)->get();
         return response()->json($applications);
     }
 
