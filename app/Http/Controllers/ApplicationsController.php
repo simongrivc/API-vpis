@@ -383,9 +383,11 @@ class ApplicationsController extends Controller{
         $contact_phone=$request->input('contact_phone');
         $fk_id_klasius_srv=$request->input('fk_id_klasius_srv');
         $fk_gained_profession=$request->input('fk_gained_profession');
+        $fk_id_status = $request->input('fk_id_status');
+        $shipping_address=$request->input('shipping_address');
         //$fk_id_status=$request->input('fk_id_status');
         $gender=$request->input('gender');
-        $fk_id_status=2;
+       
         $fk_id_middle_school_completion_type=$request->input('fk_id_middle_school_completion_type');
  		
  		$fk_id_country=$request->input('fk_id_country');
@@ -426,6 +428,7 @@ class ApplicationsController extends Controller{
                 $application->fk_id_country= $fk_id_country;
                 $application->fk_id_country_temp=$fk_id_country_temp;
                 $application->fk_id_place_of_birth=$fk_id_place_of_birth;
+                $application->shipping_address=$shipping_address;
                 $application->save();
               return response()->json($application);
           }
@@ -461,6 +464,7 @@ class ApplicationsController extends Controller{
                 $application->fk_id_country= $fk_id_country;
                 $application->fk_id_country_temp=$fk_id_country_temp;
                 $application->fk_id_place_of_birth=$fk_id_place_of_birth;
+                $application->shipping_address=$shipping_address;
                 $application->save();
                  return response()->json($application);
             }

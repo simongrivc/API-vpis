@@ -32,7 +32,8 @@ class ApplicationModel extends Model
 							'fk_gained_profession',
 							'fk_id_status',
 							'gender',
-							'fk_id_middle_school_completion_type'
+							'fk_id_middle_school_completion_type',
+							'shipping_address'
 							];
 
  	
