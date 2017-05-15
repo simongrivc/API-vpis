@@ -402,7 +402,7 @@ class ApplicationsController extends Controller{
  		
  		$fk_id_country=$request->input('fk_id_country');
  		$fk_id_country_temp=$request->input('fk_id_country_temp');
- 		$fk_id_place_of_birth=$request->input('fk_id_place_of_birth');
+ 		$place_of_birth=$request->input('place_of_birth');
         
        
         //dodajanje
@@ -437,7 +437,7 @@ class ApplicationsController extends Controller{
                 $application->gender=$gender;
                 $application->fk_id_country= $fk_id_country;
                 $application->fk_id_country_temp=$fk_id_country_temp;
-                $application->fk_id_place_of_birth=$fk_id_place_of_birth;
+                $application->place_of_birth=$place_of_birth;
                 $application->shipping_address=$shipping_address;
                 $application->save();
               return response()->json($application);
@@ -473,7 +473,7 @@ class ApplicationsController extends Controller{
   				$application->gender=$gender;
                 $application->fk_id_country= $fk_id_country;
                 $application->fk_id_country_temp=$fk_id_country_temp;
-                $application->fk_id_place_of_birth=$fk_id_place_of_birth;
+                $application->place_of_birth=$place_of_birth;
                 $application->shipping_address=$shipping_address;
                 $application->save();
                  return response()->json($application);

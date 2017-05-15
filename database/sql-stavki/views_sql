@@ -47,7 +47,7 @@ AND study_programs_calls.fk_id_call_type = call_type.id
 CREATE VIEW applications_view AS
 SELECT applications.*, users.email, users.username, users.name, users.surname, users.is_active,
 stalni.city_name as city_address_name, stalni.city_number as city_address_number, stalni_drzava.country_name as country_name, zacasni.city_name as city_address_temp_name, zacasni.city_number as city_address_temp_number, zacasni_drzava.country_name as country_name_temp,
-citizenships.id as id_citizenship, citizenships.citizenship_name, place_of_birth.city_number as city_number_place_of_birth, place_of_birth.city_name as city_name_place_of_birth,
+citizenships.id as id_citizenship, citizenships.citizenship_name,
 wish1.id as study_programs_calls_wish1_id, wish1.fk_id_call_type as study_programs_calls_wish1_call_type, wish1.is_active as study_programs_wish1_is_active, programwish1.id as study_programs_wish1_id, programwish1.program_name as study_programs_wish1_program_name,
 programwish1_carrier.id as program_carrier_wish1_id, programwish1_carrier.institution_name as program_carrier_wish1_institution_name,
 wish1_double.id as study_programs_calls_wish1_double_id, wish1_double.is_active as study_programs_wish1_double_is_active, programwish1_double.id as study_programs_wish1_double_id, programwish1_double.program_name as study_programs_wish1_double_program_name,
@@ -72,8 +72,6 @@ LEFT JOIN
     countries stalni_drzava ON (stalni_drzava.id = applications.fk_id_country)
 LEFT JOIN
     countries zacasni_drzava ON (zacasni_drzava.id = applications.fk_id_country_temp)
-LEFT JOIN
-    cities place_of_birth ON (place_of_birth.id = applications.fk_id_place_of_birth)
 INNER JOIN citizenships
     ON citizenships.id = applications.fk_id_citizenship
 LEFT JOIN 
