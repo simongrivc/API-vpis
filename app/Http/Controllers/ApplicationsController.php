@@ -358,6 +358,16 @@ class ApplicationsController extends Controller{
         return response()->json($applications);
     }
 
+    public function getApplicationsById(Request $request, $id){
+     	if($id>0)
+     	$application = Application_view::where('id', '=', $id)->where('fk_id_status', '!=', 3)->get();
+        if($application)
+        	return response()->json($application);
+        else
+        	return response()->json(array('error' => 'Wrong application id.'),400);
+    }
+    
+
     public function editApplication(Request $request){
     	//$user = Auth::user();
     	$id=$request->input('id');

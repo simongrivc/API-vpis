@@ -72,6 +72,9 @@ $app->get('application/countries', 'CountriesController@index');
 //dobi vse prijavnice (za prijavnice moraš biti prijavljen kot referent oz. služba vpis)
 $app->post('application/applications', ['middleware' => 'auth', 'uses' => 'ApplicationsController@getApplications']);
 
+//prijavnica po id
+$app->get('application/applications/{id}', 'ApplicationsController@getApplicationsById');
+
 //dobi šifrante univerz
 $app->post('application/applications_user', 'ApplicationsController@getApplicationsUser');
 
