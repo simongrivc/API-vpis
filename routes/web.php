@@ -108,7 +108,8 @@ $app->post('application/programs_call_conditions/add', 'ConditionsController@add
 $app->post('application/programs_call_conditions/delete', 'ConditionsController@deleteConditionGroup');
 
 //posodobi pogoje za razpisan program
-$app->post('application/programs_call_conditions/edit', 'ConditionsController@updateConditionGroup');
+//$app->post('application/programs_call_conditions/edit', 'ConditionsController@updateConditionGroup');
+$app->post('application/programs_call_conditions/edit', 'ConditionsController@addConditionGroup');
 
 //TODO
 //dobi vse pogoje za razpisan program
