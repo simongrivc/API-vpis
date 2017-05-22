@@ -69,6 +69,20 @@ class StudyProgramsController extends Controller{
        
             $program->nr_slo_eu_accepted = 0;
             $program->nr_foreigners_accepted =0;
+            
+            //pridobivanje vseh group za ta program
+            $condGroups = DB::table('condition_groups')
+                      ->where('fk_program_call_id', '=', $programId)
+                      ->get();
+                      
+            foreach($condGroups as $group){
+                $conditions = DB::table('program_call_conditions')
+                      ->where('fk_condition_group', '=', $group["id"])
+                      ->get();
+                $group["conditions"] = $conditions;
+            }
+            
+            $program->enroll_conds = $condGroups;
            
           }
           return response()->json($studyProgramCalls);
