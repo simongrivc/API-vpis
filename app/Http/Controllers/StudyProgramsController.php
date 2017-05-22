@@ -77,7 +77,7 @@ class StudyProgramsController extends Controller{
                       
             foreach($condGroups as $group){
                 $conditions = DB::table('program_call_conditions')
-                      ->where('fk_condition_group', '=', $group["id"])
+                      ->where('fk_condition_group', '=', $group("id"))
                       ->get();
                 $group["conditions"] = $conditions;
             }
