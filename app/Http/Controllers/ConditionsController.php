@@ -48,7 +48,7 @@ class ConditionsController extends Controller{
                         ['fk_program_call_id' => $request->input('program_call_id')]);
                     
                     //poveži pogoje z grupo
-                    foreach ($pogojGroup('conditions') as $pogoj) {
+                    foreach ($pogojGroup['conditions'] as $pogoj) {
                         $id = DB::table('program_call_conditions')->insertGetId(
                             ['fk_condition_group' => $groupID, 'condition_weight' => $pogoj["condition_weight"], 'fk_condition_code_id' => $pogoj['condition_code_id']]
                         );
