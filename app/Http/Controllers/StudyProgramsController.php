@@ -79,7 +79,7 @@ class StudyProgramsController extends Controller{
                 $conditions = DB::table('program_call_conditions')
                       ->where('fk_condition_group', '=', $group->id)
                       ->get();
-                $group["conditions"] = $conditions;
+                $group->conditions = $conditions;
             }
             
             $program->enroll_conds = $condGroups;
