@@ -22,28 +22,42 @@ class ConditionsController extends Controller{
     //seštevek vseh pogojev pa mora bit 0 ali pa 100
     public function addConditionGroup(Request $request){
 
-        if($request->input('program_call_id') && $request->input('conditions'))
+        if($request->input('program_calls_id') && $request->input('enroll_conds'))
         {            
             //preveri če je weight skupaj == 100% ali pa 0%
-            $totalWeight = 0;
-            foreach ($request->input('conditions') as $pogoj) {
-                $totalWeight += $pogoj["condition_weight"];
+            
+            foreach ($request->input('enroll_conds') as $pogojGroup) {
+                $totalWeight = 0;
+                foreach($pogojGroup['conditions'] as $pogoj){
+                    $totalWeight += $pogoj["condition_weight"];                    
+                }
+                
+                if($totalWeight != 100 && $totalWeight != 0){
+                    //pogoji niso ustrezni
+                    return  response()->json(array('error' => 'weight_error'), 400);
+                }
+                
             }
             
-            if($totalWeight != 100 && $totalWeight != 0){
-                //pogoji niso ustrezni
-                return  response()->json(array('error' => 'weight_error'), 400);
-            }
-            
-            //kreiraj grupo
-            $groupID = DB::table('condition_groups')->insertGetId(
-                ['fk_program_call_id' => $request->input('program_call_id')]);
-            
-            //poveži pogoje z grupo
-            foreach ($request->input('conditions') as $pogoj) {
-                $id = DB::table('program_call_conditions')->insertGetId(
-                    ['fk_condition_group' => $groupID, 'condition_weight' => $pogoj["condition_weight"], 'fk_condition_code_id' => $pogoj['condition_code_id']]
-                );
+            foreach ($request->input('enroll_conds') as $pogojGroup) {                
+                
+                //če je groupID manj od 0, potem je to nova grupa, naredi nov vnos
+                if($pogojGroup['groupID'] < 0){
+                    //kreiraj grupo
+                    $groupID = DB::table('condition_groups')->insertGetId(
+                        ['fk_program_call_id' => $request->input('program_call_id')]);
+                    
+                    //poveži pogoje z grupo
+                    foreach ($request->input('conditions') as $pogoj) {
+                        $id = DB::table('program_call_conditions')->insertGetId(
+                            ['fk_condition_group' => $groupID, 'condition_weight' => $pogoj["condition_weight"], 'fk_condition_code_id' => $pogoj['condition_code_id']]
+                        );
+                    }
+                }
+                else if($pogojGroup['groupID'] >= 0){
+                    //posodobi program
+                }
+                
             }
             
             return response()->json(array('success' => 'conditions_added'));
