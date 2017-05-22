@@ -91,13 +91,13 @@ class ConditionsController extends Controller{
             //preveri če je ostala še kakša grup za program
             $programCallConditions = DB::table('program_call_conditions')
                       ->where('fk_condition_group', '=', $request->input('condition_group_id'))
-                      ->get();
+                      ->count();
                       
-            /*if($programCallConditions < 1) {
+            if($programCallConditions < 1) {
                 //nato zbriši še grupo
                 $group = ConditionGroup::find($request->input('condition_group_id'));
                 $group->delete();
-            }    */        
+            }       
             
             return response()->json(array('success' => 'conditions_deleted'));
         }
