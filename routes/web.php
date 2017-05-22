@@ -102,13 +102,13 @@ $app->post('application/delete', 'ApplicationsController@deleteApplicationById')
 
 //POGOJI<-------
 //dodaj pogoje za razpisan program
-$app->post('application/programs_call_conditions/add', 'ProgramCallCondition@addConditionGroup');
+$app->post('application/programs_call_conditions/add', 'ConditionsController@addConditionGroup');
 
 //izbrisi pogoje za razpisan program
-$app->post('application/programs_call_conditions/delete', 'ProgramCallCondition@deleteConditionGroup');
+$app->post('application/programs_call_conditions/delete', 'ConditionsController@deleteConditionGroup');
 
 //posodobi pogoje za razpisan program
-$app->post('application/programs_call_conditions/edit', 'ProgramCallCondition@updateConditionGroup');
+$app->post('application/programs_call_conditions/edit', 'ConditionsController@updateConditionGroup');
 
 //TODO
 //dobi vse pogoje za razpisan program
