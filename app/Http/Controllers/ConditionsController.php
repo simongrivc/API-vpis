@@ -85,12 +85,12 @@ class ConditionsController extends Controller{
         {
             //zbriši vse pogoje vezane na grupo
             $programCallConditions = DB::table('program_call_conditions')
-                      ->where('fk_condition_group', '=', $pogojGroup["groupID"])
+                      ->where('fk_condition_group', '=', $request->input('condition_group_id'))
                       ->delete();
                       
             //preveri če je ostala še kakša grup za program
             $programCallConditions = DB::table('program_call_conditions')
-                      ->where('fk_condition_group', '=', $pogojGroup["groupID"])
+                      ->where('fk_condition_group', '=', $request->input('condition_group_id'))
                       ->get();
                       
             if($programCallConditions < 1) {
