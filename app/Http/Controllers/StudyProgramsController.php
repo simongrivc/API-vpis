@@ -72,12 +72,14 @@ class StudyProgramsController extends Controller{
             
             //pridobivanje vseh group za ta program
             $condGroups = DB::table('condition_groups')
+                      ->select("id as groupID")
                       ->where('fk_program_call_id', '=', $programId)
                       ->get();
                       
             foreach($condGroups as $group){
                 $conditions = DB::table('program_call_conditions')
-                      ->where('fk_condition_group', '=', $group->id)
+                      ->select("fk_condition_code_id as condition_code_id", "condition_weight")
+                      ->where('fk_condition_group', '=', $group->groupID)
                       ->get();
                 $group->conditions = $conditions;
             }
