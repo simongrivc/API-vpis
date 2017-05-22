@@ -56,6 +56,21 @@ class ConditionsController extends Controller{
                 }
                 else if($pogojGroup['groupID'] >= 0){
                     //posodobi program
+                    
+                    //izbriši prejšnje pogoje
+                    $programCallConditions = DB::table('program_call_conditions')
+                      ->where('fk_condition_group', '=', $pogojGroup["groupID"])
+                      ->delete();
+                    
+                    $groupID = $pogojGroup["groupID"];
+                    
+                    //poveži pogoje z grupo
+                    foreach ($pogojGroup['conditions']   as $pogoj) {
+                        $id = DB::table('program_call_conditions')->insertGetId(
+                            ['fk_condition_group' => $groupID, 'condition_weight' => $pogoj["condition_weight"], 'fk_condition_code_id' => $pogoj['condition_code_id']]
+                        );
+                    }
+                      
                 }
                 
             }
@@ -69,12 +84,20 @@ class ConditionsController extends Controller{
         if($request->input('condition_group_id'))
         {
             //zbriši vse pogoje vezane na grupo
-            $cond = ProgramCallCondition::find($request->input('condition_group_id'));
-            $cond->delete();
-            
-            //nato zbriši še grupo
-            $group = ConditionGroup::find($request->input('condition_group_id'));
-            $group->delete();
+            $programCallConditions = DB::table('program_call_conditions')
+                      ->where('fk_condition_group', '=', $pogojGroup["groupID"])
+                      ->delete();
+                      
+            //preveri če je ostala še kakša grup za program
+            $programCallConditions = DB::table('program_call_conditions')
+                      ->where('fk_condition_group', '=', $pogojGroup["groupID"])
+                      ->get();
+                      
+            if($programCallConditions < 1) {
+                //nato zbriši še grupo
+                $group = ConditionGroup::find($request->input('condition_group_id'));
+                $group->delete();
+            }            
             
             return response()->json(array('success' => 'conditions_deleted'));
         }
