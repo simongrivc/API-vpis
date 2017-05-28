@@ -111,6 +111,8 @@ $app->post('application/programs_call_conditions/delete', 'ConditionsController@
 //$app->post('application/programs_call_conditions/edit', 'ConditionsController@updateConditionGroup');
 $app->post('application/programs_call_conditions/edit', 'ConditionsController@addConditionGroup');
 
+
+$app->post('uploadData', 'RicDataUploadController@uploadFile');
 //TODO
 //dobi vse pogoje za razpisan program
 //$app->get('application/programs_call_conditions/{id}', 'ProgramCallCondition@getProgramCallConditions');
