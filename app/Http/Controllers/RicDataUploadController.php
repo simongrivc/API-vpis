@@ -20,6 +20,7 @@ class RicDataUploadController extends Controller{
     }
 	
 	public function uploadFile(Request $request){
+		var_dump($request);
 		if ($request->hasFile('maturant')) {
 			if ($request->file('maturant')->isValid()) {
 				echo "berem dat";
