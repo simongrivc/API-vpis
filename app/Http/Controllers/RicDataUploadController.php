@@ -20,7 +20,7 @@ class RicDataUploadController extends Controller{
     }
 	
 	public function uploadFile(Request $request){
-		var_dump($request);
+		
 		if ($request->hasFile('maturant')) {
 			if ($request->file('maturant')->isValid()) {
 				echo "berem dat";
@@ -36,12 +36,19 @@ class RicDataUploadController extends Controller{
 					$info[$row]['ime']         = $row_data[1];
 					$info[$row]['priimek']  = $row_data[2];
 					$info[$row]['uspeh']       = $row_data[3];
+					$info[$row]['opravil']       = $row_data[4];
+					$info[$row]['uspeh3l']       = $row_data[5];
+					$info[$row]['uspeh4l']       = $row_data[6];
+					$info[$row]['tip']       = $row_data[7];
+					$info[$row]['srSola']       = $row_data[8];
+					$info[$row]['poklic']       = $row_data[9];
+					
 				
-					echo 'Row ' . $row . ' emso: ' . $info[$row]['emso'] . '<br />';
-					/*
+					/*echo 'Row ' . $row . ' emso: ' . $info[$row]['emso'] . '<br />';
 					echo 'Row ' . $row . ' NAME: ' . $info[$row]['name'] . '<br />';
 					echo 'Row ' . $row . ' DESCRIPTION: ' . $info[$row]['description'] . '<br />';
 					echo 'Row ' . $row . ' IMAGES:<br />';*/
+									
 				
 					//display images
 					/*$row_images = explode(',', $info[$row]['images']);
@@ -51,9 +58,9 @@ class RicDataUploadController extends Controller{
 						echo ' - ' . $row_image . '<br />';
 					}
 					*/
-					echo '<br />';
+					//echo '<br />';
 				}
-				echo "end";
+				var_dump($info);				
 				
 			}
 			else{
