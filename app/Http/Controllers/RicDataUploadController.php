@@ -52,14 +52,15 @@ class RicDataUploadController extends Controller{
 					*/
 					echo '<br />';
 				}
+				echo "end";
 				
 			}
 			else{
-				echo "ni valid";
+				echo "no valid";
 			}
 		}
 		else{
-			echo " "
+			echo "no file";
 		}
 	} 
 
