@@ -22,7 +22,7 @@ class RicDataUploadController extends Controller{
 	public function uploadFile(Request $request){
 		if ($request->hasFile('maturant')) {
 			if ($request->file('maturant')->isValid()) {
-				
+				echo "berem dat";
 				$txt_file    = file_get_contents($request->file('maturant'));
 				$rows        = explode("\n", $txt_file);
 				array_shift($rows);
@@ -54,6 +54,12 @@ class RicDataUploadController extends Controller{
 				}
 				
 			}
+			else{
+				echo "ni valid";
+			}
+		}
+		else{
+			echo " "
 		}
 	} 
 
