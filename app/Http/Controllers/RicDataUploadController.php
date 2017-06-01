@@ -76,6 +76,7 @@ class RicDataUploadController extends Controller{
 						);
 					}
 				}
+				return response()->json(array('success' => 'candidates_added'));
 			} catch(Exception $e){
 				 return  response()->json(array('error' => 'file_format_error'), 400);
 			}
@@ -122,6 +123,7 @@ class RicDataUploadController extends Controller{
 						);
 					}
 				}
+				return response()->json(array('success' => 'results_added'));
 			} catch(Exception $e){
 				 return  response()->json(array('error' => 'file_format_error'), 400);
 			}
@@ -173,6 +175,7 @@ class RicDataUploadController extends Controller{
 						);
 					}
 				}
+				return response()->json(array('success' => 'candidates_added'));
 			} catch(Exception $e){
 				 return  response()->json(array('error' => 'file_format_error'), 400);
 			}
@@ -221,6 +224,7 @@ class RicDataUploadController extends Controller{
 						);
 					}
 				}
+				return response()->json(array('success' => 'results_added'));
 			} catch(Exception $e){
 				 return  response()->json(array('error' => 'file_format_error'), 400);
 			}
