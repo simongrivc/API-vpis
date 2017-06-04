@@ -39,7 +39,7 @@ class RicDataUploadController extends Controller{
 			try {	
 				$txt_file    = file_get_contents($request->file('maturant'));
 				$rows        = explode("\n", $txt_file);
-				array_shift($rows);
+				//array_shift($rows);
 				
 				foreach($rows as $row => $data)
 				{
@@ -138,7 +138,7 @@ class RicDataUploadController extends Controller{
 			try {	
 				$txt_file    = file_get_contents($request->file('maturpre'));
 				$rows        = explode("\n", $txt_file);
-				array_shift($rows);
+				//array_shift($rows);
 				
 				foreach($rows as $row => $data)
 				{
