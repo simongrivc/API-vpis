@@ -101,7 +101,8 @@ class RicDataUploadController extends Controller{
 					$info[$row]['poklic']    = $poklic;*/
 					
 					$user = DB::table('applications')->where('emso', $emso)->first();
-					if($user){
+					//if($user){ testiranje če je prijava za tega userja
+					if(true){
 						//obstaja prijava za tale emso, vpišemo zaključno oceno in poklic
 						$id = DB::table('ric_candidates')->insertGetId(
 							['emso' => $emso, 'fk_profession' => $poklic, 'points_grade' => $uspeh, 'success' => $opravil, 'grade3' => $uspeh3l, 'grade4' => $uspeh4l,
