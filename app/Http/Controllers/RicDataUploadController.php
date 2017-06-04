@@ -145,7 +145,7 @@ class RicDataUploadController extends Controller{
 					
 					$error = false;
 					$row_data = explode('Q', $data);
-					var_dump($row_data);
+					//var_dump($row_data);
 					$emso = $row_data[0];
 					$id_predmet = $row_data[1];
 					$ocena = $row_data[2];
