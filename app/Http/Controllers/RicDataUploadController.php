@@ -20,14 +20,15 @@ class RicDataUploadController extends Controller{
     }
 	
 	public function uploadFile(Request $request){
-		
+		echo "start";
 		//kandidati splošna matura
 		if ($request->hasFile('maturant')) {			
-			
+			echo "has file";
 			if ($request->file('maturant')->isValid()) {
+				echo "no valid";
 				 return  response()->json(array('error' => 'maturant_file_not_valid'), 400);
 			}
-				
+			
 			if ($request->file('maturant')->getClientOriginalExtension() != "txt"){
 				 return  response()->json(array('error' => 'wrong_fileType'), 400);
 			}
