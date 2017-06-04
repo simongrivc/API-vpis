@@ -120,7 +120,7 @@ class RicDataUploadController extends Controller{
 			
 			$new = 0;
 			$updated = 0;
-			$wrong = 0;
+			$errors = 0;
 			$persons = array();
 			
 			if (!$request->file('maturpre')->isValid()) {
@@ -145,7 +145,7 @@ class RicDataUploadController extends Controller{
 					
 					$error = false;
 					$row_data = explode('Q', $data);
-					
+					var_dump($row_data);
 					$emso = $row_data[0];
 					$id_predmet = $row_data[1];
 					$ocena = $row_data[2];
@@ -222,6 +222,7 @@ class RicDataUploadController extends Controller{
 							}
 						}
 						else{
+							$errors++;
 							$upor = DB::table('applications')->where('emso', $emso)->first();
 							$user = DB::table('users')->where('id', $upor->fk_id_user)->first();
 							
@@ -230,7 +231,7 @@ class RicDataUploadController extends Controller{
 						
 					}
 				}
-				return response()->json(array('success' => 'results_added', 'added' => $new, 'updated' => $updated, 'error_persons' => $persons));
+				return response()->json(array('success' => 'results_added', 'added' => $new, 'updated' => $updated, 'errors' => $errors, 'error_persons' => $persons));
 			} catch(Exception $e){
 				 return  response()->json(array('error' => 'file_format_error'), 400);
 			}
