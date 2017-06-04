@@ -231,6 +231,13 @@ class RicDataUploadController extends Controller{
 						}
 						
 					}
+					else{
+						$errors++;
+						$upor = DB::table('applications')->where('emso', $emso)->first();
+						$user = DB::table('users')->where('id', $upor->fk_id_user)->first();
+						
+						$persons[] = array('emso' => $emso, 'name' => $user->name, 'surname' => $user->surname);
+					}
 				}
 				return response()->json(array('success' => 'results_added', 'added' => $new, 'updated' => $updated, 'errors' => $errors, 'error_persons' => $persons));
 			} catch(Exception $e){
