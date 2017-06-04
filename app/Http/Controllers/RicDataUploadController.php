@@ -25,7 +25,7 @@ class RicDataUploadController extends Controller{
 		if ($request->hasFile('maturant')) {			
 			
 			if ($request->file('maturant')->isValid()) {
-				 return  response()->json(array('error' => 'file_not_valid'), 400);
+				 return  response()->json(array('error' => 'maturant_file_not_valid'), 400);
 			}
 				
 			if ($request->file('maturant')->getClientOriginalExtension() != "txt"){
@@ -55,6 +55,10 @@ class RicDataUploadController extends Controller{
 					$tip = $row_data[7];
 					$srSola = $row_data[8];
 					$poklic = $row_data[9];
+					
+					if(!$emso || !$ime || !$priimek || !$uspeh || !$opravil || !$uspeh3l || !$uspeh4l || !$tip || !$srSola || !$poklic){
+						return  response()->json(array('error' => 'file_format_error'), 400);
+					}
 					
 					/*$info[$row]['emso']      = $emso;
 					$info[$row]['ime']       = $ime;
@@ -86,7 +90,7 @@ class RicDataUploadController extends Controller{
 		if ($request->hasFile('maturpre')) {			
 			
 			if ($request->file('maturpre')->isValid()) {
-				 return  response()->json(array('error' => 'file_not_valid'), 400);
+				 return  response()->json(array('error' => 'maturpre_file_not_valid'), 400);
 			}
 				
 			if ($request->file('maturpre')->getClientOriginalExtension() != "txt"){
@@ -113,7 +117,11 @@ class RicDataUploadController extends Controller{
 					$ocena4l = $row_data[4];
 					$opravil = $row_data[5];
 					$tip_predmeta = $row_data[6];
-														
+					
+					if(!$emso || !$id_predmet || !$ocena || !$ocena3l || !$ocena4l || !$opravil || !$tip_predmeta){
+						return response()->json(array('error' => 'file_format_error'), 400);
+					}
+					
 					$user = DB::table('ric_candidates')->where('emso', $emso)->first();
 					if($user){
 						//obstaja prijava za tale emso, vpišemo zaključno oceno in poklic
@@ -134,7 +142,7 @@ class RicDataUploadController extends Controller{
 		if ($request->hasFile('poklmat')) {			
 			
 			if ($request->file('poklmat')->isValid()) {
-				 return  response()->json(array('error' => 'file_not_valid'), 400);
+				 return  response()->json(array('error' => 'poklmat_file_not_valid'), 400);
 			}
 				
 			if ($request->file('poklmat')->getClientOriginalExtension() != "txt"){
@@ -166,6 +174,10 @@ class RicDataUploadController extends Controller{
 					$poklic = $row_data[9];
 					$maximum = $row_data[10];
 					
+					if(!$emso || !$ime || !$priimek || !$uspeh || !$opravil || !$uspeh3l || !$uspeh4l || !$tip || !$srSola || !$poklic || !$maximum){
+						return  response()->json(array('error' => 'file_format_error'), 400);
+					}
+					
 					$user = DB::table('applications')->where('emso', $emso)->first();
 					if($user){
 						//obstaja prijava za tale emso, vpišemo zaključno oceno in poklic
@@ -187,7 +199,7 @@ class RicDataUploadController extends Controller{
 		if ($request->hasFile('poklpre')) {			
 			
 			if ($request->file('poklpre')->isValid()) {
-				 return  response()->json(array('error' => 'file_not_valid'), 400);
+				 return  response()->json(array('error' => 'poklpre_file_not_valid'), 400);
 			}
 				
 			if ($request->file('poklpre')->getClientOriginalExtension() != "txt"){
@@ -214,6 +226,10 @@ class RicDataUploadController extends Controller{
 					$ocena4l = $row_data[4];
 					$opravil = $row_data[5];
 					$tip_predmeta = $row_data[6];
+					
+					if(!$emso || !$id_predmet || !$ocena || !$ocena3l || !$ocena4l || !$opravil || !$tip_predmeta){
+						return response()->json(array('error' => 'file_format_error'), 400);
+					}
 														
 					$user = DB::table('ric_candidates')->where('emso', $emso)->first();
 					if($user){
