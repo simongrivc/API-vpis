@@ -120,6 +120,8 @@ class RicDataUploadController extends Controller{
 			
 			$new = 0;
 			$updated = 0;
+			$wrong = 0;
+			$persons = array();
 			
 			if (!$request->file('maturpre')->isValid()) {
 				 return  response()->json(array('error' => 'file_not_valid'), 400);
@@ -140,6 +142,8 @@ class RicDataUploadController extends Controller{
 				
 				foreach($rows as $row => $data)
 				{
+					
+					$error = false;
 					$row_data = explode('Q', $data);
 					
 					$emso = $row_data[0];
@@ -161,37 +165,37 @@ class RicDataUploadController extends Controller{
 						//veljavna šifra predmeta
 						$predmet = DB::table('condition_codes')->where('id', $id_predmet)->first();
 						if(!$predmet){
-							continue;
+							$error = true;
 						}
 						
 						if($user->fk_type != 5){
 							//kandidat tipa 5 opravlja samo dodaten predmet, zato nima vpisanih ocen
 							
 							if($ocena < 1 || $ocena > 5){
-								continue;
+								$error = true;
 							}
 							
 							if($ocena3l < 2 || $ocena3l > 5){
-								continue;
+								$error = true;
 							}
 							
 							if($ocena4l < 2 || $ocena4l > 5){
-								continue;
+								$error = true;
 							}							
 						}
 						
 						if($opravil != "D" || $opravil != "N"){
-							continue;
+							$error = true;
 						}
 						
 						$school = DB::table('middle_schools')->where('id', $srSola)->first();
 						if(!$school){
-							continue;
+							$error = true;
 						}
 							
 						$profession = DB::table('gained_professions')->where('id', $poklic)->first();
 						if(!$profession){
-							continue;
+							$error = true;
 						}
 						
 						/*$type_subj = DB::table('type_subject')->where('id', $tip_predmeta)->first();
@@ -199,27 +203,34 @@ class RicDataUploadController extends Controller{
 							continue;
 						}*/
 						
-						
-						if($user->fk_type == 0 || $user->fk_type == 1 || $user->fk_type == 2){
-							//vpisovanje novih podatkov
-							$id = DB::table('ric_grades')->insertGetId(
-								['emso' => $emso, 'fk_subject' => $id_predmet, 'grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l,
-								 'success' => $opravil, 'fk_type_subject' => $tip_predmeta]
-							);
-							$new++;
+						if(!$error){
+							if($user->fk_type == 0 || $user->fk_type == 1 || $user->fk_type == 2){
+								//vpisovanje novih podatkov
+								$id = DB::table('ric_grades')->insertGetId(
+									['emso' => $emso, 'fk_subject' => $id_predmet, 'grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l,
+									 'success' => $opravil, 'fk_type_subject' => $tip_predmeta]
+								);
+								$new++;
+							}
+							else if($user->fk_type == 3 || $user->fk_type == 4){
+								//posodabljanje podatkov							
+								$id = DB::table('ric_grades')
+								->where('emso', $emso)
+								->where('fk_subject', $id_predmet)
+								->update(['grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l, 'success' => $opravil, 'fk_type_subject' => $id_predmet]);
+								$updated++;
+							}
 						}
-						else if($user->fk_type == 3 || $user->fk_type == 4){
-							//posodabljanje podatkov							
-							DB::table('ric_grades')
-							->where('emso', $emso)
-							->where('fk_subject', $id_predmet)
-							->update(['grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l, 'success' => $opravil, 'fk_type_subject' => $id_predmet]);
-							$updated++;
+						else{
+							$upor = DB::table('applications')->where('emso', $emso)->first();
+							$user = DB::table('users')->where('id', $upor->fk_id_user)->first();
+							
+							$persons[] = array('emso' => $emso, 'name' => $user->name, 'surname' => $user->surname);
 						}
 						
 					}
 				}
-				return response()->json(array('success' => 'results_added', 'added' => $new, 'updated' => $updated));
+				return response()->json(array('success' => 'results_added', 'added' => $new, 'updated' => $updated, 'error_persons' => $persons));
 			} catch(Exception $e){
 				 return  response()->json(array('error' => 'file_format_error'), 400);
 			}
