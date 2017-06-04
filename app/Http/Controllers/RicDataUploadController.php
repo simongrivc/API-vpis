@@ -152,7 +152,7 @@ class RicDataUploadController extends Controller{
 					$ocena3l = $row_data[3];
 					$ocena4l = $row_data[4];
 					$opravil = $row_data[5];
-					$tip_predmeta = $row_data[6];
+					$tip_predmeta = intval($row_data[6]);
 					
 					if(!$emso || !$id_predmet || !$ocena || !$ocena3l || !$ocena4l || !$opravil || !$tip_predmeta){
 						return response()->json(array('error' => 'file_format_error'), 400);
