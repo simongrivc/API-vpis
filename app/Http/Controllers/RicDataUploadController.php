@@ -20,13 +20,12 @@ class RicDataUploadController extends Controller{
     }
 	
 	public function uploadFile(Request $request){
-		echo "start";
+		
 		//kandidati splošna matura
-		if ($request->hasFile('maturant')) {			
-			echo "has file";
-			if ($request->file('maturant')->isValid()) {
-				echo "no valid";
-				 return  response()->json(array('error' => 'maturant_file_not_valid'), 400);
+		if ($request->hasFile('maturant')) {
+			
+			if (!$request->file('maturant')->isValid()) {
+				 return  response()->json(array('error' => 'file_not_valid'), 400);
 			}
 			
 			if ($request->file('maturant')->getClientOriginalExtension() != "txt"){
@@ -90,8 +89,8 @@ class RicDataUploadController extends Controller{
 		//rezultati splošne mature
 		if ($request->hasFile('maturpre')) {			
 			
-			if ($request->file('maturpre')->isValid()) {
-				 return  response()->json(array('error' => 'maturpre_file_not_valid'), 400);
+			if (!$request->file('maturpre')->isValid()) {
+				 return  response()->json(array('error' => 'file_not_valid'), 400);
 			}
 				
 			if ($request->file('maturpre')->getClientOriginalExtension() != "txt"){
@@ -142,8 +141,8 @@ class RicDataUploadController extends Controller{
 		//kandidati poklicna matura
 		if ($request->hasFile('poklmat')) {			
 			
-			if ($request->file('poklmat')->isValid()) {
-				 return  response()->json(array('error' => 'poklmat_file_not_valid'), 400);
+			if (!$request->file('poklmat')->isValid()) {
+				 return  response()->json(array('error' => 'file_not_valid'), 400);
 			}
 				
 			if ($request->file('poklmat')->getClientOriginalExtension() != "txt"){
@@ -199,8 +198,8 @@ class RicDataUploadController extends Controller{
 		//rezultati poklicne mature				
 		if ($request->hasFile('poklpre')) {			
 			
-			if ($request->file('poklpre')->isValid()) {
-				 return  response()->json(array('error' => 'poklpre_file_not_valid'), 400);
+			if (!$request->file('poklpre')->isValid()) {
+				 return  response()->json(array('error' => 'file_not_valid'), 400);
 			}
 				
 			if ($request->file('poklpre')->getClientOriginalExtension() != "txt"){
