@@ -110,7 +110,7 @@ class RicDataUploadController extends Controller{
 						//if($user){ testiranje če je prijava za tega userja
 						if(true){
 							//obstaja prijava za tale emso, vpišemo zaključno oceno in poklic
-							$id = DB::table('ric_candidates')->insertGetId(
+							$id = DB::table('ric_candidates')->insert(
 								['emso' => $emso, 'fk_profession' => $poklic, 'points_grade' => $uspeh, 'success' => $opravil, 'grade3' => $uspeh3l, 'grade4' => $uspeh4l,
 								 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek]
 							);
@@ -220,7 +220,7 @@ class RicDataUploadController extends Controller{
 						if(!$error){
 							if($user->fk_type == 0 || $user->fk_type == 1 || $user->fk_type == 2){
 								//vpisovanje novih podatkov
-								$id = DB::table('ric_grades')->insertGetId(
+								$id = DB::table('ric_grades')->insert(
 									['emso' => $emso, 'fk_subject' => $id_predmet, 'grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l,
 									 'success' => $opravil, 'fk_type_subject' => $tip_predmeta]
 								);
@@ -302,7 +302,7 @@ class RicDataUploadController extends Controller{
 					$user = DB::table('applications')->where('emso', $emso)->first();
 					if($user){
 						//obstaja prijava za tale emso, vpišemo zaključno oceno in poklic
-						$id = DB::table('ric_candidates')->insertGetId(
+						$id = DB::table('ric_candidates')->insert(
 							['emso' => $emso, 'fk_profession' => $poklic, 'points_grade' => $uspeh, 'success' => $opravil, 'grade3' => $uspeh3l, 'grade4' => $uspeh4l,
 							 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'maximum' => $maximum]
 						);
@@ -355,7 +355,7 @@ class RicDataUploadController extends Controller{
 					$user = DB::table('ric_candidates')->where('emso', $emso)->first();
 					if($user){
 						//obstaja prijava za tale emso, vpišemo zaključno oceno in poklic
-						$id = DB::table('ric_grades')->insertGetId(
+						$id = DB::table('ric_grades')->insert(
 							['emso' => $emso, 'fk_subject' => $id_predmet, 'grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l,
 							 'success' => $opravil, 'fk_type_subject' => $tip_predmeta]
 						);
