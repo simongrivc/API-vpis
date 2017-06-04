@@ -24,6 +24,9 @@ class RicDataUploadController extends Controller{
 		//kandidati splošna matura
 		if ($request->hasFile('maturant')) {
 			
+			$persons = array();
+			$errors = 0;
+			
 			if (!$request->file('maturant')->isValid()) {
 				 return  response()->json(array('error' => 'file_not_valid'), 400);
 			}
@@ -43,6 +46,8 @@ class RicDataUploadController extends Controller{
 				
 				foreach($rows as $row => $data)
 				{
+					
+					$error = false;
 					$row_data = explode('Q', $data);
 					
 					$emso = $row_data[0];
@@ -63,30 +68,30 @@ class RicDataUploadController extends Controller{
 					
 					if($tip != 5){ //kandidat tipa 5 opravlja samo dodaten predmet
 						if($uspeh < 0 || $uspeh > 34){
-							continue;
+							$error = true;
 						}
 						
 						if($uspeh3l < 2 || $uspeh3l > 5){
-							continue;
+							$error = true;
 						}
 						
 						if($uspeh4l < 2 || $uspeh4l > 5){
-							continue;
+							$error = true;
 						}
 					}
 					
 					if($opravil != "D" || $opravil != "N"){
-						continue;
+						$error = true;
 					}
 					
 					$school = DB::table('middle_schools')->where('id', $srSola)->first();
 					if(!$school){
-						continue;
+						$error = true;
 					}
 					
 					$profession = DB::table('gained_professions')->where('id', $poklic)->first();
 					if(!$profession){
-						continue;
+						$error = true;
 					}
 					
 					/*$info[$row]['emso']      = $emso;
@@ -99,18 +104,25 @@ class RicDataUploadController extends Controller{
 					$info[$row]['tip']       = $tip;
 					$info[$row]['srSola']    = $srSola;
 					$info[$row]['poklic']    = $poklic;*/
-					
-					$user = DB::table('applications')->where('emso', $emso)->first();
-					//if($user){ testiranje če je prijava za tega userja
-					if(true){
-						//obstaja prijava za tale emso, vpišemo zaključno oceno in poklic
-						$id = DB::table('ric_candidates')->insertGetId(
-							['emso' => $emso, 'fk_profession' => $poklic, 'points_grade' => $uspeh, 'success' => $opravil, 'grade3' => $uspeh3l, 'grade4' => $uspeh4l,
-							 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek]
-						);
+					$error = false;
+					if(!$error){
+						$user = DB::table('applications')->where('emso', $emso)->first();
+						//if($user){ testiranje če je prijava za tega userja
+						if(true){
+							//obstaja prijava za tale emso, vpišemo zaključno oceno in poklic
+							$id = DB::table('ric_candidates')->insertGetId(
+								['emso' => $emso, 'fk_profession' => $poklic, 'points_grade' => $uspeh, 'success' => $opravil, 'grade3' => $uspeh3l, 'grade4' => $uspeh4l,
+								 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek]
+							);
+						}
 					}
+					else{
+						$errors++;
+						$persons[] = array('emso' => $emso, 'name' => $ime, 'surname' => $priimek);
+					}
+					
 				}
-				return response()->json(array('success' => 'candidates_added'));
+				return response()->json(array('success' => 'candidates_added', 'error_persons' => $persons));
 			} catch(Exception $e){
 				 return  response()->json(array('error' => 'file_format_error'), 400);
 			}
