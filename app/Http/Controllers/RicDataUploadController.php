@@ -105,7 +105,7 @@ class RicDataUploadController extends Controller{
 						//obstaja prijava za tale emso, vpišemo zaključno oceno in poklic
 						$id = DB::table('ric_candidates')->insertGetId(
 							['emso' => $emso, 'fk_profession' => $poklic, 'points_grade' => $uspeh, 'success' => $opravil, 'grade3' => $uspeh3l, 'grade4' => $uspeh4l,
-							 'fk_type' => $tip, 'fk_middle_school' => $srSola]
+							 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek]
 						);
 					}
 				}
@@ -224,19 +224,19 @@ class RicDataUploadController extends Controller{
 						}
 						else{
 							$errors++;
-							$upor = DB::table('applications')->where('emso', $emso)->first();
-							$user = DB::table('users')->where('id', $upor->fk_id_user)->first();
+							/*$upor = DB::table('applications')->where('emso', $emso)->first();
+							$user = DB::table('users')->where('id', $upor->fk_id_user)->first();*/
 							
-							$persons[] = array('emso' => $emso, 'name' => $user->name, 'surname' => $user->surname);
+							$persons[] = array('emso' => $user->emso, 'name' => $user->name, 'surname' => $user->surname);
 						}
 						
 					}
 					else{
 						$errors++;
-						$upor = DB::table('applications')->where('emso', $emso)->first();
-						$user = DB::table('users')->where('id', $upor->fk_id_user)->first();
+						/*$upor = DB::table('applications')->where('emso', $emso)->first();
+						$user = DB::table('users')->where('id', $upor->fk_id_user)->first();*/
 						
-						$persons[] = array('emso' => $emso, 'name' => $user->name, 'surname' => $user->surname);
+						$persons[] = array('emso' => $emso, 'name' => "---", 'surname' => "---");
 					}
 				}
 				return response()->json(array('success' => 'results_added', 'added' => $new, 'updated' => $updated, 'errors' => $errors, 'error_persons' => $persons));
