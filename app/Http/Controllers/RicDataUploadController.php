@@ -154,7 +154,8 @@ class RicDataUploadController extends Controller{
 					$opravil = $row_data[5];
 					$tip_predmeta = str_replace(' ', '', $row_data[6]);
 					
-					if(!$emso || !$id_predmet || !$ocena || !$ocena3l || !$ocena4l || !$opravil || !$tip_predmeta){
+					if(!$emso || !$id_predmet || !$ocena || !$ocena3l || !$ocena4l || !$opravil || !$tip_predmeta ||
+					   $emso == "" || $id_predmet == "" || $ocena == "" || $ocena3l == "" || $ocena4l == "" || $opravil == "" || $tip_predmeta == ""){
 						return response()->json(array('error' => 'file_format_error'), 400);
 					}
 														
