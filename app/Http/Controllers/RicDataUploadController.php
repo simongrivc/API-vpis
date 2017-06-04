@@ -118,6 +118,9 @@ class RicDataUploadController extends Controller{
 		//rezultati splošne mature
 		if ($request->hasFile('maturpre')) {			
 			
+			$new = 0;
+			$updated = 0;
+			
 			if (!$request->file('maturpre')->isValid()) {
 				 return  response()->json(array('error' => 'file_not_valid'), 400);
 			}
@@ -195,8 +198,7 @@ class RicDataUploadController extends Controller{
 						if(!$type_subj){
 							continue;
 						}*/
-						$new = 0;
-						$updated = 0;
+						
 						
 						if($user->fk_type == 0 || $user->fk_type == 1 || $user->fk_type == 2){
 							//vpisovanje novih podatkov
