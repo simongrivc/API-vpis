@@ -128,3 +128,6 @@ $app->delete('uporabnik/{id}','UporabnikController@izbrisiUporabnika');*/
 $app->get('application/acceptance_tests', 'ConditionsController@getAllAcceptanceTestConditions');
 
 $app->post('application/acceptance_tests/edit', 'ConditionsController@addAcceptanceTest');
+
+
+$app->get('application/acceptance_tests', 'StudyProgramsController@getStudyProgramCallsWithAccTest');

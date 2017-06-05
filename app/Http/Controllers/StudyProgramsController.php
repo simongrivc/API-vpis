@@ -6,6 +6,7 @@ use App\StudyProgram;
 use App\StudyProgramCallView;
 use App\StudyProgramCall;
 use App\Application_view;
+use App\Study_program_call_with_acceprance_test
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -219,6 +220,14 @@ class StudyProgramsController extends Controller{
           else
             return response()->json(array('error' => 'Wrong or missing input data.'),400);
     
+    }
+
+
+     public function getStudyProgramCallsWithAccTest(){
+
+        $studyProgramCalls = Study_program_call_with_acceprance_test::all();
+
+        return response()->json($studyProgramCalls);
     }
 
 }

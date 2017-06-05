@@ -135,3 +135,13 @@ WHERE condition_code_name LIKE '%PREIZKUS%'
 
 
 
+CREATE VIEW study_program_calls_with_acceptance_tests AS
+SELECT DISTINCT fk_program_call_id, program_name, fk_id_program_carrier, fk_program_call_id, fk_id_call_type 
+FROM public.acceptance_test_conditions_view
+INNER JOIN study_programs_calls
+ON fk_program_call_id = study_programs_calls.id
+
+
+
+
+
