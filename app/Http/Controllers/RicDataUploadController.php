@@ -246,11 +246,18 @@ class RicDataUploadController extends Controller{
 						if(!$error){
 							if($user->fk_type == 0 || $user->fk_type == 1 || $user->fk_type == 2){
 								//vpisovanje novih podatkov
-								$id = DB::table('ric_grades')->insert(
-									['emso' => $emso, 'fk_subject' => $id_predmet, 'grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l,
-									 'success' => $opravil, 'fk_type_subject' => $tip_predmeta]
-								);
-								$new = $new+1;
+								$result = DB::table('ric_grades')
+								->where('emso', $emso)
+								->where('fk_subject', $id_predmet)->first();
+								
+								if(!$result){
+									$id = DB::table('ric_grades')->insert(
+										['emso' => $emso, 'fk_subject' => $id_predmet, 'grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l,
+										 'success' => $opravil, 'fk_type_subject' => $tip_predmeta]
+									);
+									$new = $new+1;
+								}
+							
 							}
 							else if($user->fk_type == 3 || $user->fk_type == 4){
 								$result = DB::table('ric_grades')
