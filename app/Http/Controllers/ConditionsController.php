@@ -169,7 +169,7 @@ class ConditionsController extends Controller{
 
     public function addAcceptanceTest(Request $request)
     {
-        if($request->input('min_points')>=0 && $request->input('max_points')>=0 && $request->input('fk_id_program_call_conditions'))
+        if($request->input('min_points') && $request->input('max_points') && $request->input('fk_id_program_call_conditions'))
         {   
 
             $existingAcceptanceTestCondition = acceptanceTestCondition::where('fk_id_program_call_conditions', '=', $request->input('fk_id_program_call_conditions'))->get();
