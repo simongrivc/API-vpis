@@ -84,9 +84,9 @@ class RicDataUploadController extends Controller{
 					}					
 					
 					if($tip != 5){
-						if(!$uspeh || !$uspeh3l || !$uspeh4l ){
+						/*if(!$uspeh || !$uspeh3l || !$uspeh4l ){
 							return  response()->json(array('error' => 'file_format_error'), 400);
-						}
+						}*/
 						//kandidat tipa 5 opravlja samo dodaten predmet
 						if($uspeh < 0 || $uspeh > 34){
 							$error = true;
