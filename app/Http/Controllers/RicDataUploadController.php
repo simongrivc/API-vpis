@@ -83,7 +83,7 @@ class RicDataUploadController extends Controller{
 						return  response()->json(array('error' => 'file_format_error'), 400);
 					}					
 					
-					if($tip != 5){
+					if($tip != 5 && $tip != 7){
 						if(!$uspeh || !$uspeh3l || !$uspeh4l ){
 							$error = true;
 						}
