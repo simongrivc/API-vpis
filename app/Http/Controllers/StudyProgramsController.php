@@ -6,7 +6,7 @@ use App\StudyProgram;
 use App\StudyProgramCallView;
 use App\StudyProgramCall;
 use App\Application_view;
-use App\Study_program_call_with_acceprance_test
+use App\Study_program_call_with_acceprance_test;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
