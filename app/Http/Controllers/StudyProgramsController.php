@@ -238,7 +238,7 @@ class StudyProgramsController extends Controller{
       study_programs_calls_wish3_id = study_program_calls_with_acceptance_tests.fk_program_call_id or
       study_programs_calls_wish1_double_id = study_program_calls_with_acceptance_tests.fk_program_call_id or 
       study_programs_calls_wish2_double_id  = study_program_calls_with_acceptance_tests.fk_program_call_id or 
-      study_programs_calls_wish3_double_id = study_program_calls_with_acceptance_tests.fk_program_call_id) and application_status_id=2', [1]);
+      study_programs_calls_wish3_double_id = study_program_calls_with_acceptance_tests.fk_program_call_id) and application_status_id=2');
         return response()->json($prijavljeniNaProgram);
     }
      
