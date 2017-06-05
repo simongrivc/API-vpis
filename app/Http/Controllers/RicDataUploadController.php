@@ -105,7 +105,7 @@ class RicDataUploadController extends Controller{
 						$error = true;
 					}
 					
-					$school = DB::table('middle_schools')->where('id', $srSola)->first();
+					/*$school = DB::table('middle_schools')->where('id', $srSola)->first();
 					if(!$school){
 						$error = true;
 					}
@@ -113,7 +113,7 @@ class RicDataUploadController extends Controller{
 					$profession = DB::table('gained_professions')->where('id', $poklic)->first();
 					if(!$profession){
 						$error = true;
-					}
+					}*/
 					
 					/*$info[$row]['emso']      = $emso;
 					$info[$row]['ime']       = $ime;
