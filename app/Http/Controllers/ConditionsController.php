@@ -169,17 +169,18 @@ class ConditionsController extends Controller{
 
     public function addAcceptanceTest(Request $request)
     {
-        if($request->input('min_points') && $request->input('max_points') && $request->input('fk_id_program_call_conditions'))
+        $min=floatval($request->input('min_points'));
+        $max=floatval($request->input('max_points'));
+        if($min>=0 && $max>=0 && $request->input('fk_id_program_call_conditions'))
         {   
-            $min=floatval($request->input('min_points'));
-            $max=floatval($request->input('max_points'));
+            
             $existingAcceptanceTestCondition = acceptanceTestCondition::where('fk_id_program_call_conditions', '=', $request->input('fk_id_program_call_conditions'))->get();
-            if(sizeof($existingAcceptanceTestCondition)>0 && $min>=0 && $max>=0)
+            if(sizeof($existingAcceptanceTestCondition)>0 )
             {
                 //če že obstaja ga popravimo
                 return response()->json(array('error' => 'Potrebno popravit.'),400);
             } 
-            elseif($min>=0 && $max>=0)
+            else
             {
                //dodamo novega
                 $acceptanceTestCondition = AcceptanceTestCondition::create($request->all());
