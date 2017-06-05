@@ -140,11 +140,15 @@ class RicDataUploadController extends Controller{
 					}
 					else{
 						$errors++;
-						$persons[] = array('emso' => $emso, 'name' => $ime, 'surname' => $priimek);
+						$persons[$emso] = array('emso' => $emso, 'name' => $ime, 'surname' => $priimek);
 					}
 					
 				}
-				return response()->json(array('success' => 'candidates_added', 'error_persons' => array_unique($persons)));
+				$personsF = array();
+				foreach($persons as $key => $value){
+					$personsF[] = $value;
+				}
+				return response()->json(array('success' => 'candidates_added', 'error_persons' => $personsF));
 			} catch(Exception $e){
 				 return  response()->json(array('error' => 'file_format_error'), 400);
 			}
@@ -262,7 +266,7 @@ class RicDataUploadController extends Controller{
 							/*$upor = DB::table('applications')->where('emso', $emso)->first();
 							$user = DB::table('users')->where('id', $upor->fk_id_user)->first();*/
 							
-							$persons[] = array('emso' => $user->emso, 'name' => $user->name, 'surname' => $user->surname);
+							$persons[$user->emso] = array('emso' => $user->emso, 'name' => $user->name, 'surname' => $user->surname);
 						}
 						
 					}
@@ -271,10 +275,14 @@ class RicDataUploadController extends Controller{
 						/*$upor = DB::table('applications')->where('emso', $emso)->first();
 						$user = DB::table('users')->where('id', $upor->fk_id_user)->first();*/
 						
-						$persons[] = array('emso' => $emso, 'name' => "---", 'surname' => "---");
+						$persons[$emso] = array('emso' => $emso, 'name' => "---", 'surname' => "---");
 					}
 				}
-				return response()->json(array('success' => 'results_added', 'added' => $new, 'updated' => $updated, 'errors' => $errors, 'error_persons' => $persons));
+				$personsF = array();
+				foreach($persons as $key => $value){
+					$personsF[] = $value;
+				}
+				return response()->json(array('success' => 'results_added', 'added' => $new, 'updated' => $updated, 'errors' => $errors, 'error_persons' => $personsF));
 			} catch(Exception $e){
 				 return  response()->json(array('error' => 'file_format_error'), 400);
 			}
@@ -396,17 +404,21 @@ class RicDataUploadController extends Controller{
 							//obstaja prijava za tale emso, vpišemo zaključno oceno in poklic
 							$id = DB::table('ric_candidates')->insert(
 								['emso' => $emso, 'fk_profession' => $poklic, 'points_grade' => $uspeh, 'success' => $opravil, 'grade3' => $uspeh3l, 'grade4' => $uspeh4l,
-								 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek, 'maximum' => $maximum]
+								 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek]
 							);
 						}
 					}
 					else{
 						$errors++;
-						$persons[] = array('emso' => $emso, 'name' => $ime, 'surname' => $priimek);
+						$persons[$emso] = array('emso' => $emso, 'name' => $ime, 'surname' => $priimek);
 					}
 					
 				}
-				return response()->json(array('success' => 'candidates_added', 'error_persons' => array_unique($persons)));
+				$personsF = array();
+				foreach($persons as $key => $value){
+					$personsF[] = $value;
+				}
+				return response()->json(array('success' => 'candidates_added', 'error_persons' => $personsF));
 			} catch(Exception $e){
 				 return  response()->json(array('error' => 'file_format_error'), 400);
 			}
@@ -526,7 +538,7 @@ class RicDataUploadController extends Controller{
 							/*$upor = DB::table('applications')->where('emso', $emso)->first();
 							$user = DB::table('users')->where('id', $upor->fk_id_user)->first();*/
 							
-							$persons[] = array('emso' => $user->emso, 'name' => $user->name, 'surname' => $user->surname);
+							$persons[$user->emso] = array('emso' => $user->emso, 'name' => $user->name, 'surname' => $user->surname);
 						}
 						
 					}
@@ -535,10 +547,14 @@ class RicDataUploadController extends Controller{
 						/*$upor = DB::table('applications')->where('emso', $emso)->first();
 						$user = DB::table('users')->where('id', $upor->fk_id_user)->first();*/
 						
-						$persons[] = array('emso' => $emso, 'name' => "---", 'surname' => "---");
+						$persons[$emso] = array('emso' => $emso, 'name' => "---", 'surname' => "---");
 					}
 				}
-				return response()->json(array('success' => 'results_added', 'added' => $new, 'updated' => $updated, 'errors' => $errors, 'error_persons' => $persons));
+				$personsF = array();
+				foreach($persons as $key => $value){
+					$personsF[] = $value;
+				}
+				return response()->json(array('success' => 'results_added', 'added' => $new, 'updated' => $updated, 'errors' => $errors, 'error_persons' => $personsF));
 			} catch(Exception $e){
 				 return  response()->json(array('error' => 'file_format_error'), 400);
 			}
