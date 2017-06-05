@@ -169,8 +169,8 @@ class ConditionsController extends Controller{
 
     public function addAcceptanceTest(Request $request)
     {
-        $min=floatval($request->input('min_points'));
-        $max=floatval($request->input('max_points'));
+        $min=intval($request->input('min_points'));
+        $max=intval($request->input('max_points'));
         if($min>=0 && $max>=0 && $request->input('fk_id_program_call_conditions'))
         {   
             
