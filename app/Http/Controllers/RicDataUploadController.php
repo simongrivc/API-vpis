@@ -62,6 +62,22 @@ class RicDataUploadController extends Controller{
 					$srSola = $row_data[8];
 					$poklic = $row_data[9];
 					
+					$uspeh = str_replace(' ', '', $uspeh);					
+					$uspeh3l = str_replace(' ', '', $uspeh3l);
+					$uspeh4l = str_replace(' ', '', $uspeh4l);
+					
+					if($uspeh == ""){
+						$uspeh = 0;
+					}
+					
+					if($uspeh3l == ""){
+						$uspeh3l = 0;
+					}
+					
+					if($uspeh4l == ""){
+						$uspeh4l = 0;
+					}
+					
 					
 					if(!$emso || !$ime || !$priimek || !$uspeh || !$opravil || !$uspeh3l || !$uspeh4l || !$tip || !$srSola || !$poklic){
 						return  response()->json(array('error' => 'file_format_error'), 400);
