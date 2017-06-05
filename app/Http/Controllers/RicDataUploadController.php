@@ -224,7 +224,7 @@ class RicDataUploadController extends Controller{
 							}							
 						}
 						
-						if($opravil != "D" || $opravil != "N"){
+						if($opravil != "D" && $opravil != "N"){
 							$error = true;
 						}
 						
@@ -369,7 +369,7 @@ class RicDataUploadController extends Controller{
 						if($uspeh4l < 2 || $uspeh4l > 5){
 							$error = true;
 						}
-						/*if($opravil != "D" || $opravil != "N"){
+						/*if($opravil != "D" && $opravil != "N"){
 							$error = true;
 						}*/
 					}
