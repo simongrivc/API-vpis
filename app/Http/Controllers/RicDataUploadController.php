@@ -79,7 +79,7 @@ class RicDataUploadController extends Controller{
 					}
 					
 					
-					if(!$emso || !$ime || !$priimek || !$opravil || !$tip || !$srSola || !$poklic){
+					if(!$emso || !$ime || !$priimek || !$tip || !$srSola || !$poklic){
 						return  response()->json(array('error' => 'file_format_error'), 400);
 					}					
 					
