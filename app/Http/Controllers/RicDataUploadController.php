@@ -99,11 +99,11 @@ class RicDataUploadController extends Controller{
 						if($uspeh4l < 2 || $uspeh4l > 5){
 							$error = true;
 						}
+						/*if($opravil != "D" || $opravil != "N"){
+							$error = true;
+						}*/
 					}
 					
-					if($opravil != "D" || $opravil != "N"){
-						$error = true;
-					}
 					
 					/*$school = DB::table('middle_schools')->where('id', $srSola)->first();
 					if(!$school){
