@@ -116,7 +116,7 @@ INNER JOIN application_status
     ON application_status.id = applications.fk_id_status
 
 CREATE VIEW acceptance_test_conditions AS
-SELECT program_call_conditions.*, acceptance_test_condition.id as id_acceptance_test_condition, acceptance_test_condition.min_points, acceptance_test_condition.max_points, condition_codes.*, condition_groups.fk_program_call_id, study_programs_calls.fk_id_study_program,
+SELECT program_call_conditions.*, acceptance_test_condition.id as id_acceptance_test_condition, acceptance_test_condition.min_points, acceptance_test_condition.max_points, condition_codes.condition_code_name, condition_groups.fk_program_call_id, study_programs_calls.fk_id_study_program,
 study_programs.program_name, study_programs.fk_id_program_carrier
 FROM program_call_conditions
 INNER JOIN condition_groups
@@ -130,5 +130,8 @@ INNER JOIN condition_codes
 LEFT JOIN acceptance_test_condition
     ON program_call_conditions.id = acceptance_test_condition.fk_id_program_call_conditions
 WHERE condition_code_name LIKE '%PREIZKUS%'
+
+
+
 
 
