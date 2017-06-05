@@ -182,12 +182,12 @@ class ConditionsController extends Controller{
             {
                //dodamo novega
                 $acceptanceTestCondition = AcceptanceTestCondition::create($request->all());
-                return response()->json($sprejemniIzpiti);
+                return response()->json($acceptanceTestCondition);
             }
         }
         elseif($request->input('min_points')>=0 && $request->input('max_points')>=0){
             $acceptanceTestCondition = AcceptanceTestCondition::create($request->all());
-            return response()->json($sprejemniIzpiti);
+            return response()->json($acceptanceTestCondition);
         }
         else
             return response()->json(array('error' => 'Wrong or missing input data.'),400);
