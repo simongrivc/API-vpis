@@ -55,7 +55,7 @@ class RicDataUploadController extends Controller{
 					$ime = $row_data[1];
 					$priimek = $row_data[2];
 					$uspeh = $row_data[3];
-					$opravil = $row_data[4];
+					$opravil = str_replace(' ', '', $row_data[4]);
 					$uspeh3l = $row_data[5];
 					$uspeh4l = $row_data[6];
 					$tip = $row_data[7];
