@@ -144,7 +144,7 @@ class RicDataUploadController extends Controller{
 					}
 					
 				}
-				return response()->json(array('success' => 'candidates_added', 'error_persons' => $persons));
+				return response()->json(array('success' => 'candidates_added', 'error_persons' => array_unique($persons)));
 			} catch(Exception $e){
 				 return  response()->json(array('error' => 'file_format_error'), 400);
 			}
@@ -246,7 +246,7 @@ class RicDataUploadController extends Controller{
 									['emso' => $emso, 'fk_subject' => $id_predmet, 'grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l,
 									 'success' => $opravil, 'fk_type_subject' => $tip_predmeta]
 								);
-								$new++;
+								$new = $new+1;
 							}
 							else if($user->fk_type == 3 || $user->fk_type == 4){
 								//posodabljanje podatkov							
@@ -254,7 +254,7 @@ class RicDataUploadController extends Controller{
 								->where('emso', $emso)
 								->where('fk_subject', $id_predmet)
 								->update(['grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l, 'success' => $opravil, 'fk_type_subject' => $id_predmet]);
-								$updated++;
+								$updated=$updated+1;
 							}
 						}
 						else{
@@ -322,7 +322,7 @@ class RicDataUploadController extends Controller{
 					$tip = $row_data[7];
 					$srSola = $row_data[8];
 					$poklic = $row_data[9];
-					$maximum = $row_data[10];
+					//$maximum = $row_data[10];
 					
 					$uspeh = str_replace(' ', '', $uspeh);					
 					$uspeh3l = str_replace(' ', '', $uspeh3l);
@@ -406,7 +406,7 @@ class RicDataUploadController extends Controller{
 					}
 					
 				}
-				return response()->json(array('success' => 'candidates_added', 'error_persons' => $persons));
+				return response()->json(array('success' => 'candidates_added', 'error_persons' => array_unique($persons)));
 			} catch(Exception $e){
 				 return  response()->json(array('error' => 'file_format_error'), 400);
 			}
@@ -510,7 +510,7 @@ class RicDataUploadController extends Controller{
 									['emso' => $emso, 'fk_subject' => $id_predmet, 'grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l,
 									 'success' => $opravil, 'fk_type_subject' => $tip_predmeta]
 								);
-								$new++;
+								$new = $new+1;
 							}
 							else if($user->fk_type == 3 || $user->fk_type == 4){
 								//posodabljanje podatkov							
@@ -518,7 +518,7 @@ class RicDataUploadController extends Controller{
 								->where('emso', $emso)
 								->where('fk_subject', $id_predmet)
 								->update(['grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l, 'success' => $opravil, 'fk_type_subject' => $id_predmet]);
-								$updated++;
+								$updated = $updated+1;
 							}
 						}
 						else{
