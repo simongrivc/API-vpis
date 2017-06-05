@@ -130,4 +130,4 @@ $app->get('application/acceptance_tests', 'ConditionsController@getAllAcceptance
 $app->post('application/acceptance_tests/edit', 'ConditionsController@addAcceptanceTest');
 
 
-$app->get('application/acceptance_tests', 'StudyProgramsController@getStudyProgramCallsWithAccTest');
+$app->get('application/program_calls_w_acceptance_test', 'StudyProgramsController@getStudyProgramCallsWithAccTest');
