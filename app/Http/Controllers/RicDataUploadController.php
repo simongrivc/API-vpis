@@ -84,9 +84,9 @@ class RicDataUploadController extends Controller{
 					}					
 					
 					if($tip != 5){
-						/*if(!$uspeh || !$uspeh3l || !$uspeh4l ){
-							return  response()->json(array('error' => 'file_format_error'), 400);
-						}*/
+						if(!$uspeh || !$uspeh3l || !$uspeh4l ){
+							$error = true;
+						}
 						//kandidat tipa 5 opravlja samo dodaten predmet
 						if($uspeh < 0 || $uspeh > 34){
 							$error = true;
@@ -125,7 +125,7 @@ class RicDataUploadController extends Controller{
 					$info[$row]['tip']       = $tip;
 					$info[$row]['srSola']    = $srSola;
 					$info[$row]['poklic']    = $poklic;*/
-					$error = false;
+					
 					if(!$error){
 						$user = DB::table('applications')->where('emso', $emso)->first();
 						$RicUser = DB::table('ric_candidates')->where('emso', $emso)->where('fk_profession', $poklic)->first();
