@@ -311,7 +311,6 @@ class RicDataUploadController extends Controller{
 		
 		
 		//kandidati poklicna matura
-		//kandidati splošna matura
 		if ($request->hasFile('poklmat')) {
 			
 			$persons = array();
@@ -351,7 +350,6 @@ class RicDataUploadController extends Controller{
 					$tip = $row_data[7];
 					$srSola = $row_data[8];
 					$poklic = $row_data[9];
-					//$maximum = $row_data[10];
 					
 					$uspeh = str_replace(' ', '', $uspeh);					
 					$uspeh3l = str_replace(' ', '', $uspeh3l);
@@ -379,7 +377,7 @@ class RicDataUploadController extends Controller{
 							$error = true;
 						}
 						//kandidat tipa 5 opravlja samo dodaten predmet
-						if($uspeh < 0 || $uspeh > 34){
+						if($uspeh < 0 || $uspeh > 23){
 							$error = true;
 						}
 						
@@ -390,7 +388,7 @@ class RicDataUploadController extends Controller{
 						if($uspeh4l < 2 || $uspeh4l > 5){
 							$error = true;
 						}
-						/*if($opravil != "D" && $opravil != "N"){
+						/*if($opravil != "D" || $opravil != "N"){
 							$error = true;
 						}*/
 					}
@@ -517,7 +515,7 @@ class RicDataUploadController extends Controller{
 							}							
 						}
 						
-						if($opravil != "D" || $opravil != "N"){
+						if($opravil != "D" && $opravil != "N"){
 							$error = true;
 						}
 						
@@ -537,21 +535,42 @@ class RicDataUploadController extends Controller{
 						}*/
 						
 						if(!$error){
-							if($user->fk_type == 0 || $user->fk_type == 1 || $user->fk_type == 2){
+							if($user->fk_type == 1){
 								//vpisovanje novih podatkov
-								$id = DB::table('ric_grades')->insert(
-									['emso' => $emso, 'fk_subject' => $id_predmet, 'grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l,
-									 'success' => $opravil, 'fk_type_subject' => $tip_predmeta]
-								);
-								$new = $new+1;
-							}
-							else if($user->fk_type == 3 || $user->fk_type == 4){
-								//posodabljanje podatkov							
-								$id = DB::table('ric_grades')
+								$result = DB::table('ric_grades')
 								->where('emso', $emso)
-								->where('fk_subject', $id_predmet)
-								->update(['grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l, 'success' => $opravil, 'fk_type_subject' => $id_predmet]);
-								$updated = $updated+1;
+								->where('fk_subject', $id_predmet)->first();
+								
+								if(!$result){
+									$id = DB::table('ric_grades')->insert(
+										['emso' => $emso, 'fk_subject' => $id_predmet, 'grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l,
+										 'success' => $opravil, 'fk_type_subject' => $tip_predmeta]
+									);
+									$new = $new+1;
+								}
+							
+							}
+							else if($user->fk_type == 2 || $user->fk_type == 3 || $user->fk_type == 4 || $user->fk_type == 6){
+								$result = DB::table('ric_grades')
+								->where('emso', $emso)
+								->where('fk_subject', $id_predmet)->first();
+								
+								if($result){
+									//posodabljanje podatkov							
+									$id = DB::table('ric_grades')
+									->where('emso', $emso)
+									->where('fk_subject', $id_predmet)
+									->update(['grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l, 'success' => $opravil, 'fk_type_subject' => $tip_predmeta]);
+									$updated=$updated+1;
+								}
+								else{
+									$id = DB::table('ric_grades')->insert(
+										['emso' => $emso, 'fk_subject' => $id_predmet, 'grade' => $ocena, 'grade3' => $ocena3l, 'grade4' => $ocena4l,
+										 'success' => $opravil, 'fk_type_subject' => $tip_predmeta]
+									);
+									$new = $new+1;
+								}
+								
 							}
 						}
 						else{
