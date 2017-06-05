@@ -282,12 +282,16 @@ class RicDataUploadController extends Controller{
 		
 		
 		//kandidati poklicna matura
-		if ($request->hasFile('poklmat')) {			
+		//kandidati splošna matura
+		if ($request->hasFile('poklmat')) {
+			
+			$persons = array();
+			$errors = 0;
 			
 			if (!$request->file('poklmat')->isValid()) {
 				 return  response()->json(array('error' => 'file_not_valid'), 400);
 			}
-				
+			
 			if ($request->file('poklmat')->getClientOriginalExtension() != "txt"){
 				 return  response()->json(array('error' => 'wrong_fileType'), 400);
 			}
@@ -298,18 +302,21 @@ class RicDataUploadController extends Controller{
 			
 			try {	
 				$txt_file    = file_get_contents($request->file('poklmat'));
+				$txt_file = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $txt_file);
 				$rows        = explode("\n", $txt_file);
-				array_shift($rows);
+				//array_shift($rows);
 				
 				foreach($rows as $row => $data)
 				{
+					
+					$error = false;
 					$row_data = explode('Q', $data);
 					
 					$emso = $row_data[0];
 					$ime = $row_data[1];
 					$priimek = $row_data[2];
 					$uspeh = $row_data[3];
-					$opravil = $row_data[4];
+					$opravil = str_replace(' ', '', $row_data[4]);
 					$uspeh3l = $row_data[5];
 					$uspeh4l = $row_data[6];
 					$tip = $row_data[7];
@@ -317,20 +324,89 @@ class RicDataUploadController extends Controller{
 					$poklic = $row_data[9];
 					$maximum = $row_data[10];
 					
-					if(!$emso || !$ime || !$priimek || !$uspeh || !$opravil || !$uspeh3l || !$uspeh4l || !$tip || !$srSola || !$poklic || !$maximum){
-						return  response()->json(array('error' => 'file_format_error'), 400);
+					$uspeh = str_replace(' ', '', $uspeh);					
+					$uspeh3l = str_replace(' ', '', $uspeh3l);
+					$uspeh4l = str_replace(' ', '', $uspeh4l);
+					
+					if($uspeh == ""){
+						$uspeh = 0;
 					}
 					
-					$user = DB::table('applications')->where('emso', $emso)->first();
-					if($user){
-						//obstaja prijava za tale emso, vpišemo zaključno oceno in poklic
-						$id = DB::table('ric_candidates')->insert(
-							['emso' => $emso, 'fk_profession' => $poklic, 'points_grade' => $uspeh, 'success' => $opravil, 'grade3' => $uspeh3l, 'grade4' => $uspeh4l,
-							 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'maximum' => $maximum]
-						);
+					if($uspeh3l == ""){
+						$uspeh3l = 0;
 					}
+					
+					if($uspeh4l == ""){
+						$uspeh4l = 0;
+					}
+					
+					
+					if(!$emso || !$ime || !$priimek || !$tip || !$srSola || !$poklic){
+						return  response()->json(array('error' => 'file_format_error'), 400);
+					}					
+					
+					if($tip != 5){
+						if(!$uspeh || !$uspeh3l || !$uspeh4l ){
+							$error = true;
+						}
+						//kandidat tipa 5 opravlja samo dodaten predmet
+						if($uspeh < 0 || $uspeh > 34){
+							$error = true;
+						}
+						
+						if($uspeh3l < 2 || $uspeh3l > 5){
+							$error = true;
+						}
+						
+						if($uspeh4l < 2 || $uspeh4l > 5){
+							$error = true;
+						}
+						/*if($opravil != "D" || $opravil != "N"){
+							$error = true;
+						}*/
+					}
+					
+					
+					/*$school = DB::table('middle_schools')->where('id', $srSola)->first();
+					if(!$school){
+						$error = true;
+					}
+					
+					$profession = DB::table('gained_professions')->where('id', $poklic)->first();
+					if(!$profession){
+						$error = true;
+					}*/
+					
+					/*$info[$row]['emso']      = $emso;
+					$info[$row]['ime']       = $ime;
+					$info[$row]['priimek']   = $priimek;
+					$info[$row]['uspeh']     = $uspeh;
+					$info[$row]['opravil']   = $opravil;
+					$info[$row]['uspeh3l']   = $uspeh3l;
+					$info[$row]['uspeh4l']   = $uspeh4l;
+					$info[$row]['tip']       = $tip;
+					$info[$row]['srSola']    = $srSola;
+					$info[$row]['poklic']    = $poklic;*/
+					
+					if(!$error){
+						$user = DB::table('applications')->where('emso', $emso)->first();
+						$RicUser = DB::table('ric_candidates')->where('emso', $emso)->where('fk_profession', $poklic)->first();
+						//if($user){ testiranje če je prijava za tega userja
+						if(!$RicUser){
+							//obstaja prijava za tale emso, vpišemo zaključno oceno in poklic
+							$id = DB::table('ric_candidates')->insert(
+								['emso' => $emso, 'fk_profession' => $poklic, 'points_grade' => $uspeh, 'success' => $opravil, 'grade3' => $uspeh3l, 'grade4' => $uspeh4l,
+								 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek, 'maximum' => $maximum]
+							);
+						}
+					}
+					else{
+						$errors++;
+						$persons[] = array('emso' => $emso, 'name' => $ime, 'surname' => $priimek);
+					}
+					
 				}
-				return response()->json(array('success' => 'candidates_added'));
+				return response()->json(array('success' => 'candidates_added', 'error_persons' => $persons));
 			} catch(Exception $e){
 				 return  response()->json(array('error' => 'file_format_error'), 400);
 			}
