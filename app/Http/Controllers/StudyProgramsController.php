@@ -230,5 +230,20 @@ class StudyProgramsController extends Controller{
         return response()->json($studyProgramCalls);
     }
 
+    public function getUsersStudyCallAcceptanceTest($id){
+
+      $prijavljeniNaProgram= DB::select('SELECT * FROM public.applications_view, study_program_calls_with_acceptance_tests
+      WHERE (study_programs_calls_wish1_id = study_program_calls_with_acceptance_tests.fk_program_call_id or
+      study_programs_calls_wish2_id = study_program_calls_with_acceptance_tests.fk_program_call_id or 
+      study_programs_calls_wish3_id = study_program_calls_with_acceptance_tests.fk_program_call_id or
+      study_programs_calls_wish1_double_id = study_program_calls_with_acceptance_tests.fk_program_call_id or 
+      study_programs_calls_wish2_double_id  = study_program_calls_with_acceptance_tests.fk_program_call_id or 
+      study_programs_calls_wish3_double_id = study_program_calls_with_acceptance_tests.fk_program_call_id) and application_status_id=2', [1]);
+        return response()->json($prijavljeniNaProgram);
+    }
+     
+
+    
+
 }
 ?>

@@ -131,3 +131,5 @@ $app->post('application/acceptance_tests/edit', 'ConditionsController@addAccepta
 
 
 $app->get('application/program_calls_w_acceptance_test', 'StudyProgramsController@getStudyProgramCallsWithAccTest');
+
+$app->get('application/users_study_call_acceptance_test/{id}', 'StudyProgramsController@getUsersStudyCallAcceptanceTest');
