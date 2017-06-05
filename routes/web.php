@@ -123,3 +123,6 @@ $app->post('uploadData', 'RicDataUploadController@uploadFile');
 $app->put('uporabnik/{id}','UporabnikController@urediUporabnika');
  	 
 $app->delete('uporabnik/{id}','UporabnikController@izbrisiUporabnika');*/
+
+
+$app->get('application/acceptance_tests', 'ConditionsController@getAllAcceptanceTestConditions');

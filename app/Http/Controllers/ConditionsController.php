@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
  
 use App\ProgramCallCondition;
 use App\ConditionGroup;
+use App\AcceptanceTestCondition;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -157,6 +158,12 @@ class ConditionsController extends Controller{
         }
         else
             return response()->json(array('error' => 'input_id_error'),400);
+    }
+
+    public function getAllAcceptanceTestConditions()
+    {
+         $sprejemniIzpiti = AcceptanceTestCondition::all();
+        return response()->json($sprejemniIzpiti);
     }
 }
 ?>
