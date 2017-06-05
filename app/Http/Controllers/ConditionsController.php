@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
  
 use App\ProgramCallCondition;
 use App\ConditionGroup;
+use App\AcceptanceTestConditionView;
 use App\AcceptanceTestCondition;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -162,8 +163,19 @@ class ConditionsController extends Controller{
 
     public function getAllAcceptanceTestConditions()
     {
-         $sprejemniIzpiti = AcceptanceTestCondition::all();
+         $sprejemniIzpiti = AcceptanceTestConditionView::all();
         return response()->json($sprejemniIzpiti);
     }
+
+    public function addAcceptanceTest(Request $request)
+    {
+    /*    if($request->input('min_points') && $request->input('max_points') && $request->input('fk_id_program_call_conditions') )
+        {            
+            $sprejemniIzpiti = AcceptanceTestCondition::all();
+            return response()->json($sprejemniIzpiti);
+        }*/
+    }
+
+    
 }
 ?>
