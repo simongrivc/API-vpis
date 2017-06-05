@@ -199,10 +199,10 @@ class RicDataUploadController extends Controller{
 						//obstaja prijava za tale emso, vpišemo zaključno oceno in poklic
 						
 						//veljavna šifra predmeta
-						$predmet = DB::table('condition_codes')->where('id', $id_predmet)->first();
+						/*$predmet = DB::table('condition_codes')->where('id', $id_predmet)->first();
 						if(!$predmet){
 							$error = true;
-						}
+						}*/
 						
 						if($user->fk_type != 5){
 							//kandidat tipa 5 opravlja samo dodaten predmet, zato nima vpisanih ocen
