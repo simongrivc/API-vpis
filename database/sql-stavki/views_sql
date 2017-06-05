@@ -114,3 +114,21 @@ LEFT JOIN middle_school_completion_type
     ON middle_school_completion_type.id = applications.fk_id_middle_school_completion_type
 INNER JOIN application_status
     ON application_status.id = applications.fk_id_status
+
+CREATE VIEW acceptance_test_conditions AS
+SELECT program_call_conditions.*, acceptance_test_condition.id as id_acceptance_test_condition, acceptance_test_condition.min_points, acceptance_test_condition.max_points, condition_codes.*, condition_groups.fk_program_call_id, study_programs_calls.fk_id_study_program,
+study_programs.program_name, study_programs.fk_id_program_carrier
+FROM program_call_conditions
+INNER JOIN condition_groups
+    ON program_call_conditions.fk_condition_group = condition_groups.id
+INNER JOIN study_programs_calls
+    ON condition_groups.fk_program_call_id = study_programs_calls.id
+INNER JOIN study_programs
+    ON study_programs_calls.fk_id_study_program = study_programs.id
+INNER JOIN condition_codes
+    ON program_call_conditions.fk_condition_code_id = condition_codes.id
+LEFT JOIN acceptance_test_condition
+    ON program_call_conditions.id = acceptance_test_condition.fk_id_program_call_conditions
+WHERE condition_code_name LIKE '%PREIZKUS%'
+
+
