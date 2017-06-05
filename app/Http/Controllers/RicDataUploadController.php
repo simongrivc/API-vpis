@@ -41,6 +41,7 @@ class RicDataUploadController extends Controller{
 			
 			try {	
 				$txt_file    = file_get_contents($request->file('maturant'));
+				$txt_file = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $txt_file);
 				$rows        = explode("\n", $txt_file);
 				//array_shift($rows);
 				
