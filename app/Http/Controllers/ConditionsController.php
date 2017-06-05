@@ -173,19 +173,18 @@ class ConditionsController extends Controller{
         {   
 
             $existingAcceptanceTestCondition = acceptanceTestCondition::where('fk_id_program_call_conditions', '=', $request->input('fk_id_program_call_conditions'))->get();
-            if(sizeof($existingAcceptanceTestCondition)>0)
+            if(sizeof($existingAcceptanceTestCondition)>0 && $request->input('min_points')>=0 && $request->input('max_points')>=0)
             {
                 //če že obstaja ga popravimo
                 return response()->json(array('error' => 'Potrebno popravit.'),400);
             } 
-            else
+            elseif($request->input('min_points')>=0 && $request->input('max_points')>=0)
             {
                //dodamo novega
                 $acceptanceTestCondition = AcceptanceTestCondition::create($request->all());
                 return response()->json($acceptanceTestCondition);
             }
         }
-        else
             return response()->json(array('error' => 'Wrong or missing input data.'),400);
         
     }
