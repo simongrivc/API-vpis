@@ -173,7 +173,7 @@ class ConditionsController extends Controller{
         {   
 
             $existingAcceptanceTestCondition = acceptanceTestCondition::where('fk_id_program_call_conditions', '=', $request->input('fk_id_program_call_conditions'))->get();
-            if($existingAcceptanceTestCondition)
+            if(sizeof($existingAcceptanceTestCondition)>0)
             {
                 //če že obstaja ga popravimo
                 return response()->json(array('error' => 'Potrebno popravit.'),400);
