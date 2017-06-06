@@ -6,7 +6,7 @@ class AcceptanceTestResult extends Model
 { 
 	
  	
-	protected $fillable = ['id', 'fk_id_user','max_points', 'grade'];
+	protected $fillable = ['id', 'fk_id_user','fk_id_program_call', 'grade'];
  /*	protected $attributes  = ['id', 'min_points','max_points', 'fk_id_program_call_conditions'];
 */
  
