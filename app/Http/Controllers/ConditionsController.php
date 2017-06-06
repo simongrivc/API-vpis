@@ -6,7 +6,7 @@ use App\ProgramCallCondition;
 use App\ConditionGroup;
 use App\AcceptanceTestConditionView;
 use App\AcceptanceTestCondition;
-use App\AcceptanceTestResult:
+use App\AcceptanceTestResult;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
