@@ -5,8 +5,8 @@ use Illuminate\Database\Eloquent\Model;
 class AcceptanceTestResult extends Model
 { 
 	
- 	protected $fillable = ['id', 'min_points','fk_id_program_call', 'fk_id_program_call_conditions'];
-
+ 	
+	protected $fillable = ['id', 'fk_id_user','max_points', 'grade'];
  /*	protected $attributes  = ['id', 'min_points','max_points', 'fk_id_program_call_conditions'];
 */
  
