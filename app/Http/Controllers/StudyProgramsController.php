@@ -232,11 +232,11 @@ class StudyProgramsController extends Controller{
 
     public function getUsersStudyCallAcceptanceTest($id){
 
-      $prijavljeniNaProgram= DB::select('SELECT applications_view.id as fk_id_program_call, applications_view.fk_id_user, applications_view.name, applications_view.surname,
+      $prijavljeniNaProgram= DB::select('SELECT applications_view.id as fk_id_program_call, applications_view.fk_id_user as fk_user_id, applications_view.name, applications_view.surname,
         acceptance_test_results.grade
         FROM applications_view, study_program_calls_with_acceptance_tests
         LEFT JOIN acceptance_test_results
-        on acceptance_test_results.fk_id_user = applications_view.fk_id_user
+        on acceptance_test_results.fk_id_user = fk_user_id
         WHERE ((study_programs_calls_wish1_id = study_program_calls_with_acceptance_tests.fk_program_call_id and study_programs_calls_wish1_id = '.$id.') 
                or
         (study_programs_calls_wish2_id = study_program_calls_with_acceptance_tests.fk_program_call_id and study_programs_calls_wish2_id = '.$id.') or 
