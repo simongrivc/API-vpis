@@ -127,7 +127,9 @@ $app->delete('uporabnik/{id}','UporabnikController@izbrisiUporabnika');*/
 
 $app->get('application/acceptance_tests', 'ConditionsController@getAllAcceptanceTestConditions');
 
-$app->post('application/acceptance_tests/edit', 'ConditionsController@addAcceptanceTest');
+$app->post('application/acceptance_tests/edit', 'ConditionsController@addAcceptanceTestBorderPoints');
+
+$app->post('application/user_acceptance_test/edit', 'ConditionsController@addAcceptanceTestUser');
 
 
 $app->get('application/program_calls_w_acceptance_test', 'StudyProgramsController@getStudyProgramCallsWithAccTest');

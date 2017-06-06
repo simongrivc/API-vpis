@@ -6,6 +6,7 @@ use App\ProgramCallCondition;
 use App\ConditionGroup;
 use App\AcceptanceTestConditionView;
 use App\AcceptanceTestCondition;
+use App\AcceptanceTestResult:
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -167,7 +168,7 @@ class ConditionsController extends Controller{
         return response()->json($sprejemniIzpiti);
     }
 
-    public function addAcceptanceTest(Request $request)
+    public function addAcceptanceTestBorderPoints(Request $request)
     {
         $min=intval($request->input('min_points'));
         $max=intval($request->input('max_points'));
@@ -196,6 +197,37 @@ class ConditionsController extends Controller{
         
     }
 
+    public function addAcceptanceTestUser(Request $request)
+    {
+       $fkIdUser=$request->input('fk_id_user');
+        $fkIdProgramCall= $request->input('fk_id_program_call');
+        $grade = intval($request->input('grade'));
+       
+        if($fkIdUser && $grade>=0 && $fkIdProgramCall)
+        {   
+            
+            $existingAcceptanceTestUserResult = AcceptanceTestResult::where('fk_id_user', '=', $fkIdUser)->where('fk_id_program_call', '=', $fkIdProgramCall)->get();
+            if(sizeof($existingAcceptanceTestUserResult)>0 )
+            {
+                  //če že obstaja ga popravimo
+                $acceptanceTestEdited=$existingAcceptanceTestUserResult[0];
+                $acceptanceTestEdited->fk_id_user=$fkIdUser;
+                $acceptanceTestEdited->fk_id_program_call=$fkIdProgramCall;
+                $acceptanceTestEdited->grade=$grade;
+                $acceptanceTestEdited->save();
+              
+               return response()->json($acceptanceTestEdited);
+            } 
+            else
+            {
+               //dodamo novega
+                $existingAcceptanceTestUserResult = AcceptanceTestResult::create($request->all());
+                return response()->json($existingAcceptanceTestUserResult);
+            }
+        }
+        return response()->json(array('error' => 'Wrong or missing input data.'),400);
+        
+    }
     
 }
 ?>

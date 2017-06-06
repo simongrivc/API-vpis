@@ -2,10 +2,10 @@
 namespace App;
 use Illuminate\Database\Eloquent\Model;
  
-class AcceptanceTestCondition extends Model
+class AcceptanceTestResult extends Model
 { 
 	
- 	protected $fillable = ['id', 'fk_id_user','max_points', 'grade'];
+ 	protected $fillable = ['id', 'min_points','fk_id_program_call', 'fk_id_program_call_conditions'];
 
  /*	protected $attributes  = ['id', 'min_points','max_points', 'fk_id_program_call_conditions'];
 */
