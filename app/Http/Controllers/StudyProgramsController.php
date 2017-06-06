@@ -232,11 +232,9 @@ class StudyProgramsController extends Controller{
 
     public function getUsersStudyCallAcceptanceTest($id){
 
-      $prijavljeniNaProgram= DB::select('SELECT applications_view.id as fk_id_program_call, applications_view.fk_id_user, applications_view.name, applications_view.surname,
+      $prijavljeniNaProgram= DB::select('SELECT applications_view.id, '.$id.' as fk_id_program_call, applications_view.fk_id_user, applications_view.name, applications_view.surname,
         acceptance_test_results.grade
         FROM applications_view
-        LEFT JOIN acceptance_test_results
-        on acceptance_test_results.fk_id_user = applications_view.fk_id_user
         INNER JOIN study_program_calls_with_acceptance_tests
         ON ((study_programs_calls_wish1_id = study_program_calls_with_acceptance_tests.fk_program_call_id and study_programs_calls_wish1_id = '.$id.') 
                or
@@ -245,7 +243,9 @@ class StudyProgramsController extends Controller{
         (study_programs_calls_wish1_double_id = study_program_calls_with_acceptance_tests.fk_program_call_id and study_programs_calls_wish1_double_id = '.$id.')
                or 
         (study_programs_calls_wish2_double_id  = study_program_calls_with_acceptance_tests.fk_program_call_id and study_programs_calls_wish2_double_id = '.$id.')or 
-        (study_programs_calls_wish3_double_id = study_program_calls_with_acceptance_tests.fk_program_call_id and study_programs_calls_wish3_double_id = '.$id.')) and application_status_id=2');
+        (study_programs_calls_wish3_double_id = study_program_calls_with_acceptance_tests.fk_program_call_id and study_programs_calls_wish3_double_id = '.$id.')) and application_status_id=2
+         LEFT JOIN acceptance_test_results
+        on acceptance_test_results.fk_id_user = applications_view.fk_id_user and acceptance_test_results.fk_id_program_call='.$id);
         return response()->json($prijavljeniNaProgram);
     }
      
