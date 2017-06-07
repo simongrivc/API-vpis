@@ -225,9 +225,18 @@ class StudyProgramsController extends Controller{
 
      public function getStudyProgramCallsWithAccTest(){
 
-        $studyProgramCalls = Study_program_call_with_acceprance_test::all();
-
-        return response()->json($studyProgramCalls);
+        $user = Auth::user();
+        if($user->fk_user_role==2)
+        {
+            $studyProgramCalls = Study_program_call_with_acceprance_test::all();
+            return response()->json($studyProgramCalls);
+        }
+        else if($user->fk_user_role==3)
+        {
+            $studyProgramCalls = Study_program_call_with_acceprance_test::where('fk_id_program_carrier', '=', $user->fk_id_vis_institution)->get();
+            return response()->json($studyProgramCalls);
+        }
+        return response()->json(array('error' => 'Missing authentification of user.'),400);
     }
 
     public function getUsersStudyCallAcceptanceTest($id){
