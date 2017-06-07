@@ -81,7 +81,17 @@ class PointsCalculator extends Controller{
 					$RICgradesCheckArray[] = $RICgrade->fk_subject;
 				}
 				
-
+				echo "emso: ";
+				var_dump($application);
+				
+				echo "conditions: ";
+				var_dump($conditions);
+				
+				echo "RIC grades: ";
+				var_dump($RICgrades);
+				
+				echo $program_call->fk_id_call_type;
+				die();
 				
 				$fulfills = true;
 				$itCond = $conditions;
