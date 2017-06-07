@@ -130,7 +130,8 @@ class PointsCalculator extends Controller{
 				}
 				else{
 					//kandidat ne ustreza pogojem
-					
+					$seznam[] = array('emso' => $application->emso, 'name' => $application->name, 'surname' => $application->surname, 'wish' => $wish, 'program' => $program_call->program_name,
+						  'institution' => $program_call->institution_name, 'call_type' => $program_call->call_type_name, 'points' => 92, 'fulfills' => false);
 				}				
 			}
 			
