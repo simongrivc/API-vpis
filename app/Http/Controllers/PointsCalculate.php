@@ -45,7 +45,7 @@ class PointsCalculator extends Controller{
 			//vse prijave za posamezen razpisan program
 			$applications = DB::table('applications')
 			->join('users', 'users.id', '=', 'applications.fk_id_user')
-			->where('fk_id_wish1', $program_call->id)
+			->orwhere('fk_id_wish1', $program_call->id)
 			->orwhere('fk_id_wish2', $program_call->id)
 			->orwhere('fk_id_wish3', $program_call->id)
 			->get();
