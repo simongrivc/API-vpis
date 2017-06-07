@@ -31,15 +31,20 @@ class PointsCalculator extends Controller{
 		//izpis vseh aktivnih razpisanih programov
 		$program_calls = DB::table('study_programs_calls')		
 		->join('condition_groups', 'fk_program_call_id', '=', 'study_programs_calls.id')
+		->join('call_type', 'call_type.id', '=', 'study_programs_calls.fk_id_call_type')
+		->join('study_programs', 'study_programs.id', '=', 'study_programs_calls.fk_id_study_program')
+		->join('vis_institutions', 'vis_institutions.id', '=', 'study_programs.fk_id_program_carrier')
 		->where('is_active', 1)
-		->select("study_programs_calls.*", "condition_groups.id AS condition_group_id")
+		->select("study_programs_calls.*", "condition_groups.id AS condition_group_id",
+				 "call_type.type_name as call_type_name", "study_programs.program_name", "vis_institutions.institution_name")
 		->get();
 		
 		foreach($program_calls as $program_call){			
 			//posamezen razpisan program -> program_call
 			
 			//vse prijave za posamezen razpisan program
-			$applications = DB::table('applications')		
+			$applications = DB::table('applications')
+			->join('users', 'users.id', '=', 'applications.fk_id_user')
 			->where('fk_id_wish1', $program_call->id)
 			->orwhere('fk_id_wish2', $program_call->id)
 			->orwhere('fk_id_wish3', $program_call->id)
@@ -81,16 +86,14 @@ class PointsCalculator extends Controller{
 					$RICgradesCheckArray[] = $RICgrade->fk_subject;
 				}
 				
-				echo "emso: ";
+				/*echo "emso: ";
 				var_dump($application);
 				
 				echo "conditions: ";
 				var_dump($conditions);
 				
 				echo "RIC grades: ";
-				var_dump($RICgrades);
-				
-				echo $program_call->fk_id_call_type;
+				var_dump($RICgrades);*/
 				
 				
 				$fulfills = true;
@@ -102,10 +105,10 @@ class PointsCalculator extends Controller{
 					}
 				}
 				
-				echo "conditions: ";
+				/*echo "conditions: ";
 				var_dump($conditions);
 				var_dump($fulfills);
-				die();
+				die();*/
 				
 				if($fulfills){
 					echo "emso: ";
@@ -121,8 +124,8 @@ class PointsCalculator extends Controller{
 					
 					//računanje točk
 					//...
-					$seznam[] = array('emso' => $application->emso, 'name' => 'Luka', 'surname' => 'Novak', 'wish' => 1, 'program' => 'Visokošolski VS',
-						  'institution' => 'Fakulteta za računalništvo in informatiko, UL', 'call_type' => 'IZREDNI', 'points' => 92, 'fulfills' => true);
+					$seznam[] = array('emso' => $application->emso, 'name' => $application->name, 'surname' => $application->surname, 'wish' => $wish, 'program' => $program_call->program_name,
+						  'institution' => $program_call->institution_name, 'call_type' => $program_call->call_type_name, 'points' => 92, 'fulfills' => true);
 					
 				}
 				else{
@@ -133,7 +136,7 @@ class PointsCalculator extends Controller{
 			
 		}
 		
-		var_dump($seznam);
+		return response()->json($seznam);
 		
 		//iz baze vzameš vse kandidate, ki so se prijavili na to šifro, preveriš da imamo podatke iz RIC-a
 		//iz baze vzameš pravilo za condition group
