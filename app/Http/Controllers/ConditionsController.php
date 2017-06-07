@@ -212,7 +212,7 @@ class ConditionsController extends Controller{
        $fkIdUser=$request->input('fk_id_user');
         $fkIdProgramCall= $request->input('fk_id_program_call');
         $grade = intval($request->input('grade'));
-       $test = AcceptanceTestConditionView::where('fk_program_call_id', '=', $fkIdProgramCall)->Get();
+       $test = AcceptanceTestConditionView::where('fk_program_call_id', '=', $fkIdProgramCall)->get();
        $min=$test[0]->min_points;
        $max=$test[0]->max_points;
         if($fkIdUser && $grade>=0 && $fkIdProgramCall && $grade<=$max)
