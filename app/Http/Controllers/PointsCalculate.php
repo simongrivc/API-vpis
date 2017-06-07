@@ -111,7 +111,7 @@ class PointsCalculator extends Controller{
 				die();*/
 				
 				if($fulfills){
-					echo "emso: ";
+					/*echo "emso: ";
 					var_dump($application);
 					
 					echo "conditions: ";
@@ -120,7 +120,7 @@ class PointsCalculator extends Controller{
 					echo "RIC grades: ";
 					var_dump($RICgrades);
 					
-					echo $program_call->fk_id_call_type;
+					echo $program_call->fk_id_call_type;*/
 					
 					//računanje točk
 					//...
