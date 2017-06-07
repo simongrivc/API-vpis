@@ -104,6 +104,7 @@ class PointsCalculator extends Controller{
 				
 				echo "conditions: ";
 				var_dump($conditions);
+				var_dump($fulfills);
 				die();
 				
 				if($fulfills){
