@@ -170,7 +170,7 @@ class ConditionsController extends Controller{
             $sprejemniIzpiti = AcceptanceTestConditionView::all();
             return response()->json($sprejemniIzpiti);
         }
-        else if($user->fk_user_role==2)
+        else if($user->fk_user_role==3)
         {
             $sprejemniIzpiti = AcceptanceTestConditionView::where('fk_id_program_carrier', '=', $user->fk_id_vis_institution)->get();
             return response()->json($sprejemniIzpiti);
