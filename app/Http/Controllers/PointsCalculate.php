@@ -21,12 +21,12 @@ class PointsCalculator extends Controller{
 	
 	public function calculate(Request $request){		
 		$seznam = array();
-		$seznam[] = array('emso' => '0123456789', 'name' => 'Luka', 'surname' => 'Novak', 'wish' => 1, 'program' => 'Visokošolski VS',
+		/*$seznam[] = array('emso' => '0123456789', 'name' => 'Luka', 'surname' => 'Novak', 'wish' => 1, 'program' => 'Visokošolski VS',
 						  'institution' => 'Fakulteta za računalništvo in informatiko, UL', 'call_type' => 'IZREDNI', 'points' => 92, 'fulfills' => true);
 		$seznam[] = array('emso' => '0434345345', 'name' => 'Jaka', 'surname' => 'Klancar', 'wish' => 3, 'program' => 'Univerzitetni UN',
 						'institution' => 'Fakulteta za računalništvo in informatiko, UL', 'call_type' => 'REDNI', 'points' => 73, 'fulfills' => false);
 
-		return response()->json($seznam);
+		return response()->json($seznam);*/
 		
 		//izpis vseh aktivnih razpisanih programov
 		$program_calls = DB::table('study_programs_calls')		
@@ -76,29 +76,49 @@ class PointsCalculator extends Controller{
 				->where('emso', $application->emso)
 				->get();
 				
+				$RICgradesCheckArray = array();
+				foreach($RICgrades as $RICgrade){
+					$RICgradesCheckArray[] = $RICgrade->fk_subject;
+				}
+				
+
+				
+				$fulfills = true;
+				
 				//preverjanje pogojev
-				/*foreach($conditions as $condition){
+				foreach($conditions as $condition){
+					if(!array_key_exists($condition->RIC_condition_code, $RICgradesCheckArray)){
+						$fulfills = false;
+					}
+				}
+				
+				if($fulfills){
+					echo "emso: ";
+					var_dump($application);
 					
-				}*/
-				echo "emso: ";
-				var_dump($application);
-				
-				echo "conditions: ";
-				var_dump($conditions);
-				
-				echo "RIC grades: ";
-				var_dump($RICgrades);
-				
-				echo $program_call->fk_id_call_type;
-				die();
-				
-				
-				//računanje točk
-				//...
-				
+					echo "conditions: ";
+					var_dump($conditions);
+					
+					echo "RIC grades: ";
+					var_dump($RICgrades);
+					
+					echo $program_call->fk_id_call_type;
+					
+					//računanje točk
+					//...
+					$seznam[] = array('emso' => $application->emso, 'name' => 'Luka', 'surname' => 'Novak', 'wish' => 1, 'program' => 'Visokošolski VS',
+						  'institution' => 'Fakulteta za računalništvo in informatiko, UL', 'call_type' => 'IZREDNI', 'points' => 92, 'fulfills' => true);
+					
+				}
+				else{
+					//kandidat ne ustreza pogojem
+					
+				}				
 			}
 			
 		}
+		
+		var_dump($seznam);
 		
 		//iz baze vzameš vse kandidate, ki so se prijavili na to šifro, preveriš da imamo podatke iz RIC-a
 		//iz baze vzameš pravilo za condition group
