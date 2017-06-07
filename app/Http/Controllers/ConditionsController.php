@@ -212,8 +212,10 @@ class ConditionsController extends Controller{
        $fkIdUser=$request->input('fk_id_user');
         $fkIdProgramCall= $request->input('fk_id_program_call');
         $grade = intval($request->input('grade'));
-       
-        if($fkIdUser && $grade>=0 && $fkIdProgramCall)
+       $test = AcceptanceTestConditionView::where('fk_program_call_id', '=', $fkIdProgramCall)->Get();
+       $min=$test->min_points;
+       $max=$test->max_points;
+        if($fkIdUser && $grade>=0 && $fkIdProgramCall && $grade<=$max)
         {   
             
             $existingAcceptanceTestUserResult = AcceptanceTestResult::where('fk_id_user', '=', $fkIdUser)->where('fk_id_program_call', '=', $fkIdProgramCall)->get();
@@ -235,7 +237,7 @@ class ConditionsController extends Controller{
                 return response()->json($existingAcceptanceTestUserResult);
             }
         }
-        return response()->json(array('error' => 'Wrong or missing input data.'),400);
+        return response()->json(array('error' => 'Grade too high duude.'),400);
         
     }
     
