@@ -378,7 +378,7 @@ class RicDataUploadController extends Controller{
 						return  response()->json(array('error' => 'file_format_error'), 400);
 					}					
 					
-					if($tip != 5){
+					if($tip != 5 && $tip != 7){
 						if(!$uspeh || !$uspeh3l || !$uspeh4l ){
 							$error = true;
 						}
@@ -431,6 +431,12 @@ class RicDataUploadController extends Controller{
 								['emso' => $emso, 'fk_profession' => $poklic, 'points_grade' => $uspeh, 'success' => $opravil, 'grade3' => $uspeh3l, 'grade4' => $uspeh4l,
 								 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek]
 							);
+						}						
+						else{
+							$id = DB::table('ric_candidates')
+									->where('emso', $emso)
+									->update(['fk_profession' => $poklic, 'points_grade' => $uspeh, 'success' => $opravil, 'grade3' => $uspeh3l, 'grade4' => $uspeh4l,
+								 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek]);
 						}
 					}
 					else{

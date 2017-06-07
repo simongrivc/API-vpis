@@ -70,6 +70,17 @@ class PointsCalculator extends Controller{
 				->where('emso', $application->emso)
 				->get();
 				
+				//preverjanje pogojev
+				/*foreach($conditions as $condition){
+					
+				}*/
+				echo "conditions: ";
+				var_dump($conditions);
+				
+				echo "RIC grades: ";
+				var_dump($RICgrades);
+				die();
+				
 				//računanje točk
 				//...
 				
