@@ -19,8 +19,14 @@ class PointsCalculator extends Controller{
         return response()->json($studyPrograms);*/
     }
 	
-	public function calculate(Request $request){
+	public function calculate(Request $request){		
 		$seznam = array();
+		$seznam[] = array('emso' => '0123456789', 'name' => 'Luka', 'surname' => 'Novak', 'wish' => 1, 'program' => 'Visokošolski VS',
+						  'institution' => 'Fakulteta za računalništvo in informatiko, UL', 'call_type' => 'IZREDNI', 'points' => 92, 'fulfills' => true);
+		$seznam[] = array('emso' => '0434345345', 'name' => 'Jaka', 'surname' => 'Klancar', 'wish' => 3, 'program' => 'Univerzitetni UN',
+						'institution' => 'Fakulteta za računalništvo in informatiko, UL', 'call_type' => 'REDNI', 'points' => 73, 'fulfills' => false);
+
+		return response()->json($seznam);
 		
 		//izpis vseh aktivnih razpisanih programov
 		$program_calls = DB::table('study_programs_calls')		
@@ -43,7 +49,7 @@ class PointsCalculator extends Controller{
 			$conditions = DB::table('program_call_conditions')
 			->join('condition_codes', 'condition_codes.id', '=', 'program_call_conditions.fk_condition_code_id')
 			->where('fk_condition_group', $program_call->condition_group_id)
-			->select('program_call_conditions.*', 'condition_codes.condition_code_name AS fk_condition_code_name')
+			->select('program_call_conditions.*', 'condition_codes.condition_code_name AS fk_condition_code_name', 'condition_codes.RIC_condition_code')
 			->get();
 			
 			
@@ -82,7 +88,10 @@ class PointsCalculator extends Controller{
 				
 				echo "RIC grades: ";
 				var_dump($RICgrades);
+				
+				echo $program_call->fk_id_call_type;
 				die();
+				
 				
 				//računanje točk
 				//...
