@@ -127,13 +127,14 @@ $app->put('uporabnik/{id}','UporabnikController@urediUporabnika');
 $app->delete('uporabnik/{id}','UporabnikController@izbrisiUporabnika');*/
 
 
-$app->get('application/acceptance_tests', 'ConditionsController@getAllAcceptanceTestConditions');
 
 $app->post('application/acceptance_tests/edit', 'ConditionsController@addAcceptanceTestBorderPoints');
 
 $app->post('application/user_acceptance_test/edit', 'ConditionsController@addAcceptanceTestUser');
 
 
-$app->get('application/program_calls_w_acceptance_test', 'StudyProgramsController@getStudyProgramCallsWithAccTest');
+$app->get('application/acceptance_tests',  ['middleware' => 'auth', 'uses' => 'ConditionsController@getAllAcceptanceTestConditions']);
+
+$app->get('application/program_calls_w_acceptance_test', ['middleware' => 'auth', 'uses' => 'StudyProgramsController@getStudyProgramCallsWithAccTest']);
 
 $app->get('application/users_study_call_acceptance_test/{id}', 'StudyProgramsController@getUsersStudyCallAcceptanceTest');
