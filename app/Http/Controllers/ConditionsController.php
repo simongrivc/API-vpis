@@ -167,10 +167,15 @@ class ConditionsController extends Controller{
         $user = Auth::user();
         if($user->fk_user_role==2)
         {
-         $sprejemniIzpiti = AcceptanceTestConditionView::all();
-        return response()->json($sprejemniIzpiti);
+            $sprejemniIzpiti = AcceptanceTestConditionView::all();
+            return response()->json($sprejemniIzpiti);
         }
-        return response()->json(array('error' => 'Autentifikacija'),400);
+        else if($user->fk_user_role==2)
+        {
+            $sprejemniIzpiti = AcceptanceTestConditionView::where('fk_id_program_carrier', '=', $user->fk_id_vis_institution)->get();
+            return response()->json($sprejemniIzpiti);
+        }
+        return response()->json(array('error' => 'Missing authentification of user.'),400);
     }
 
     public function addAcceptanceTestBorderPoints(Request $request)
