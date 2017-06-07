@@ -74,6 +74,9 @@ class PointsCalculator extends Controller{
 				/*foreach($conditions as $condition){
 					
 				}*/
+				echo "emso: ";
+				var_dump($application);
+				
 				echo "conditions: ";
 				var_dump($conditions);
 				
