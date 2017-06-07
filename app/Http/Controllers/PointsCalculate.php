@@ -24,6 +24,7 @@ class PointsCalculator extends Controller{
 		//sprehodiš se čez vse razpisane programe
 		
 		$program_calls = DB::table('study_programs_calls')
+		->select("study_programs_calls.*, condition_groups.id AS condition_group_id")
 		->join('condition_groups', 'fk_program_call_id', '=', 'study_programs_calls.id')
 		->where('is_active', 1)
 		->get();
