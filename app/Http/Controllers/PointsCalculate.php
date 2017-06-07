@@ -91,7 +91,7 @@ class PointsCalculator extends Controller{
 				var_dump($RICgrades);
 				
 				echo $program_call->fk_id_call_type;
-				die();
+				
 				
 				$fulfills = true;
 				$itCond = $conditions;
@@ -101,6 +101,10 @@ class PointsCalculator extends Controller{
 						$fulfills = false;
 					}
 				}
+				
+				echo "conditions: ";
+				var_dump($conditions);
+				die();
 				
 				if($fulfills){
 					echo "emso: ";
