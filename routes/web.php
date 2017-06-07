@@ -113,6 +113,8 @@ $app->post('application/programs_call_conditions/edit', 'ConditionsController@ad
 
 
 $app->post('uploadData', 'RicDataUploadController@uploadFile');
+
+$app->post('calculatePoints', 'PointsCalculator@calculate');
 //TODO
 //dobi vse pogoje za razpisan program
 //$app->get('application/programs_call_conditions/{id}', 'ProgramCallCondition@getProgramCallConditions');
