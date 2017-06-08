@@ -29,11 +29,11 @@ class PointsCalculator extends Controller{
 		return response()->json($seznam);*/
 		
 		//izpis vseh aktivnih razpisanih programov
-		$program_calls = DB::table('study_programs_calls')		
-		->join('condition_groups', 'fk_program_call_id', '=', 'study_programs_calls.id')
+		$program_calls = DB::table('study_programs_calls')
 		->join('call_type', 'call_type.id', '=', 'study_programs_calls.fk_id_call_type')
 		->join('study_programs', 'study_programs.id', '=', 'study_programs_calls.fk_id_study_program')
 		->join('vis_institutions', 'vis_institutions.id', '=', 'study_programs.fk_id_program_carrier')
+		->leftjoin('condition_groups', 'fk_program_call_id', '=', 'study_programs_calls.id')
 		->where('is_active', 1)
 		->select("study_programs_calls.*", "condition_groups.id AS condition_group_id",
 				 "call_type.type_name as call_type_name", "study_programs.program_name", "vis_institutions.institution_name")
@@ -52,11 +52,15 @@ class PointsCalculator extends Controller{
 			->get();
 			
 			//vsi pogoji za razpisan program z utežmi
-			$conditions = DB::table('program_call_conditions')
-			->join('condition_codes', 'condition_codes.id', '=', 'program_call_conditions.fk_condition_code_id')
-			->where('fk_condition_group', $program_call->condition_group_id)
-			->select('program_call_conditions.*', 'condition_codes.condition_code_name AS fk_condition_code_name', 'condition_codes.RIC_condition_code')
-			->get();
+			$conditions = array();
+			if($program_call->condition_group_id != null){
+				$conditions = DB::table('program_call_conditions')
+				->join('condition_codes', 'condition_codes.id', '=', 'program_call_conditions.fk_condition_code_id')
+				->where('fk_condition_group', $program_call->condition_group_id)
+				->select('program_call_conditions.*', 'condition_codes.condition_code_name AS fk_condition_code_name', 'condition_codes.RIC_condition_code')
+				->get();
+			}
+			
 			
 			
 			
