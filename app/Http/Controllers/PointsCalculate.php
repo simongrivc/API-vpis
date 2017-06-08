@@ -48,6 +48,7 @@ class PointsCalculator extends Controller{
 			->orwhere('fk_id_wish1', $program_call->id)
 			->orwhere('fk_id_wish2', $program_call->id)
 			->orwhere('fk_id_wish3', $program_call->id)
+			->select('applications.*', 'applications.name', 'applications.surname')
 			->get();
 			
 			//vsi pogoji za razpisan program z utežmi
@@ -131,14 +132,27 @@ class PointsCalculator extends Controller{
 					
 					//računanje točk
 					//...
-					$seznam[] = array('emso' => $application->emso, 'name' => $application->name, 'surname' => $application->surname, 'wish' => $wish, 'program' => $program_call->program_name,
-						  'institution' => $program_call->institution_name, 'call_type' => $program_call->call_type_name, 'points' => 92, 'fulfills' => true);
+					$points = 92;
+					if(array_key_exists($application->id."-".$wish, $seznam)){
+						$result = $seznam[$application->id."-".$wish];
+						
+						//če je boljši rezultat potem ga upoštevamo
+						if($points > $result->points){
+							$seznam[$application->id."-".$wish] = array('emso' => $application->emso, 'name' => $application->name, 'surname' => $application->surname, 'wish' => $wish, 'program' => $program_call->program_name,
+							'institution' => $program_call->institution_name, 'call_type' => $program_call->call_type_name, 'points' => $points, 'fulfills' => true);
+						}
+						
+					}
+					else{
+						$seznam[$application->id."-".$wish] = array('emso' => $application->emso, 'name' => $application->name, 'surname' => $application->surname, 'wish' => $wish, 'program' => $program_call->program_name,
+						  'institution' => $program_call->institution_name, 'call_type' => $program_call->call_type_name, 'points' => $points, 'fulfills' => true);
+					}					
 					
 				}
 				else{
 					//kandidat ne ustreza pogojem
-					$seznam[] = array('emso' => $application->emso, 'name' => $application->name, 'surname' => $application->surname, 'wish' => $wish, 'program' => $program_call->program_name,
-						  'institution' => $program_call->institution_name, 'call_type' => $program_call->call_type_name, 'points' => 92, 'fulfills' => false);
+					$seznam[$application->id."-".$wish] = array('emso' => $application->emso, 'name' => $application->name, 'surname' => $application->surname, 'wish' => $wish, 'program' => $program_call->program_name,
+						  'institution' => $program_call->institution_name, 'call_type' => $program_call->call_type_name, 'points' => 0, 'fulfills' => false);
 				}				
 			}
 			
