@@ -115,7 +115,12 @@ class PointsCalculator extends Controller{
 				if($fulfills){			
 					
 					//računanje točk
-					//...
+					$points = 0;
+					//$RICcandidate->splosna_matura
+					
+					
+					
+					
 					$points = 92;
 					if(array_key_exists($application->id."-".$wish, $seznam)){
 						$result = $seznam[$application->id."-".$wish];
@@ -146,9 +151,8 @@ class PointsCalculator extends Controller{
 		
 		foreach($seznam as $key => $value){
 			$seznamF[] = $value;
+			//shraniš kandidate(emso) in rezultat v tabelo z rezultati
 		}
-		
-		//shraniš kandidate(emso) in rezultat v tabelo z rezultati
 		
 		return response()->json($seznamF);						
 	}

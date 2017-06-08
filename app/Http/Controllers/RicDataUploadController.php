@@ -134,14 +134,14 @@ class RicDataUploadController extends Controller{
 							//obstaja prijava za tale emso, vpišemo zaključno oceno in poklic
 							$id = DB::table('ric_candidates')->insert(
 								['emso' => $emso, 'fk_profession' => $poklic, 'points_grade' => $uspeh, 'success' => $opravil, 'grade3' => $uspeh3l, 'grade4' => $uspeh4l,
-								 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek]
+								 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek, 'splosna_matura' => true]
 							);
 						}
 						else{
 							$id = DB::table('ric_candidates')
 									->where('emso', $emso)
 									->update(['fk_profession' => $poklic, 'points_grade' => $uspeh, 'success' => $opravil, 'grade3' => $uspeh3l, 'grade4' => $uspeh4l,
-								 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek]);
+								 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek, 'splosna_matura' => true]);
 						}
 					}
 					else{
@@ -429,14 +429,14 @@ class RicDataUploadController extends Controller{
 							//obstaja prijava za tale emso, vpišemo zaključno oceno in poklic
 							$id = DB::table('ric_candidates')->insert(
 								['emso' => $emso, 'fk_profession' => $poklic, 'points_grade' => $uspeh, 'success' => $opravil, 'grade3' => $uspeh3l, 'grade4' => $uspeh4l,
-								 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek]
+								 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek, 'splosna_matura' => false]
 							);
 						}						
 						else{
 							$id = DB::table('ric_candidates')
 									->where('emso', $emso)
 									->update(['fk_profession' => $poklic, 'points_grade' => $uspeh, 'success' => $opravil, 'grade3' => $uspeh3l, 'grade4' => $uspeh4l,
-								 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek]);
+								 'fk_type' => $tip, 'fk_middle_school' => $srSola, 'name' => $ime, 'surname' => $priimek, 'splosna_matura' => false]);
 						}
 					}
 					else{
