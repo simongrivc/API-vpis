@@ -99,11 +99,13 @@ class PointsCalculator extends Controller{
 				$fulfills = true;
 				$itCond = $conditions;
 				//preverjanje pogojev
-				foreach($itCond as $condition){
-					if(!array_key_exists($condition->RIC_condition_code, $RICgradesCheckArray)){
-						$fulfills = false;
+				if(count($itCond)>0){
+					foreach($itCond as $condition){
+						if(!array_key_exists($condition->RIC_condition_code, $RICgradesCheckArray)){
+							$fulfills = false;
+						}
 					}
-				}
+				}				
 				
 				
 				if($fulfills){			
