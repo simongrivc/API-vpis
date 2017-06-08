@@ -60,10 +60,10 @@ class PointsCalculator extends Controller{
 			
 			
 			
-			echo "Izpis aplikacij za razpis: ".$program_call->id;
+			/*echo "Izpis aplikacij za razpis: ".$program_call->id;
 			var_dump(count($applications));
 			var_dump($applications);
-			echo "-------------------------------------------";
+			echo "-------------------------------------------";*/
 			
 			
 			foreach($applications as $application){
@@ -93,15 +93,7 @@ class PointsCalculator extends Controller{
 				foreach($RICgrades as $RICgrade){
 					$RICgradesCheckArray[] = $RICgrade->fk_subject;
 				}
-				
-				/*echo "emso: ";
-				var_dump($application);
-				
-				echo "conditions: ";
-				var_dump($conditions);
-				
-				echo "RIC grades: ";
-				var_dump($RICgrades);*/
+
 				
 				
 				$fulfills = true;
@@ -113,22 +105,8 @@ class PointsCalculator extends Controller{
 					}
 				}
 				
-				/*echo "conditions: ";
-				var_dump($conditions);
-				var_dump($fulfills);
-				die();*/
 				
-				if($fulfills){
-					/*echo "emso: ";
-					var_dump($application);
-					
-					echo "conditions: ";
-					var_dump($conditions);
-					
-					echo "RIC grades: ";
-					var_dump($RICgrades);
-					
-					echo $program_call->fk_id_call_type;*/
+				if($fulfills){			
 					
 					//računanje točk
 					//...
@@ -158,9 +136,15 @@ class PointsCalculator extends Controller{
 			
 		}
 		
+		$seznamF = array();
+		
+		foreach($seznam as $key => $value){
+			$seznamF[] = $value;
+		}
+		
 		//shraniš kandidate(emso) in rezultat v tabelo z rezultati
 		
-		return response()->json($seznam);						
+		return response()->json($seznamF);						
 	}
 }
 ?>
