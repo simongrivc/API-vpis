@@ -56,8 +56,14 @@ class PointsCalculator extends Controller{
 			->where('fk_condition_group', $program_call->condition_group_id)
 			->select('program_call_conditions.*', 'condition_codes.condition_code_name AS fk_condition_code_name', 'condition_codes.RIC_condition_code')
 			->get();
+			
+			
+			
+			echo "Izpis aplikacij za razpis: ".$program_call->id;
+			var_dump(count($applications));
 			var_dump($applications);
-			die();
+			echo "-------------------------------------------";
+			
 			
 			foreach($applications as $application){
 				//posamezna prijava na razpisan program
