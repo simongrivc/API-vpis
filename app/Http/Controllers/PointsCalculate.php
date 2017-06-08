@@ -48,7 +48,7 @@ class PointsCalculator extends Controller{
 			->orwhere('fk_id_wish1', $program_call->id)
 			->orwhere('fk_id_wish2', $program_call->id)
 			->orwhere('fk_id_wish3', $program_call->id)
-			->select('applications.*', 'applications.name', 'applications.surname')
+			->select('applications.*', 'users.name', 'users.surname')
 			->get();
 			
 			//vsi pogoji za razpisan program z utežmi
@@ -158,20 +158,9 @@ class PointsCalculator extends Controller{
 			
 		}
 		
-		return response()->json($seznam);
+		//shraniš kandidate(emso) in rezultat v tabelo z rezultati
 		
-		//iz baze vzameš vse kandidate, ki so se prijavili na to šifro, preveriš da imamo podatke iz RIC-a
-		//iz baze vzameš pravilo za condition group
-		
-		//od vsakega kandidata vzameš rezultate ric_grade
-		//poračunaš koliko točk je dosegel
-		
-		//shraniš kandidata(emso) in rezultat v tabelo z rezultati
-		
-		//kandidati splošna matura
-		
-					
-						
+		return response()->json($seznam);						
 	}
 }
 ?>
